@@ -19,6 +19,13 @@ db = mongo.db.clientes
 def mostrarPrincipal():
     return render_template('index.html')
 
+@app.route('/1', methods=['GET'])
+def mostrarcliente():
+    return render_template('clientes.html')
+
+@app.route('/2', methods=['GET'])
+def mostrarestado():
+    return render_template('estados.html')
 ############################ clientes ###########################################
 # show one client
 @app.route('/cliente/<id>',methods=['GET'])
@@ -29,16 +36,29 @@ def mostrarCliente():
 @app.route('/clientes',methods=['GET'])
 def mostrarClientes():
     clientes=[{
-                "nombre":"maxi", 
-                "edad":33
+                "nombre y apellido":"maxi", 
+                "nro celular/telefono":11111111,
+                "email":"maxi@gmail.com",
+                "domicilio":"sarasa 20",
+                "localidad":"almagro",
+                "provincia":"bs as"
+
               },
               {
-                "nombre":"tomy", 
-                "edad":24
+                "nombre y apellido":"tomy", 
+                "nro celular/telefono":1111111,
+                "email":"tomy@gmail.com",
+                "domicilio":"sarasa 30",
+                "localidad":" la caba",
+                "provincia":"bs as"
               }, 
               {
-                "nombre":"ivan", 
-                "edad":23
+                "nombre y apellido":"ivan", 
+                "nro celular/telefono":111111111,
+                "email":"ivan@gmail.com",
+                "domicilio":"sarasa 40",
+                "localidad":"martelli",
+                "provincia":"bs as"
               }]
     return jsonify(clientes)#render_template('clientes.html')
 
