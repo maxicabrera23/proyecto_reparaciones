@@ -10,19 +10,20 @@
     <body>
         <nav>
             <div class="Logo">
-                <img src="./static/images/logo-premier-support.webp" alt="Logo">
+                <img src="./static/images/MTI_Logo.png" alt="Logo">
             </div>
             <div class="Links">
                 <a href="/1">CLIENTES</a>
-                <a href="/2">ESTADO</a>
+                <a><span class="Activo">REPARACIONES</span></a>
+                <a href="/2">ESTADOS</a>
             </div>
         </nav>
         
         <h1> Lista de Reparaciones </h1>
         
-        <div class="ListaReparaciones">
+        <div class="CajaColor">
             <div class="Vacio">
-                <p>No hay reparaciones pendientes...</p>
+                <p>No hay reparaciones pendientes<span class="Animacion">...</span></p>
             </div>
         </div>
 
@@ -31,7 +32,7 @@
         </div>
 
         <section class="Modal">
-            <button class="CerrarModal">X</button>
+            <div class="Der"><button class="CerrarModal">X</button></div>
             <div class="ContenedorModal">
                 <form action="GET">
                     <div class="Formulario">

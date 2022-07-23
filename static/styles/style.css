@@ -23,7 +23,7 @@ nav{
 }
 
 .Logo img{
-    width: 150px;
+    width: 75px;
 }
 
 .Links{
@@ -46,6 +46,15 @@ nav{
 
 .Links a:hover{
     border-bottom: rgba(4,216,255,1) solid 2px;
+    text-shadow: 0px 1px 2px aliceblue;
+}
+
+a .Activo{
+    color: rgba(4,216,255,1);
+}
+
+.Activo{
+    text-shadow: 0px 1px 1px rgba(4,216,255,1);
 }
 
 h1{
@@ -54,12 +63,12 @@ h1{
     margin: 20px;
 }
 
-.ListaReparaciones {
+.CajaColor {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(53, 53, 53);
-    margin: 20px;
+    margin: 0px 10px 20px 10px;
     min-height: 100px;
     max-height: 400px;
     height: auto;
@@ -70,8 +79,12 @@ h1{
     overflow: auto;
 }
 
-.ListaReparaciones p{
+.CajaColor p{
     color: aliceblue;
+    font-size: medium;
+}
+
+.CajaColor::placeholder { 
     font-size: medium;
 }
 
@@ -109,7 +122,7 @@ h1{
     pointer-events: none;
     background-color: rgba(0, 0, 0, 0.5);
 	margin: auto auto;
-	padding: 40px;
+	padding: 10px 20px;
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgb(255, 255, 255);
 	position: absolute;
@@ -127,13 +140,21 @@ h1{
     pointer-events: unset;
 }
 
+.Der{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
 .ContenedorModal{
     border: solid;
     border-image-slice: 1;
     border-width: 3px;
     border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1));
-    background-color: rgba(255,255,255,0.3);
-    -webkit-backdrop-filter: blur(10px);backdrop-filter: blur(10px);
+    background: rgb(0,10,11);
+    background: linear-gradient(344deg, rgba(0,10,11,1) 0%, rgba(64,64,64,1) 100%);
+    /*background-color: rgba(255,255,255,0.3);
+    -webkit-backdrop-filter: blur(10px);backdrop-filter: blur(10px);*/
     padding: 30px;
     max-height: 550px;
     overflow: auto;
@@ -170,12 +191,20 @@ h2{
     color: aliceblue;
 }
 
+.CampoInput .CajaColor{
+    
+}
+
 input{
     height: 30px;
     background-color: gray;
+    text-align: center;
+    color: aliceblue;
 }
 
-input::placeholder { color: rgb(192, 192, 192); }
+input::placeholder { 
+    color: rgb(192, 192, 192); 
+}
 
 /*----------------- Pantalla Celular -----------------*/
 
@@ -187,10 +216,17 @@ input::placeholder { color: rgb(192, 192, 192); }
     }
 
     .Links{
+        flex-direction: column;
         justify-content: center;
     }
 
     .Links a {
         margin: 0px 10px;
     }    
+}
+
+@media (max-height:600px) {
+    .ContenedorModal{
+        max-height: 350px;
+    }
 }
