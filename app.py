@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, ObjectId
 
 # server instance
 app = Flask(__name__)
@@ -11,7 +11,7 @@ app.config['MONGO_URI']='mongodb://localhost/reparaciones_db'
 mongo = PyMongo(app)
 
 #create table clientes 
-db = mongo.db.clientes
+db_clientes = mongo.db.clientes
 
 # route clients
 # show index.html
@@ -29,53 +29,66 @@ def mostrarestado():
 ############################ clientes ###########################################
 # show one client
 @app.route('/cliente/<id>',methods=['GET'])
-def mostrarCliente():
-    return 'show cliente'
+def mostrarCliente(id):
+    # consulta un id de la tabla clientes
+    cliente = db_clientes.find_one({'_id': ObjectId(id)}) 
+    return jsonify({
+        '_id': str(ObjectId(cliente['_id'])),
+        'nombre_apellido': cliente['nombre'],
+        'telefono': cliente['telefono'],
+        'domicilio': cliente['domicilio'],
+        'localidad': cliente['localidad'],
+        'provincia': cliente['provincia']
+    })
 
 # show all clients
 @app.route('/clientes',methods=['GET'])
 def mostrarClientes():
-    clientes=[{
-                "nombre y apellido":"maxi", 
-                "nro celular/telefono":11111111,
-                "email":"maxi@gmail.com",
-                "domicilio":"sarasa 20",
-                "localidad":"almagro",
-                "provincia":"bs as"
-
-              },
-              {
-                "nombre y apellido":"tomy", 
-                "nro celular/telefono":1111111,
-                "email":"tomy@gmail.com",
-                "domicilio":"sarasa 30",
-                "localidad":" la caba",
-                "provincia":"bs as"
-              }, 
-              {
-                "nombre y apellido":"ivan", 
-                "nro celular/telefono":111111111,
-                "email":"ivan@gmail.com",
-                "domicilio":"sarasa 40",
-                "localidad":"martelli",
-                "provincia":"bs as"
-              }]
-    return jsonify(clientes)#render_template('clientes.html')
+    # muestra todos los clientes de la tabla
+    clientes = []
+    for doc in db_clientes.find():
+        clientes.append({
+            '_id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre'],
+            'telefono': doc['telefono'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia']
+            })
+    return jsonify(clientes)
 
 # create client
 @app.route('/clientes',methods=['POST'])
 def crearCliente():
-    reque = request.get_json()
-    print(reque)
-    return 'created'
+    id = db_clientes.insert_one({
+        'nombre': request.json['nombre_apellido'],
+        'telefono': request.json['telefono'],
+        'email': request.json['email'],
+        'domicilio': request.json['domicilio'],
+        'localidad': request.json['localidad'],
+        'provincia': request.json['provincia']
+    })
+    return str(ObjectId(id.inserted_id))
+    
+# delete client
+@app.route('/cliente/<id>', methods=['DELETE'])
+def borrarCliente(id):
+    db_clientes.delete_one({'_id': ObjectId(id)})
+    return jsonify({'msg':'Cliente Eliminado'})
 
-@app.route('/clientes/<id>', methods=['GET'])
-def borrarCliente():
-    return 'delete client'
+# modify client
+@app.route('/cliente/<id>', methods=['PUT'])
+def modificarCliente(id):
+    db_clientes.update_one({'_id':ObjectId(id)}, {'$set':{
+        'nombre': request.json['nombre_apellido'],
+        'telefono': request.json['telefono'],
+        'email': request.json['email'],
+        'domicilio': request.json['domicilio'],
+        'localidad': request.json['localidad'],
+        'provincia': request.json['provincia']
 
-@app.route('/clientes/<id>', methods=['PUT'])
-def modificarCliente():
-    return 'upgrade client'
+    }})
+    return jsonify({'msg':'Cliente Modificado'})
 
 ######################## reparaciones ##################################################
 # show one reparacion
