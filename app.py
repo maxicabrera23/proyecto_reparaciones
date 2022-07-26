@@ -1,20 +1,23 @@
+import re
 from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo, ObjectId
 
-# server instance
+# instanciar servidor
 app = Flask(__name__)
 
-# create link of the connection db
+# crear link con la base de datos
 app.config['MONGO_URI']='mongodb://localhost/reparaciones_db'
 
-# db instance 
+# intsnacia de la base de datos
 mongo = PyMongo(app)
 
-#create table clientes 
+# variables de tablas
 db_clientes = mongo.db.clientes
+db_nro = mongo.db.nro_reparacion
+db_reparaciones = mongo.db.reparaciones
 
-# route clients
-# show index.html
+# rutas de clientes
+# mostrar los html
 @app.route('/', methods=['GET'])
 def mostrarPrincipal():
     return render_template('index.html')
@@ -27,7 +30,7 @@ def mostrarcliente():
 def mostrarestado():
     return render_template('estados.html')
 ############################ clientes ###########################################
-# show one client
+# buscar un cliente
 @app.route('/cliente/<id>',methods=['GET'])
 def mostrarCliente(id):
     # consulta un id de la tabla clientes
@@ -41,7 +44,7 @@ def mostrarCliente(id):
         'provincia': cliente['provincia']
     })
 
-# show all clients
+# mostrar todos los clientes
 @app.route('/clientes',methods=['GET'])
 def mostrarClientes():
     # muestra todos los clientes de la tabla
@@ -57,7 +60,7 @@ def mostrarClientes():
             })
     return jsonify(clientes)
 
-# create client
+# crear un cliente
 @app.route('/clientes',methods=['POST'])
 def crearCliente():
     id = db_clientes.insert_one({
@@ -70,13 +73,13 @@ def crearCliente():
     })
     return str(ObjectId(id.inserted_id))
     
-# delete client
+# borrar cliente
 @app.route('/cliente/<id>', methods=['DELETE'])
 def borrarCliente(id):
     db_clientes.delete_one({'_id': ObjectId(id)})
     return jsonify({'msg':'Cliente Eliminado'})
 
-# modify client
+# modificar cliente
 @app.route('/cliente/<id>', methods=['PUT'])
 def modificarCliente(id):
     db_clientes.update_one({'_id':ObjectId(id)}, {'$set':{
@@ -91,102 +94,128 @@ def modificarCliente(id):
     return jsonify({'msg':'Cliente Modificado'})
 
 ######################## reparaciones ##################################################
-# show one reparacion
+# mostrar una rearacion
 @app.route('/reparacion/<id>',methods=['GET'])
-def mostrarReparacion():
-    return 'show reparacion'
+def mostrarReparacion(id):
+    reparacion = db_reparaciones.find_one({'_id':ObjectId(id)})
+    
+    return jsonify({
+        'id':str(ObjectId(reparacion['_id'])),
+        'nombre_apellido': reparacion['nombre_apellido'], 
+        'telefono': reparacion['telefono'],
+        'email': reparacion['email'],
+        'domicilio': reparacion['domicilio'],
+        'localidad': reparacion['localidad'],
+        'provincia': reparacion['provincia'],
+        'nro_reparacion': reparacion['nro_reparacion'],
+        'producto': reparacion['producto'],
+        'falla': reparacion['falla'],
+        'defecto_encontrado': reparacion['defecto_encontrado'],
+        'factura': reparacion['factura'],
+        'valor_reparacion': reparacion['valor_reparacion'],
+        'fecha_alta': reparacion['fecha_alta'],
+        'fecha_reparacion': reparacion['fecha_reparacion'],
+        'fecha_retiro': reparacion['fecha_retiro'],
+        'estado': reparacion['estado']
+    })
 
-# show all reparaciones
+# mostrar todas las reparaciones
 @app.route('/reparaciones',methods=['GET'])
 def mostrarReparaciones():
-    reparaciones=[{
-                   "nombre y apellido cliente":"electroservice", 
-                   "celular/telefono":47029500,
-                   "email":"electroservice@gmail.com",
-                   "domicilio":"congreso 2000",
-                   "localidad":"caba",
-                   "provincia":"bs as",
-                   "nro reparacion": 123456,
-                   "producto":"frente de calle",
-                   "falla":"no funciona el parlante",
-                   "defecto encotrado":"se cambio parlante por otro",
-                   "factura":"si",
-                   "valor de reparacion":"1500",
-                   "fecha de alta":"15/6/2002",
-                   "fecha de reparacion":"16/6/2022",
-                   "fecha de retiro/envio":"17/6/2022",
-                   "estado":"reparada"
-                   },
-                   {
-                   "nombre y apellido cliente":"steines", 
-                   "celular/telefono":47029500,
-                   "email":"steines@gmail.com",
-                   "domicilio":"sarandi 203",
-                   "localidad":"caba",
-                   "provincia":"bs as",
-                   "nro reparacion": 654321,
-                   "producto":"central multifamiliar",
-                   "falla":"un interno no tiene tono",
-                   "defecto encotrado":"se cambio el trafiro de audio",
-                   "factura":"si",
-                   "valor de reparacion":"",
-                   "fecha de alta":"20/6/2002",
-                   "fecha de reparacion":"21/6/2022",
-                   "fecha de retiro/envio":"",
-                   "estado":"en curso"
-                   }]
-    return jsonify(reparaciones)#render_template('clientes.html')
-
-# create reparacion
+    reparaciones = []
+    for doc in db_reparaciones.find():
+        reparaciones.append({
+            'id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre_apellido'], 
+            'telefono': doc['telefono'],
+            'email': doc['email'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia'],
+            'nro_reparacion': doc['nro_reparacion'],
+            'producto': doc['producto'],
+            'falla': doc['falla'],
+            'defecto_encontrado': doc['defecto_encontrado'],
+            'factura': doc['factura'],
+            'valor_reparacion': doc['valor_reparacion'],
+            'fecha_alta': doc['fecha_alta'],
+            'fecha_reparacion': doc['fecha_reparacion'],
+            'fecha_retiro': doc['fecha_retiro'],
+            'estado': doc['estado']
+        })
+    return jsonify(reparaciones)
+    
+# crear reparacion
 @app.route('/reparacion',methods=['POST'])
 def crearReparacion():
-    reque = request.get_json()
-    print(reque)
-    return 'created'
+    consulta = db_nro.find_one({'_id':ObjectId('62de25be643425aa1212241b')})
+    nro_reparacion = int(consulta['nro'])
+    nueva_reparacion = nro_reparacion + 1
+    
+    id = db_reparaciones.insert_one({
+        'nombre_apellido': request.json['nombre_apellido'], 
+        'telefono': request.json['telefono'],
+        'email': request.json['email'],
+        'domicilio' : request.json['domicilio'],
+        'localidad' : request.json['localidad'],
+        'provincia' : request.json['provincia'],
+        'nro_reparacion': nueva_reparacion ,
+        'producto' : request.json['producto'],
+        'falla' : request.json['falla'],
+        'defecto_encontrado': request.json['defecto_encotrado'],
+        'factura': request.json['factura'],
+        'valor_reparacion': request.json['valor_reparacion'],
+        'fecha_alta': request.json['fecha_alta'],
+        'fecha_reparacion': request.json['fecha_reparacion'],
+        'fecha_retiro': request.json['fecha_retiro'],
+        'estado': request.json['estado']
+    })
+    
+    db_nro.update_one({'_id':ObjectId('62de25be643425aa1212241b')}, {'$set':{
+        'nro': nueva_reparacion}})
+    
+    return str(ObjectId(id.inserted_id))
 
-# delete reparacion 
-@app.route('/reparacion/<id>', methods=['GET'])
-def borrarReparacion():
-    return 'delete reparacion'
+# borrar reparacion 
+@app.route('/reparacion/<id>', methods=['DELETE'])
+def borrarReparacion(id):
+    db_reparaciones.delete_one({'_id': ObjectId(id)})
+    return jsonify({'msg':'Reparacion Eliminada'})
 
-# update reparacion
+# modificar reparacion
 @app.route('/reparacion/<id>', methods=['PUT'])
-def modificarReparacion():
-    return 'upgrade reparacion'
+def modificarReparacion(id):
+    db_reparaciones.update_one({'_id': ObjectId(id)}, {'$set':{
+        'nombre_apellido': request.json['nombre_apellido'], 
+        'telefono': request.json['telefono'],
+        'email': request.json['email'],
+        'domicilio' : request.json['domicilio'],
+        'localidad' : request.json['localidad'],
+        'provincia' : request.json['provincia'],
+        'nro_reparacion': request.json['nro_reparacion'],
+        'producto' : request.json['producto'],
+        'falla' : request.json['falla'],
+        'defecto_encontrado': request.json['defecto_encotrado'],
+        'factura': request.json['factura'],
+        'valor_reparacion': request.json['valor_reparacion'],
+        'fecha_alta': request.json['fecha_alta'],
+        'fecha_reparacion': request.json['fecha_reparacion'],
+        'fecha_retiro': request.json['fecha_retiro'],
+        'estado': request.json['estado']
+
+    }})
+    return jsonify({'msg':'Reparacion Modificada'})
 
 
 ######################### estados #################################################
+"""
 # show estados
 @app.route('/estados', methods=['GET'])
-def mostrarEstados():
-    estados=[{
-                "nro reparacion": 123456,
-                "producto":"frente de calle",
-                "falla":"no funciona el parlante",
-                "defecto encotrado":"se cambio parlante por otro",
-                "factura":"si",
-                "valor de reparacion":"1500",
-                "fecha de alta":"15/6/2002",
-                "fecha de reparacion":"16/6/2022",
-                "fecha de retiro/envio":"17/6/2022",
-                "estado":"reparada"
-                },
-                {
-                "nro reparacion": 654321,
-                "producto":"central multifamiliar",
-                "falla":"un interno no tiene tono",
-                "defecto encotrado":"",
-                "factura":"si",
-                "valor de reparacion":"",
-                "fecha de alta":"20/6/2002",
-                "fecha de reparacion":"21/6/2022",
-                "fecha de retiro/envio":"",
-                "estado":"en curso"
-                }]
-    return jsonify(estados) 
+def mostrarestados():
 
+return 
+"""
 
-
-# server start
+# iniciar servidor
 if __name__== "__main__":
     app.run(debug=True)
