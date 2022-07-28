@@ -21,10 +21,38 @@
         
         <h1> Lista de Reparaciones </h1>
         
-        <div class="CajaColor">
-            <div class="Vacio">
-                <p>No hay reparaciones pendientes<span class="Animacion">...</span></p>
+        <div class="CajaColor" id="ListaUsuarios">
+            <!--<div class="Vacio">
+                <h3>No hay reparaciones pendientes<span class="Animacion">...</span></h3>
+            </div>-->
+
+            <div class="ModuloRep">
+                <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+
+                <div class="ModuloRepUsuarios">
+                    <p>Electroservice</p>
+                    <p>N° 123456789</p>
+                    <p>Camara no funciona</p>
+                    <p>16/6/2022</p>
+                </div>
+
+                <div class="ModuloRepBotones">
+                    <div class="Acciones">
+                        <button>Modificar</button>
+                        <button>Borrar</button>    
+                    </div>
+                </div>
+
+                <div class="ModuloRepEstados">
+                    <input type="radio" name="estados" class="Rojo">
+                    <input type="radio" name="estados" class="Naranja">
+                    <input type="radio" name="estados" class="Blanco">
+                    <input type="radio" name="estados" class="Aqua">
+                    <input type="radio" name="estados" class="Azul">
+                    <input type="radio" name="estados" class="Verde">
+                </div>
             </div>
+
         </div>
 
         <div class="Acciones">
@@ -34,52 +62,91 @@
         <section class="Modal">
             <div class="Der"><button class="CerrarModal">X</button></div>
             <div class="ContenedorModal">
-                <form action="GET">
+
+                <form id="FormUsuarios">
                     <div class="Formulario">
                         <div class="DatosCliente">    
                             <h2> Datos Cliente</h2>
 
                             <div class="CampoInput">
-                                <label>Empresa</label>
-                                <input type="text" placeholder="Ingresar Empresa" required>
+                                <label for="nombre_apellido">Nombre y Apellido</label>
+                                <input name="nombre_apellido" type="text" placeholder="Ingresar Nombre y Apellido" required>
                             </div>
 
                             <div class="CampoInput">
-                                <label>Nombre y Apellido</label>
-                                <input type="text" placeholder="Ingresar Nombre y Apellido" required>
+                                <label for="telefono">Telefono</label>
+                                <input name="telefono" type="number" placeholder="11-12341234" required>
                             </div>
 
                             <div class="CampoInput">
-                                <label>Telefono</label>
-                                <input type="number" placeholder="11-12341234" pattern="[0-9]{2}-[0-9]{8}" required>
+                                <label for="email">Email</label>
+                                <input name="email" type="email" placeholder="example@gmail.com" required>
                             </div>
 
                             <div class="CampoInput">
-                                <label>Email</label>
-                                <input type="email" placeholder="Ingresar Email" required>
+                                <label for="domicilio">Domicilio</label>
+                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio" required>
                             </div>
 
                             <div class="CampoInput">
-                                <label>Domicilio, Localidad y Provincia</label>
-                                <input type="text" placeholder="Ingresar Direccion" required>
+                                <label for="localidad">Localidad</label>
+                                <input name="localidad" type="text" placeholder="Ingresar Localidad" required>
                             </div>
+
+                            <div class="CampoInput">
+                                <label for="provincia">Provincia</label>
+                                <input name="provincia" type="text" placeholder="Ingresar Provincia" required>
+                            </div>
+
                         </div>
 
                         <div class="DatosPortero">
                             <h2>Datos Portero</h2>
+
                             <div class="CampoInput">
-                                <label>Numero de Reparacion</label>
-                                <input type="text" placeholder="Ingresar Nro de Reparacion" required>
+                                <label for="producto">Producto</label>
+                                <input name="producto" type="text" placeholder="Ingresar Producto" required>
                             </div>
 
                             <div class="CampoInput">
-                                <label>Falla</label>
-                                <input type="" placeholder="Falla" required>
+                                <label for="falla">Falla</label>
+                                <input name="falla" type="text" placeholder="¿Cual es la Falla?" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="defecto_encontrado">Defecto Encontrado</label>
+                                <input name="defecto_encontrado" type="text" placeholder="Ingresar Defecto" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="factura">Factura</label>
+                                <input name="factura" type="text" placeholder="¿LLeva Factura?" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="fecha_alta">Fecha de Alta</label>
+                                <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="fecha_reparacion">Fecha de Recparacion</label>
+                                <input name="fecha_reparacion" type="date" placeholder="Ingresar Fecha de Recparacion" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="fecha_retiro">Fecha de Retiro</label>
+                                <input name="fecha_retiro" type="date" placeholder="Ingresar Fecha de Retiro" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="estado">Estado</label>
+                                <input name="estado" type="text" placeholder="Ingresar estado de la reparacion" required>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="CerrarModal">Dar de alta</button>
                 </form>
+
             </div>
         </section>
 

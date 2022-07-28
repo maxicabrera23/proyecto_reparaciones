@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo, ObjectId
 app = Flask(__name__)
 
 # crear link con la base de datos
-app.config['MONGO_URI']='mongodb://localhost/reparaciones_db'
+app.config['MONGO_URI']='mongodb://127.0.0.1:27017/reparaciones_db'
 
 # intsnacia de la base de datos
 mongo = PyMongo(app)
@@ -94,7 +94,7 @@ def modificarCliente(id):
     return jsonify({'msg':'Cliente Modificado'})
 
 ######################## reparaciones ##################################################
-# mostrar una rearacion
+# mostrar una reparacion
 @app.route('/reparacion/<id>',methods=['GET'])
 def mostrarReparacion(id):
     reparacion = db_reparaciones.find_one({'_id':ObjectId(id)})
@@ -148,8 +148,10 @@ def mostrarReparaciones():
 # crear reparacion
 @app.route('/reparacion',methods=['POST'])
 def crearReparacion():
-    consulta = db_nro.find_one({'_id':ObjectId('62de25be643425aa1212241b')})
-    nro_reparacion = int(consulta['nro'])
+    for doc in db_nro.find():
+        nro_id = str(ObjectId(doc['_id']))
+        nro_reparacion = doc['nro']
+
     nueva_reparacion = nro_reparacion + 1
     
     id = db_reparaciones.insert_one({
@@ -171,10 +173,13 @@ def crearReparacion():
         'estado': request.json['estado']
     })
     
-    db_nro.update_one({'_id':ObjectId('62de25be643425aa1212241b')}, {'$set':{
+    db_nro.update_one({'_id':ObjectId(nro_id)}, {'$set':{
         'nro': nueva_reparacion}})
     
-    return str(ObjectId(id.inserted_id))
+    return jsonify({
+        'id':str(ObjectId(id.inserted_id)),
+        'msg':'Reparacion Creada'
+        })
 
 # borrar reparacion 
 @app.route('/reparacion/<id>', methods=['DELETE'])
@@ -208,13 +213,34 @@ def modificarReparacion(id):
 
 
 ######################### estados #################################################
-"""
-# show estados
-@app.route('/estados', methods=['GET'])
-def mostrarestados():
 
-return 
-"""
+# show estados
+@app.route('/estados/<id>', methods=['GET'])
+def mostrarestados(id):
+    reparacion = []
+    #buscar = 'nro_reparacion':id
+    for doc in db_reparaciones.find({"nro_reparacion":int(id)}):
+        reparacion.append({
+            'id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre_apellido'], 
+            'telefono': doc['telefono'],
+            'email': doc['email'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia'],
+            'nro_reparacion': doc['nro_reparacion'],
+            'producto': doc['producto'],
+            'falla': doc['falla'],
+            'defecto_encontrado': doc['defecto_encontrado'],
+            'factura': doc['factura'],
+            'valor_reparacion': doc['valor_reparacion'],
+            'fecha_alta': doc['fecha_alta'],
+            'fecha_reparacion': doc['fecha_reparacion'],
+            'fecha_retiro': doc['fecha_retiro'],
+            'estado': doc['estado']
+        })
+    return jsonify(reparacion)
+
 
 # iniciar servidor
 if __name__== "__main__":

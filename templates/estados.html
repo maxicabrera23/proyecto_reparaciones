@@ -21,16 +21,20 @@
         
         <h1> Buscador de estados </h1>
 
-        <form action="GET">
-            <div class="CampoInput">
-                <input class="CajaColor" placeholder="Ingrese el numero de reparacion" required>
+        <form action="" method="GET"   id="EForm" >
+            <div class="CajaBuscador">
+                <label><h2>Ingrese el numero de reparacion</h2></label>
+                <input class="CajaEstados" name="nro_reparacion" required>
             </div>
             
             <div class="Acciones">
-                <button> Buscar </button>    
+                <button type="submit"> Buscar </button>    
             </div>
         </form>
+        <div id="Info">
+            
+        </div>
 
-        <script src="main.js"></script>
+        <script src="./static/scripts/estados.js"></script>
     </body>
 </html>

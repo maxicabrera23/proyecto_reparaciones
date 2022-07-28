@@ -9,3 +9,55 @@ AbrirModal.addEventListener('click', ()=>{
 CerrarModal.addEventListener('click', ()=>{
     Modal.classList.remove('MostrarModal');
 });
+
+
+
+const FormUsuarios = document.querySelector('#FormUsuarios');
+
+FormUsuarios.addEventListener('submit', async e=>{
+    e.preventDefault()
+
+    const nombre_apellido = FormUsuarios['nombre_apellido'].value
+    const telefono = FormUsuarios['telefono'].value
+    const email = FormUsuarios['email'].value
+    const domicilio = FormUsuarios['domicilio'].value
+    const localidad = FormUsuarios['localidad'].value
+    const provincia = FormUsuarios['provincia'].value
+    const producto = FormUsuarios['producto'].value
+    const falla = FormUsuarios['falla'].value
+    const defecto_encontrado = FormUsuarios['defecto_encontrado'].value
+    const factura = FormUsuarios['factura'].value
+    const fecha_alta = FormUsuarios['fecha_alta'].value
+    const fecha_reparacion = FormUsuarios['fecha_reparacion'].value
+    const fecha_retiro = FormUsuarios['fecha_retiro'].value
+    const estado = FormUsuarios['estado'].value
+
+    const response = await fetch('', {
+        method: 'POST',
+        headers:{
+            contentType: 'application/json',
+        },
+        body: JSON.stringify({
+            nombre_apellido,
+            telefono,
+            email,
+            domicilio,
+            localidad,
+            provincia,
+            producto,
+            falla,
+            defecto_encontrado,
+            factura,
+            fecha_alta,
+            fecha_reparacion,
+            fecha_retiro,
+            estado
+    })
+})
+
+
+const NuevoUsuario = await response.json();
+console.log(NuevoUsuario);
+
+FormUsuarios.requestFullscreen();
+})
