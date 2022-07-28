@@ -1,16 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <link rel="stylesheet" href="./static/styles/style.css">
+    <title>Soporte Tecnico</title>
 </head>
-<body>
-    <center><h1>Paguina de clientes</h1></center><br>
-    <br>
-    <center><a href="http://localhost:5000/">VOLVER</a></center>
+    <body>
+        <nav>
+            <div class="Logo">
+                <img src="./static/images/MTI_Logo.png" alt="Logo">
+            </div>
+            <div class="Links">
+                <a><span class="Activo">CLIENTES</span></a>
+                <a href="http://localhost:5000/">REPARACIONES</a>
+                <a href="/2">ESTADOS</a>
+            </div>
+        </nav>
+        
+        <h1> Lista de Clientes </h1>
+        
+        <div class="CajaColor" id="ListaUsuarios">
+            <!--<div class="Vacio">
+                <h3>No hay reparaciones pendientes<span class="Animacion">...</span></h3>
+            </div>-->
 
-    <script src="./static/scripts/clientes.js"></script>
-</body>
+            <div class="ModuloRep">
+                <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+
+                <div class="ModuloRepUsuarios">
+                    <p>Electroservice</p>
+                    <p>N° 123456789</p>
+                    <p>Camara no funciona</p>
+                    <p>16/6/2022</p>
+                </div>
+
+                <div class="ModuloRepBotones">
+                    <div class="Acciones">
+                        <button>Modificar</button>
+                        <button>Borrar</button>    
+                    </div>
+                </div>
+
+                <div class="ModuloRepEstados">
+                    <input type="radio" name="estados" class="Rojo">
+                    <input type="radio" name="estados" class="Naranja">
+                    <input type="radio" name="estados" class="Blanco">
+                    <input type="radio" name="estados" class="Aqua">
+                    <input type="radio" name="estados" class="Azul">
+                    <input type="radio" name="estados" class="Verde">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="Acciones">
+            <button class="BotonAbrirModal">Agregar un nuevo cliente</button>    
+        </div>
+
+        <section class="Modal">
+            <div class="Der"><button class="CerrarModal">X</button></div>
+            <div class="ContenedorModal">
+
+                <form id="FormUsuarios">
+                    <div class="Formulario">
+                        <div class="DatosCliente">    
+                            <h2> Datos Cliente</h2>
+
+                            <div class="CampoInput">
+                                <label for="nombre_apellido">Nombre y Apellido</label>
+                                <input name="nombre_apellido" type="text" placeholder="Ingresar Nombre y Apellido" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="telefono">Telefono</label>
+                                <input name="telefono" type="number" placeholder="11-12341234" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="email">Email</label>
+                                <input name="email" type="email" placeholder="example@gmail.com" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="domicilio">Domicilio</label>
+                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="localidad">Localidad</label>
+                                <input name="localidad" type="text" placeholder="Ingresar Localidad" required>
+                            </div>
+
+                            <div class="CampoInput">
+                                <label for="provincia">Provincia</label>
+                                <input name="provincia" type="text" placeholder="Ingresar Provincia" required>
+                            </div>
+
+                        </div>
+
+                       
+                    <button type="submit" class="CerrarModal">Dar de alta</button>
+                </form>
+
+            </div>
+        </section>
+
+        <script src="./static/scripts/clientes.js"></script>
+    </body>
 </html>
