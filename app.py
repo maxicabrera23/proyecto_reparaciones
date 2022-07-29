@@ -169,7 +169,7 @@ def crearReparacion():
         'nro_reparacion': nueva_reparacion ,
         'producto' : request.json['producto'],
         'falla' : request.json['falla'],
-        'defecto_encontrado': request.json['defecto_encotrado'],
+        'defecto_encontrado': request.json['defecto_encontrado'],
         'factura': request.json['factura'],
         'valor_reparacion': request.json['valor_reparacion'],
         'fecha_alta': request.json['fecha_alta'],

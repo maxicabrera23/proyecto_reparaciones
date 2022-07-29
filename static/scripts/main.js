@@ -27,37 +27,40 @@ FormUsuarios.addEventListener('submit', async e=>{
     const falla = FormUsuarios['falla'].value
     const defecto_encontrado = FormUsuarios['defecto_encontrado'].value
     const factura = FormUsuarios['factura'].value
+    const valor_reparacion = FormUsuarios['valor_reparacion'].value
     const fecha_alta = FormUsuarios['fecha_alta'].value
     const fecha_reparacion = FormUsuarios['fecha_reparacion'].value
     const fecha_retiro = FormUsuarios['fecha_retiro'].value
     const estado = FormUsuarios['estado'].value
 
-    const response = await fetch('', {
+    const response = await fetch('/reparacion', {
         method: 'POST',
         headers:{
-            contentType: 'application/json',
+            'Content-Type' : 'application/json',
         },
         body: JSON.stringify({
-            nombre_apellido,
-            telefono,
-            email,
-            domicilio,
-            localidad,
-            provincia,
-            producto,
-            falla,
-            defecto_encontrado,
-            factura,
-            fecha_alta,
-            fecha_reparacion,
-            fecha_retiro,
-            estado
+            "nombre_apellido": nombre_apellido,
+            "telefono": telefono,
+            "email": email,
+            "domicilio": domicilio,
+            "localidad": localidad,
+            "provincia": provincia,
+            "producto": producto,
+            "falla": falla,
+            "defecto_encontrado": defecto_encontrado,
+            "factura": factura,
+            "valor_reparacion": valor_reparacion,
+            "fecha_alta": fecha_alta,
+            "fecha_reparacion": fecha_reparacion,
+            "fecha_retiro": fecha_retiro,
+            "estado": estado
     })
 })
 
 
 const NuevoUsuario = await response.json();
-console.log(NuevoUsuario);
+alert(NuevoUsuario['msg']);
 
-FormUsuarios.requestFullscreen();
+Modal.style.display="none";
+
 })
