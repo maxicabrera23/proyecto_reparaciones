@@ -13,7 +13,7 @@ CerrarModal.addEventListener('click', ()=>{
 
 
 let clientes = []
-const FormEstados = document.querySelector('#EFormClientes');
+const FormClientes = document.querySelector('#EFormClientes');
 
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
@@ -41,6 +41,8 @@ window.addEventListener("DOMContentLoaded", async() => {
             <p>Domicilio: ${clie.domicilio}</p>
             <p>Localidad: ${clie.localida}</p> 
             <p>Provincia: ${clie.provicia}</p>
+            <button class="CerrarModal">Modificar</button>
+            <button class="CerrarModal">Eliminar</button>
             </div>
             `
 
@@ -50,6 +52,43 @@ window.addEventListener("DOMContentLoaded", async() => {
         });
     };
 
+/* crear clientes */
+
+FormClientes.addEventListener('submit', async e=>{
+    e.preventDefault()
+
+    const nombre_apellido = FormClientes['nombre_apellido'].value
+    const telefono = FormClientes['telefono'].value
+    const email = FormClientes['email'].value
+    const domicilio = FormClientes['domicilio'].value
+    const localidad = FormClientes['localidad'].value
+    const provincia = FormClientes['provincia'].value
+    
+    const response = await fetch('/cliente', {
+        method: 'POST',
+        headers:{
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+            "nombre_apellido": nombre_apellido,
+            "telefono": telefono,
+            "email": email,
+            "domicilio": domicilio,
+            "localidad": localidad,
+            "provincia": provincia,
+    })
+})
+
+
+const NuevoCliente = await response.json();
+alert(NuevoCliente['msg']);
+
+FormClientes.reset();
+Modal.style.display="none";
+
+location.reload();  
+
+})
 
 
 

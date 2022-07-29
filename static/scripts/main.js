@@ -62,5 +62,6 @@ const NuevoUsuario = await response.json();
 alert(NuevoUsuario['msg']);
 
 Modal.style.display="none";
+location.reload();  
 
 })
