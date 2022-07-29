@@ -39,6 +39,7 @@ def mostrarCliente(id):
         '_id': str(ObjectId(cliente['_id'])),
         'nombre_apellido': cliente['nombre'],
         'telefono': cliente['telefono'],
+        'email': doc['email'],
         'domicilio': cliente['domicilio'],
         'localidad': cliente['localidad'],
         'provincia': cliente['provincia']
@@ -54,6 +55,7 @@ def mostrarClientes():
             '_id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre'],
             'telefono': doc['telefono'],
+            'email': doc['email'],
             'domicilio': doc['domicilio'],
             'localidad': doc['localidad'],
             'provincia': doc['provincia']
@@ -61,7 +63,7 @@ def mostrarClientes():
     return jsonify(clientes)
 
 # crear un cliente
-@app.route('/clientes',methods=['POST'])
+@app.route('/cliente',methods=['POST'])
 def crearCliente():
     id = db_clientes.insert_one({
         'nombre': request.json['nombre_apellido'],
@@ -71,7 +73,10 @@ def crearCliente():
         'localidad': request.json['localidad'],
         'provincia': request.json['provincia']
     })
-    return str(ObjectId(id.inserted_id))
+    return jsonify({
+        "id": str(ObjectId(id.inserted_id)),
+        "msg":"Cliente Creado"
+        })
     
 # borrar cliente
 @app.route('/cliente/<id>', methods=['DELETE'])
