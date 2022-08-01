@@ -41,8 +41,8 @@ window.addEventListener("DOMContentLoaded", async() => {
             <p>Domicilio: ${clie.domicilio}</p>
             <p>Localidad: ${clie.localida}</p> 
             <p>Provincia: ${clie.provicia}</p>
-            <button class="CerrarModal">Modificar</button>
-            <button class="CerrarModal">Eliminar</button>
+            <button class="CerrarModal" style="background:#f0ad4e">Modificar</button>
+            <button class="CerrarModal" style="background:#d9534f">Eliminar</button>
             </div>
             `
 

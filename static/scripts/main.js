@@ -36,8 +36,8 @@ FormUsuarios.addEventListener('submit', async e=>{
     const response = await fetch('/reparacion', {
         method: 'POST',
         headers:{
-            'Content-Type' : 'application/json',
-        },
+            'Content-Type' : 'application/json'
+                },
         body: JSON.stringify({
             "nombre_apellido": nombre_apellido,
             "telefono": telefono,
@@ -59,6 +59,7 @@ FormUsuarios.addEventListener('submit', async e=>{
 
 
 const NuevoUsuario = await response.json();
+console.log(NuevoUsuario)
 alert(NuevoUsuario['msg']);
 
 Modal.style.display="none";
