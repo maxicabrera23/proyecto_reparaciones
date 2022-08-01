@@ -59,7 +59,6 @@ FormUsuarios.addEventListener('submit', async e=>{
 
 
 const NuevoUsuario = await response.json();
-console.log(NuevoUsuario)
 alert(NuevoUsuario['msg']);
 
 Modal.style.display="none";
