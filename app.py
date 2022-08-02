@@ -75,7 +75,11 @@ def crearCliente():
     })
     return jsonify({
         "id": str(ObjectId(id.inserted_id)),
+<<<<<<< HEAD
         'nombre_apellido': request.json['nombre_apellido'],
+=======
+        'nombre': request.json['nombre_apellido'],
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
         'telefono': request.json['telefono'],
         'email': request.json['email'],
         'domicilio': request.json['domicilio'],
@@ -103,15 +107,23 @@ def modificarCliente(id):
         'provincia': request.json['provincia']
 
     }})
+<<<<<<< HEAD
     return jsonify({
         "id": str(ObjectId(id.inserted_id)),
+=======
+    return jsonify({'_id':str(ObjectId(id)),
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
         'nombre': request.json['nombre_apellido'],
         'telefono': request.json['telefono'],
         'email': request.json['email'],
         'domicilio': request.json['domicilio'],
         'localidad': request.json['localidad'],
         'provincia': request.json['provincia'],
+<<<<<<< HEAD
         "msg":"Cliente Creado"
+=======
+        'msg':'Cliente Modificado'
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
         })
 
 ######################## reparaciones ##################################################
@@ -194,11 +206,16 @@ def crearReparacion():
         'estado': request.json['estado']
     })
     
+    
     db_nro.update_one({'_id':ObjectId(nro_id)}, {'$set':{
         'nro': nueva_reparacion}})
     
+<<<<<<< HEAD
     return jsonify({
         'id':str(ObjectId(id.inserted_id)),
+=======
+    return jsonify({'id':str(ObjectId(id.inserted_id)),
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
         'nombre_apellido': request.json['nombre_apellido'], 
         'telefono': request.json['telefono'],
         'email': request.json['email'],
@@ -215,14 +232,19 @@ def crearReparacion():
         'fecha_reparacion': request.json['fecha_reparacion'],
         'fecha_retiro': request.json['fecha_retiro'],
         'estado': request.json['estado'],
+<<<<<<< HEAD
         'msg':'Reparacion Creada'
         })
+=======
+        'msg':'Reparacion Creada'})
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
 
 # borrar reparacion 
 @app.route('/reparacion/<id>', methods=['DELETE'])
 def borrarReparacion(id):
     db_reparaciones.delete_one({'_id': ObjectId(id)})
-    return jsonify({'msg':'Reparacion Eliminada'})
+    return jsonify({'_id': str(ObjectId(id)),
+                    'msg':'Reparacion Eliminada'})
 
 # modificar reparacion
 @app.route('/reparacion/<id>', methods=['PUT'])
@@ -237,7 +259,7 @@ def modificarReparacion(id):
         'nro_reparacion': request.json['nro_reparacion'],
         'producto' : request.json['producto'],
         'falla' : request.json['falla'],
-        'defecto_encontrado': request.json['defecto_encotrado'],
+        'defecto_encontrado': request.json['defecto_encontrado'],
         'factura': request.json['factura'],
         'valor_reparacion': request.json['valor_reparacion'],
         'fecha_alta': request.json['fecha_alta'],
@@ -246,7 +268,25 @@ def modificarReparacion(id):
         'estado': request.json['estado']
 
     }})
-    return jsonify({'msg':'Reparacion Modificada'})
+    return jsonify({'_id': str(ObjectId(id)),
+        'nombre_apellido': request.json['nombre_apellido'], 
+        'telefono': request.json['telefono'],
+        'email': request.json['email'],
+        'domicilio' : request.json['domicilio'],
+        'localidad' : request.json['localidad'],
+        'provincia' : request.json['provincia'],
+        'nro_reparacion': request.json['nro_reparacion'],
+        'producto' : request.json['producto'],
+        'falla' : request.json['falla'],
+        'defecto_encontrado': request.json['defecto_encontrado'],
+        'factura': request.json['factura'],
+        'valor_reparacion': request.json['valor_reparacion'],
+        'fecha_alta': request.json['fecha_alta'],
+        'fecha_reparacion': request.json['fecha_reparacion'],
+        'fecha_retiro': request.json['fecha_retiro'],
+        'estado': request.json['estado'],
+        'msg':'Reparacion Modificada'
+        })
 
 
 ######################### estados #################################################

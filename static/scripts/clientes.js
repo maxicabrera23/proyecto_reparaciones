@@ -47,10 +47,17 @@ window.addEventListener("DOMContentLoaded", async() => {
             <p>Telefono: ${clie.telefono}</p>
             <p>Email: ${clie.email}</p>
             <p>Domicilio: ${clie.domicilio}</p>
+<<<<<<< HEAD
             <p>Localidad: ${clie.localidad}</p> 
             <p>Provincia: ${clie.provincia}</p>
             <button class="botonModificar CerrarModal">Modificar</button>
             <button class="botonEliminar CerrarModal">Eliminar</button>
+=======
+            <p>Localidad: ${clie.localida}</p> 
+            <p>Provincia: ${clie.provicia}</p>
+            <button class="CerrarModal" style="background:#f0ad4e">Modificar</button>
+            <button class="CerrarModal" style="background:#d9534f">Eliminar</button>
+>>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
             </div>
             `
 
