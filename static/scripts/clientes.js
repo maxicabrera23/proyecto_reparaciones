@@ -1,8 +1,19 @@
+let clientes = []
+let modificando = false
+let clienteId = null
+let contenido = null
+
+const FormClientes = document.querySelector('#EFormClientes');
+const clienteLista = document.querySelector('#ListaClientes')
+
+
 const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 
 AbrirModal.addEventListener('click', ()=>{
+    modificando = false
+    FormClientes.reset();
     Modal.classList.add('MostrarModal');
 });
 
@@ -12,14 +23,12 @@ CerrarModal.addEventListener('click', ()=>{
 
 
 
-let clientes = []
-let modificando = false
-let clienteId = null
-let contenido = null
 
 
-const FormClientes = document.querySelector('#EFormClientes');
-const clienteLista = document.querySelector('#ListaClientes')
+console.log(modificando)
+
+
+
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
     const response = await fetch("/clientes");
@@ -47,17 +56,10 @@ window.addEventListener("DOMContentLoaded", async() => {
             <p>Telefono: ${clie.telefono}</p>
             <p>Email: ${clie.email}</p>
             <p>Domicilio: ${clie.domicilio}</p>
-<<<<<<< HEAD
             <p>Localidad: ${clie.localidad}</p> 
             <p>Provincia: ${clie.provincia}</p>
             <button class="botonModificar CerrarModal">Modificar</button>
             <button class="botonEliminar CerrarModal">Eliminar</button>
-=======
-            <p>Localidad: ${clie.localida}</p> 
-            <p>Provincia: ${clie.provicia}</p>
-            <button class="CerrarModal" style="background:#f0ad4e">Modificar</button>
-            <button class="CerrarModal" style="background:#d9534f">Eliminar</button>
->>>>>>> d676601df470ca8b0156790d38f1d03907bcfbd3
             </div>
             `
 
@@ -89,6 +91,8 @@ window.addEventListener("DOMContentLoaded", async() => {
                 });
             const btnModificar = clienteItem.querySelector('.botonModificar')
                 btnModificar.addEventListener('click', async() => {
+                    modificando = true
+                    Modal.classList.add('MostrarModal');
                     const response = await fetch (`/cliente/${clie._id}`);
                     const data = await response.json()
                     Modal.classList.add('MostrarModal')
@@ -98,9 +102,12 @@ window.addEventListener("DOMContentLoaded", async() => {
                     domicilio = FormClientes['domicilio'].value = data.domicilio
                     FormClientes['localidad'].value = data.localidad
                     provincia = FormClientes['provincia'].value = data.provincia
-                
-                    modificando = true
+                    
+                    
+                    
+                    console.log(modificando)
                     clienteId = data._id
+                    console.log(clienteId)
                 });
         
         let contenido = clientes.length
@@ -110,7 +117,6 @@ window.addEventListener("DOMContentLoaded", async() => {
         });
     }
 /* crear clientes */
-
 FormClientes.addEventListener('submit', async e =>{
     e.preventDefault()
 
@@ -122,6 +128,7 @@ FormClientes.addEventListener('submit', async e =>{
     const provincia = FormClientes['provincia'].value
     
     if (!modificando){
+        console.log(`el valor de modificando es: ${modificando}`)
         const response = await fetch('/cliente', {
             method: 'POST',
             headers:{
@@ -138,7 +145,7 @@ FormClientes.addEventListener('submit', async e =>{
         })
     const NuevoCliente = await response.json();
     console.log(NuevoCliente)
-    clientes.push(NuevoCliente)
+    clientes.unshift(NuevoCliente)
     
     alert(NuevoCliente['msg']);
         
@@ -160,13 +167,14 @@ FormClientes.addEventListener('submit', async e =>{
         })
         const clienteModificado = await response.json();
         console.log(clienteModificado)
+        alert(clienteModificado['msg'])
         clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)
         modificando = false
         clienteId = null  
     }
 mostrarData(clientes)
 FormClientes.reset();
-Modal.style.display="none";
+Modal.classList.remove('MostrarModal');
 
 
     /* mostrarData(clientes) location.reload() location.reload();*/
