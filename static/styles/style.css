@@ -351,7 +351,7 @@ input::placeholder {
 
 }
 
-/*----------------- Pantalla Estados -----------------*/
+/*----------------- Pantalla Clientes -----------------*/
 
 #ListaClientes li{
     list-style: none;
@@ -370,6 +370,13 @@ input::placeholder {
 }
 #ListaClientes li p{
     margin: 10px;
+}
+
+.botonModificar{
+    background: #f0ad4e;
+}
+.botonEliminar{
+    background: #d9534f;
 }
 /*---------------------------------------------*/
 

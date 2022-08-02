@@ -13,21 +13,29 @@ CerrarModal.addEventListener('click', ()=>{
 
 
 let clientes = []
-const FormClientes = document.querySelector('#EFormClientes');
+let modificando = false
+let clienteId = null
+let contenido = null
 
+
+const FormClientes = document.querySelector('#EFormClientes');
+const clienteLista = document.querySelector('#ListaClientes')
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
     const response = await fetch("/clientes");
     const data = await response.json()
     clientes = data
+    contenido = clientes.length
     mostrarData(clientes)
 });
 
 
 
     function mostrarData(clientes){
+        /*if (contenido == 0){
+
+        }*/
         
-        const clienteLista = document.querySelector('#ListaClientes')
         clienteLista.innerHTML =''
 
         clientes.forEach(clie => {
@@ -39,22 +47,64 @@ window.addEventListener("DOMContentLoaded", async() => {
             <p>Telefono: ${clie.telefono}</p>
             <p>Email: ${clie.email}</p>
             <p>Domicilio: ${clie.domicilio}</p>
-            <p>Localidad: ${clie.localida}</p> 
-            <p>Provincia: ${clie.provicia}</p>
-            <button class="CerrarModal">Modificar</button>
-            <button class="CerrarModal">Eliminar</button>
+            <p>Localidad: ${clie.localidad}</p> 
+            <p>Provincia: ${clie.provincia}</p>
+            <button class="botonModificar CerrarModal">Modificar</button>
+            <button class="botonEliminar CerrarModal">Eliminar</button>
             </div>
             `
 
-            clienteLista.append(clienteItem)
+            
+            const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
+                btnEliminar.addEventListener('click', async () => {
+                    const seguro = confirm('Esta seguro de eliminar este Cliente')
+
+                    if (seguro){
+
+                        const response = await fetch(`/cliente/${clie._id}`,{
+                            method:'DELETE',
+                            headers:{
+                                'Content-Type' : 'application/json',
+                            },
+                        })
+                        const data = await response.json()
+                        clientes = clientes.filter(clie => clie._id != data._id)
+                        clienteLista.append(clientes)
+                        mostrarData(clientes)
+                        alert(`${data.msg}`)
+                        
+                        /*const data = await response.json()
+                        clientes = clientes.filter(clie => clie._id != data._id)
+                        clienteLista.append(clientes)
+                        mostrarData(clientes)*/
+                    }
+                });
+            const btnModificar = clienteItem.querySelector('.botonModificar')
+                btnModificar.addEventListener('click', async() => {
+                    const response = await fetch (`/cliente/${clie._id}`);
+                    const data = await response.json()
+                    Modal.classList.add('MostrarModal')
+                    FormClientes['nombre_apellido'].value = data.nombre_apellido
+                    FormClientes['telefono'].value = data.telefono
+                    FormClientes['email'].value = data.email
+                    domicilio = FormClientes['domicilio'].value = data.domicilio
+                    FormClientes['localidad'].value = data.localidad
+                    provincia = FormClientes['provincia'].value = data.provincia
+                
+                    modificando = true
+                    clienteId = data._id
+                });
+        
+        let contenido = clientes.length
+
+        clienteLista.append(clienteItem)
             
         });
-    };
-
+    }
 /* crear clientes */
 
-FormClientes.addEventListener('submit', async e=>{
+FormClientes.addEventListener('submit', async e =>{
     e.preventDefault()
 
     const nombre_apellido = FormClientes['nombre_apellido'].value
@@ -64,30 +114,55 @@ FormClientes.addEventListener('submit', async e=>{
     const localidad = FormClientes['localidad'].value
     const provincia = FormClientes['provincia'].value
     
-    const response = await fetch('/cliente', {
-        method: 'POST',
-        headers:{
-            'Content-Type' : 'application/json',
-        },
-        body: JSON.stringify({
-            "nombre_apellido": nombre_apellido,
-            "telefono": telefono,
-            "email": email,
-            "domicilio": domicilio,
-            "localidad": localidad,
-            "provincia": provincia,
-    })
-})
-
-
-const NuevoCliente = await response.json();
-alert(NuevoCliente['msg']);
-
+    if (!modificando){
+        const response = await fetch('/cliente', {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({
+                "nombre_apellido": nombre_apellido,
+                "telefono": telefono,
+                "email": email,
+                "domicilio": domicilio,
+                "localidad": localidad,
+                "provincia": provincia,
+            })
+        })
+    const NuevoCliente = await response.json();
+    console.log(NuevoCliente)
+    clientes.push(NuevoCliente)
+    
+    alert(NuevoCliente['msg']);
+        
+        
+    }else{
+        const response = await fetch(`/cliente/${clienteId}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "nombre_apellido": nombre_apellido,
+                "telefono": telefono,
+                "email": email,
+                "domicilio": domicilio,
+                "localidad": localidad,
+                "provincia": provincia,
+            })
+        })
+        const clienteModificado = await response.json();
+        console.log(clienteModificado)
+        clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)
+        modificando = false
+        clienteId = null  
+    }
+mostrarData(clientes)
 FormClientes.reset();
 Modal.style.display="none";
 
-location.reload();  
 
+    /* mostrarData(clientes) location.reload() location.reload();*/
 })
 
 
