@@ -36,6 +36,7 @@ window.addEventListener("DOMContentLoaded", async() => {
     clientes = data
     contenido = clientes.length
     mostrarData(clientes)
+    
 });
 
 
@@ -44,7 +45,8 @@ window.addEventListener("DOMContentLoaded", async() => {
         /*if (contenido == 0){
 
         }*/
-        
+        clientes.sort()
+        console .log(`los datos actuales de clientes son: ${clientes}`)
         clienteLista.innerHTML =''
 
         clientes.forEach(clie => {
@@ -64,51 +66,50 @@ window.addEventListener("DOMContentLoaded", async() => {
             `
 
             
-            const btnEliminar = clienteItem.querySelector('.botonEliminar')
+                const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
-                btnEliminar.addEventListener('click', async () => {
-                    const seguro = confirm('Esta seguro de eliminar este Cliente')
+                    btnEliminar.addEventListener('click', async () => {
+                        const seguro = confirm('Esta seguro de eliminar este Cliente')
 
-                    if (seguro){
+                        if (seguro){
 
-                        const response = await fetch(`/cliente/${clie._id}`,{
-                            method:'DELETE',
-                            headers:{
-                                'Content-Type' : 'application/json',
-                            },
-                        })
+                            const response = await fetch(`/cliente/${clie._id}`,{
+                                method:'DELETE',
+                                headers:{
+                                    'Content-Type' : 'application/json',
+                                },
+                            })
+                            const data = await response.json()
+                            /*clientes = clientes.filter(clie => clie._id != data._id)*/
+                            const response_clientes = await fetch("/clientes");
+                            const data_clientes = await response_clientes.json()
+                            clientes = data_clientes
+                            mostrarData(clientes)
+                            alert(`${data.msg}`)
+                            
+                            /*const data = await response.json()
+                            clientes = clientes.filter(clie => clie._id != data._id)
+                            clienteLista.append(clientes)
+                            mostrarData(clientes)*/
+                        }
+                    });
+                const btnModificar = clienteItem.querySelector('.botonModificar')
+                    btnModificar.addEventListener('click', async() => {
+                        modificando = true
+                        const response = await fetch (`/cliente/${clie._id}`);
                         const data = await response.json()
-                        clientes = clientes.filter(clie => clie._id != data._id)
-                        clienteLista.append(clientes)
-                        mostrarData(clientes)
-                        alert(`${data.msg}`)
+                        Modal.classList.add('MostrarModal')
+                        FormClientes['nombre_apellido'].value = data.nombre_apellido
+                        FormClientes['telefono'].value = data.telefono
+                        FormClientes['email'].value = data.email
+                        domicilio = FormClientes['domicilio'].value = data.domicilio
+                        FormClientes['localidad'].value = data.localidad
+                        provincia = FormClientes['provincia'].value = data.provincia
                         
-                        /*const data = await response.json()
-                        clientes = clientes.filter(clie => clie._id != data._id)
-                        clienteLista.append(clientes)
-                        mostrarData(clientes)*/
-                    }
-                });
-            const btnModificar = clienteItem.querySelector('.botonModificar')
-                btnModificar.addEventListener('click', async() => {
-                    modificando = true
-                    Modal.classList.add('MostrarModal');
-                    const response = await fetch (`/cliente/${clie._id}`);
-                    const data = await response.json()
-                    Modal.classList.add('MostrarModal')
-                    FormClientes['nombre_apellido'].value = data.nombre_apellido
-                    FormClientes['telefono'].value = data.telefono
-                    FormClientes['email'].value = data.email
-                    domicilio = FormClientes['domicilio'].value = data.domicilio
-                    FormClientes['localidad'].value = data.localidad
-                    provincia = FormClientes['provincia'].value = data.provincia
-                    
-                    
-                    
-                    console.log(modificando)
-                    clienteId = data._id
-                    console.log(clienteId)
-                });
+                        console.log(modificando)
+                        clienteId = data._id
+                        console.log(clienteId)
+                    });
         
         let contenido = clientes.length
 
@@ -145,8 +146,10 @@ FormClientes.addEventListener('submit', async e =>{
         })
     const NuevoCliente = await response.json();
     console.log(NuevoCliente)
-    clientes.unshift(NuevoCliente)
-    
+    /*clientes.unshift(NuevoCliente)*/
+    const response_clientes = await fetch("/clientes");
+    const data_clientes = await response_clientes.json()
+    clientes = data_clientes
     alert(NuevoCliente['msg']);
         
         
@@ -168,7 +171,11 @@ FormClientes.addEventListener('submit', async e =>{
         const clienteModificado = await response.json();
         console.log(clienteModificado)
         alert(clienteModificado['msg'])
-        clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)
+        /*clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)*/
+        const response_clientes = await fetch("/clientes");
+        const data_clientes = await response_clientes.json()
+        clientes = data_clientes
+        console .log(`los datos actuales de clientes en modificar son: ${clientes}`)
         modificando = false
         clienteId = null  
     }
