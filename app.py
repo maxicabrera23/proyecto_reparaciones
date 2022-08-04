@@ -50,7 +50,8 @@ def mostrarCliente(id):
 def mostrarClientes():
     # muestra todos los clientes de la tabla
     clientes = []
-    for doc in db_clientes.find():
+    string = '{nombre:1}'
+    for doc in db_clientes.find().sort('nombre',1):
         clientes.append({
             '_id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre'],
@@ -145,7 +146,7 @@ def mostrarReparacion(id):
 @app.route('/reparaciones',methods=['GET'])
 def mostrarReparaciones():
     reparaciones = []
-    for doc in db_reparaciones.find():
+    for doc in db_reparaciones.find().sort('nombre_apellido',1):
         reparaciones.append({
             'id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre_apellido'], 
