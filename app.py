@@ -146,7 +146,7 @@ def mostrarReparacion(id):
 @app.route('/reparaciones',methods=['GET'])
 def mostrarReparaciones():
     reparaciones = []
-    for doc in db_reparaciones.find().sort('nombre_apellido',1):
+    for doc in db_reparaciones.find().sort('nro_reparacion',1):
         reparaciones.append({
             'id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre_apellido'], 

@@ -15,10 +15,13 @@ AbrirModal.addEventListener('click', ()=>{
     modificando = false
     FormClientes.reset();
     Modal.classList.add('MostrarModal');
+    document.getElementById("footer").style.display = "none";
+
 });
 
 CerrarModal.addEventListener('click', ()=>{
     Modal.classList.remove('MostrarModal');
+    document.getElementById("footer").style.display = "";
 });
 
 
@@ -55,11 +58,15 @@ window.addEventListener("DOMContentLoaded", async() => {
             <div class="ModuloRep">
             <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
             <h3>${clie.nombre_apellido}</h3>
-            <p>Telefono: ${clie.telefono}</p>
-            <p>Email: ${clie.email}</p>
-            <p>Domicilio: ${clie.domicilio}</p>
-            <p>Localidad: ${clie.localidad}</p> 
-            <p>Provincia: ${clie.provincia}</p>
+
+            <div class="DatosModulo">
+            <h3>Telefono<p>${clie.telefono}</p></h3>
+            <h3>Email<p>${clie.email}</p></h3>
+            <h3>Domicilio<p>${clie.domicilio}</p></h3>
+            <h3>Localidad<p>${clie.localidad}</p></h3> 
+            <h3>Provincia<p>${clie.provincia}</p></h3>
+            </div>
+            
             <button class="botonModificar CerrarModal">Modificar</button>
             <button class="botonEliminar CerrarModal">Eliminar</button>
             </div>
@@ -77,7 +84,7 @@ window.addEventListener("DOMContentLoaded", async() => {
                                 method:'DELETE',
                                 headers:{
                                     'Content-Type' : 'application/json',
-                                },
+                                }
                             })
                             const data = await response.json()
                             /*clientes = clientes.filter(clie => clie._id != data._id)*/
