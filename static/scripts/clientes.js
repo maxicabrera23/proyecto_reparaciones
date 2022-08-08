@@ -109,9 +109,9 @@ window.addEventListener("DOMContentLoaded", async() => {
                         FormClientes['nombre_apellido'].value = data.nombre_apellido
                         FormClientes['telefono'].value = data.telefono
                         FormClientes['email'].value = data.email
-                        domicilio = FormClientes['domicilio'].value = data.domicilio
+                        FormClientes['domicilio'].value = data.domicilio
                         FormClientes['localidad'].value = data.localidad
-                        provincia = FormClientes['provincia'].value = data.provincia
+                        FormClientes['provincia'].value = data.provincia
                         
                         console.log(modificando)
                         clienteId = data._id

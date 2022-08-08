@@ -104,6 +104,11 @@
                         <div class="DatosPortero">
                             <h2>Datos Portero</h2>
 
+                            <div class="CampoInput nro_reparacion" id="nro_reparacion">
+                                <label for="nro_reparacion">NRO Reparacion</label>
+                                <input name="nro_reparacion" type="text" placeholder="nro reparacion" required>
+                            </div>
+                            
                             <div class="CampoInput">
                                 <label for="producto">Producto</label>
                                 <input name="producto" type="text" placeholder="Ingresar Producto" required>
@@ -146,7 +151,14 @@
 
                             <div class="CampoInput">
                                 <label for="estado">Estado</label>
-                                <input name="estado" type="text" placeholder="Ingresar estado de la reparacion" required>
+                                <select name="estado"required>
+                                    <option value="ingresada"selected >INGRESADA</option>
+                                    <option value="revision presupuesto" >REVISION PARA PRESUPUESTO</option>
+                                    <option value="espera confirmacion presupuesto">ESPERA CONFIRMACION PRESUPUESTO</option>
+                                    <option value="en curso">EN CURSO</option>
+                                    <option value="reparada/terminada">REPARADA/TERMINADA</option>
+                                    <option value="retirada/enviada">RETIRADA/ENVIADA</option>
+                                </select>
                             </div>
                         </div>
                     

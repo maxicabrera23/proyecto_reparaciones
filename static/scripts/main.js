@@ -3,6 +3,7 @@ let modificando = false
 let reparacionId = null
 let contenido = null
 
+
 const FormUsuarios = document.querySelector('#FormUsuarios');
 const ReparacionesLista = document.querySelector('#ListaReparaciones');
 
@@ -14,6 +15,7 @@ const CerrarModal = document.querySelector('.CerrarModal');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
+    Modal.classList.remove('nro_reparacion');
 });
 
 CerrarModal.addEventListener('click', ()=>{
@@ -115,6 +117,37 @@ function mostrarData(reparaciones){
 
                 
             });
+            
+            const btnModificar = reparacionItem.querySelector('.botonModificar')
+                    btnModificar.addEventListener('click', async() => {
+                        modificando = true
+                        const response = await fetch (`/reparacion/${repa.id}`);
+                        const data = await response.json()
+                        Modal.classList.add('MostrarModal')
+                        FormUsuarios['nombre_apellido'].value = repa.nombre_apellido
+                        FormUsuarios['telefono'].value = repa.telefono
+                        FormUsuarios['email'].value = repa.email
+                        FormUsuarios['domicilio'].value = repa.domicilio
+                        FormUsuarios['localidad'].value = repa.localidad
+                        FormUsuarios['provincia'].value = repa.provincia
+                        FormUsuarios['nro_reparacion'].value = repa.nro_reparacion
+                        FormUsuarios['producto'].value = repa.producto
+                        FormUsuarios['falla'].value = repa.falla
+                        FormUsuarios['defecto_encontrado'].value = repa.defecto_encontrado
+                        FormUsuarios['factura'].value = repa.factura
+                        FormUsuarios['valor_reparacion'].value = repa.valor_reparacion
+                        FormUsuarios['fecha_alta'].value = repa.fecha_alta
+                        FormUsuarios['fecha_reparacion'].value = repa.fecha_reparacion
+                        FormUsuarios['fecha_retiro'].value = repa.fecha_retiro
+                        FormUsuarios['estado'].value = repa.estado
+                        
+                        console.log(modificando)
+                        reparacionId = data._id
+                        console.log(reparacionId)
+                    });
+            
+            
+            
             ReparacionesLista.append(reparacionItem)
         });
         
@@ -170,7 +203,7 @@ FormUsuarios.addEventListener('submit', async e=>{
 const NuevoUsuario = await response.json();
 alert(NuevoUsuario['msg']);
 
-Modal.style.display="none";
+Modal.classList.remove('MostrarModal');
 location.reload();  
 
 })
