@@ -22,12 +22,12 @@
         <h1> Lista de Reparaciones </h1>
         
         <div class="CajaColor" id="ListaReparaciones">
+            <ul id="ListaReparaciones"></ul>
             <!--<div class="Vacio">
                 <h3>No hay reparaciones pendientes<span class="Animacion">...</span></h3>
-            </div>-->
+            </div>
 
             <div class="ModuloRep">
-                <!--
                 <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
 
                 <div class="ModuloRepUsuarios">
@@ -51,8 +51,8 @@
                     <input type="radio" name="estados" class="Aqua">
                     <input type="radio" name="estados" class="Azul">
                     <input type="radio" name="estados" class="Verde">
-                </div>-->
-            </div>   
+                </div>
+            </div>   -->
 
         </div>
 
@@ -104,11 +104,11 @@
                         <div class="DatosPortero">
                             <h2>Datos Portero</h2>
 
-                            <div class="CampoInput nro_reparacion" id="nro_reparacion">
+                            <div class="CampoInput" id="nro_repa">
                                 <label for="nro_reparacion">NRO Reparacion</label>
-                                <input name="nro_reparacion" type="text" placeholder="nro reparacion" required>
+                                <input name="nro_reparacion" type="text" placeholder="nro reparacion" readonly>
                             </div>
-                            
+
                             <div class="CampoInput">
                                 <label for="producto">Producto</label>
                                 <input name="producto" type="text" placeholder="Ingresar Producto" required>
@@ -133,7 +133,10 @@
                                 <label for="valor_reparacion">Valor de la reparacion</label>
                                 <input name="valor_reparacion" type="text" placeholder="valor de reparacion" required>
                             </div>
+                        </div>
 
+                        <div class="DatosPortero">
+                            <h2>Datos Fecha</h2>
                             <div class="CampoInput">
                                 <label for="fecha_alta">Fecha de Alta</label>
                                 <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" required>

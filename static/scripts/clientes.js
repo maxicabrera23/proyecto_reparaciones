@@ -57,14 +57,22 @@ window.addEventListener("DOMContentLoaded", async() => {
             clienteItem.innerHTML = `
             <div class="ModuloRep">
             <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
-            <h3>${clie.nombre_apellido}</h3>
+            <label for="${clie.nombre_apellido}">
+                <div class="drop">
+                    <h3>${clie.nombre_apellido}</h3>
+                </div>
+            </label>
 
-            <div class="DatosModulo">
-            <h3>Telefono<p>${clie.telefono}</p></h3>
-            <h3>Email<p>${clie.email}</p></h3>
-            <h3>Domicilio<p>${clie.domicilio}</p></h3>
-            <h3>Localidad<p>${clie.localidad}</p></h3> 
-            <h3>Provincia<p>${clie.provincia}</p></h3>
+            <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
+
+            <div class="slide">
+                <div class="DatosModulo">
+                <h3>Telefono<p>${clie.telefono}</p></h3>
+                <h3>Email<p>${clie.email}</p></h3>
+                <h3>Domicilio<p>${clie.domicilio}</p></h3>
+                <h3>Localidad<p>${clie.localidad}</p></h3> 
+                <h3>Provincia<p>${clie.provincia}</p></h3>
+                </div>
             </div>
             
             <button class="botonModificar CerrarModal">Modificar</button>
@@ -109,9 +117,9 @@ window.addEventListener("DOMContentLoaded", async() => {
                         FormClientes['nombre_apellido'].value = data.nombre_apellido
                         FormClientes['telefono'].value = data.telefono
                         FormClientes['email'].value = data.email
-                        FormClientes['domicilio'].value = data.domicilio
+                        domicilio = FormClientes['domicilio'].value = data.domicilio
                         FormClientes['localidad'].value = data.localidad
-                        FormClientes['provincia'].value = data.provincia
+                        provincia = FormClientes['provincia'].value = data.provincia
                         
                         console.log(modificando)
                         clienteId = data._id

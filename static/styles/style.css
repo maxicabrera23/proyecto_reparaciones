@@ -14,6 +14,15 @@ body{
     padding-bottom: 100px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;               
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: gray;   
+    border-radius: 20px;      
+    border: 0.5px solid rgb(0, 0, 0);  
+}
 
 /*------------- Barra de Navegacion ---------------*/
 nav{
@@ -80,6 +89,7 @@ a .Activo{
 .DatosModulo{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .DatosModulo h3{
@@ -320,7 +330,7 @@ form h2{
     color: aliceblue;
 }
 
-input{
+input, select{
     height: 30px;
     background-color: gray;
     text-align: center;
@@ -408,7 +418,7 @@ footer {
 
 
 /*----------------- Pantalla Clientes -----------------*/
-#ListaClientes li{
+#ListaClientes li, #ListaReparaciones li{
     list-style: none;
     display: flex;
     justify-content: center;
@@ -421,7 +431,7 @@ footer {
     border-radius: 15px;
     */
 }
-#ListaClientes li h3{
+#ListaClientes li h3, #ListaReparaciones li h3 {
     margin: 10px;
     color: rgba(86, 250, 250, 0.815);
 }
@@ -436,6 +446,43 @@ footer {
 }
 /*---------------------------------------------*/
 
+.drop {
+    color : white;
+    cursor : pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+  
+.drop::after {
+    float: right;
+}
+  
+.slide {
+    width:100%;
+    height:0px;
+    overflow: auto;
+    transition: 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.touch {position: absolute; opacity: 0; height: 0px;}    
+
+.touch:checked + .slide {
+    height: 250px;
+    transition: 1s ease;
+}
+
+li a {text-decoration : none; color : #2d2f31;}
+
+.ColorEstado{
+    text-align: center;
+    color: aliceblue;
+    border-radius: 20px;
+}
 
 /*----------------- Pantalla Celular -----------------*/
 

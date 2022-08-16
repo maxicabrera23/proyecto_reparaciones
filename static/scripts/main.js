@@ -2,24 +2,28 @@ let reparaciones = []
 let modificando = false
 let reparacionId = null
 let contenido = null
-
+let contador = 1
 
 const FormUsuarios = document.querySelector('#FormUsuarios');
 const ReparacionesLista = document.querySelector('#ListaReparaciones');
 
 
-
+const campoNumero = document.querySelector('#nro_repa');
 const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
-    Modal.classList.remove('nro_reparacion');
+    document.getElementById("footer").style.display = "none";
+    campoNumero.style.display="none";
+    console.log(`el valor de modifiando es ${modificando}`)
 });
 
 CerrarModal.addEventListener('click', ()=>{
     Modal.classList.remove('MostrarModal');
+    document.getElementById("footer").style.display = "";
+    FormUsuarios.reset();
 });
 
 /* mostar clientes */
@@ -29,33 +33,6 @@ window.addEventListener("DOMContentLoaded", async() => {
     reparaciones = data
     contenido = reparaciones.length
     mostrarData(reparaciones)
-    /*
-    const reparacionTarjeta = document.querySelector('.ModuloRep');
-    color = repa.estado 
-            if (color == "ingresada"){
-                reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
-                reparacionTarjeta.style.border = "solid 2px crimson";
-            
-            }else if (color == "revision presupuesto"){
-                reparacionTarjeta.style.background = "rgba(255, 127, 80, 0.61)";
-                reparacionTarjeta.style.border = "solid 2px coral";
-            
-            }else if (color == "espera confirmacion presupuesto"){
-                reparacionTarjeta.style.background = "rgba(240, 255, 255, 0.616)";
-                reparacionTarjeta.style.border = "solid 2px azure";
-            
-            }else if (color == "en curso"){
-                reparacionTarjeta.style.background = "rgba(0, 255, 255, 0.582)";
-                reparacionTarjeta.style.border = "solid 2px aqua";
-            
-            }else if (color == "reparada/terminada"){
-                reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
-                reparacionTarjeta.style.border = "solid 2px navy";
-            
-            }else if (color == "retirada/enviada"){
-                reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
-                reparacionTarjeta.style.border = "solid 2px green";
-            }*/
 });
 
 
@@ -68,31 +45,40 @@ function mostrarData(reparaciones){
         reparacionItem.innerHTML = `
             <div class="ModuloRep">
                 <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
-                <h3>${repa.nombre_apellido}</h3>
+
+                <label for="${repa.nro_reparacion}">
+                    <div class="drop">
+                        <h3>${repa.nombre_apellido}</h3> | <h3>Nro° de Reparacion<p>${repa.nro_reparacion}</p></h3>
+                    </div>
+                    <div class="ColorEstado" id="div${contador}">${repa.estado}</div>
+                </label>               
                 
+                    <input type="checkbox" class="touch" id="${repa.nro_reparacion}"> 
+
+                <div class="slide">
                     <div class="DatosModulo">
                         <h3>Telefono<p>${repa.telefono}</p></h3>
                         <h3>Email<p>${repa.email}</p></h3>
                         <h3>Domicilio<p>${repa.domicilio}</p></h3>
                         <h3>Localidad<p>${repa.localidad}</p></h3> 
                         <h3>Provincia<p>${repa.provincia}</p></h3>
-                        <p>Nro de Reparacion ${repa.nro_reparacion}</p>
-                        <p>Producto ${repa.producto}</p>
-                        <p>falla ${repa.falla}</p>
-                        <p>defecto_encontrado ${repa.defecto_encontrado}</p>
-                        <p>factura ${repa.factura}</p>
-                        <p>valor_reparacion ${repa.valor_reparacion}</p>
-                        <p>fecha_alta ${repa.fecha_alta}</p>
-                        <p>fecha_reparacion ${repa.fecha_reparacion}</p>
-                        <p>fecha_retiro ${repa.fecha_retiro}</p>
-                        <p>estado ${repa.estado}</p>
+                        <h3>Producto<p>${repa.producto}</p></h3>
+                        <h3>falla<p>${repa.falla}</p></h3>
+                        <h3>defecto_encontrado<p>${repa.defecto_encontrado}</p></h3>
+                        <h3>factura<p>${repa.factura}</p></h3>
+                        <h3>valor_reparacion<p>${repa.valor_reparacion}</p></h3>
+                        <h3>fecha_alta<p>${repa.fecha_alta}</p></h3>
+                        <h3>fecha_reparacion<p>${repa.fecha_reparacion}</p></h3>
+                        <h3>fecha_retiro<p>${repa.fecha_retiro}</p></h3>
                     </div>
+                </div>
+
                 <button class="botonModificar CerrarModal">Modificar</button>
                 <button class="botonEliminar CerrarModal">Eliminar</button>
             </div>
         `
-            const btnEliminar = reparacionItem.querySelector('.botonEliminar')
 
+            const btnEliminar = reparacionItem.querySelector('.botonEliminar')
                 btnEliminar.addEventListener('click', async () => {
                     const seguro = confirm('Esta seguro de eliminar este Cliente')
 
@@ -112,14 +98,11 @@ function mostrarData(reparaciones){
                         alert(`${data.msg}`)
                         
                     }
-                    
-    
-
-                
             });
-            
+/*###################################################################################*/           
             const btnModificar = reparacionItem.querySelector('.botonModificar')
                     btnModificar.addEventListener('click', async() => {
+                        campoNumero.style.display="flex"
                         modificando = true
                         const response = await fetch (`/reparacion/${repa.id}`);
                         const data = await response.json()
@@ -142,29 +125,67 @@ function mostrarData(reparaciones){
                         FormUsuarios['estado'].value = repa.estado
                         
                         console.log(modificando)
-                        reparacionId = data._id
+                        reparacionId = repa.id
                         console.log(reparacionId)
                     });
             
+/*###################################################################################*/
             
             
             ReparacionesLista.append(reparacionItem)
+
+            const reparacionTarjeta = document.querySelector(`#div${contador}`);
+            color = repa.estado
+            console.log(`el estado de la reparacion es ${color}`)
+            
+            if (color == "ingresada"){
+                reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
+                reparacionTarjeta.style.border = "solid 2px crimson";
+
+            }
+            if (color == "revision presupuesto"){
+                reparacionTarjeta.style.background = "rgba(255, 127, 80, 0.61)";
+                reparacionTarjeta.style.border = "solid 2px coral";
+
+            }
+            if (color == "espera confirmacion presupuesto"){
+                reparacionTarjeta.style.background = "rgba(240, 255, 255, 0.616)";
+                reparacionTarjeta.style.border = "solid 2px azure";
+
+            }
+            if (color == "en curso"){
+                reparacionTarjeta.style.background = "rgba(0, 255, 255, 0.582)";
+                reparacionTarjeta.style.border = "solid 2px aqua";
+
+            }
+            if (color == "reparada/terminada"){
+                reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
+                reparacionTarjeta.style.border = "solid 2px navy";
+
+            }
+            if (color == "retirada/enviada"){
+                reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
+                reparacionTarjeta.style.border = "solid 2px green";
+            }
+            contador = contador + 1
         });
-        
 }
+
+
 
 
 
 
 FormUsuarios.addEventListener('submit', async e=>{
     e.preventDefault()
-
+    console.log(`el valor de modifiando es ${modificando}`)
     const nombre_apellido = FormUsuarios['nombre_apellido'].value
     const telefono = FormUsuarios['telefono'].value
     const email = FormUsuarios['email'].value
     const domicilio = FormUsuarios['domicilio'].value
     const localidad = FormUsuarios['localidad'].value
     const provincia = FormUsuarios['provincia'].value
+    const nro_reparacion = FormUsuarios['nro_reparacion'].value
     const producto = FormUsuarios['producto'].value
     const falla = FormUsuarios['falla'].value
     const defecto_encontrado = FormUsuarios['defecto_encontrado'].value
@@ -175,35 +196,71 @@ FormUsuarios.addEventListener('submit', async e=>{
     const fecha_retiro = FormUsuarios['fecha_retiro'].value
     const estado = FormUsuarios['estado'].value
 
-    const response = await fetch('/reparacion', {
-        method: 'POST',
-        headers:{
-            'Content-Type' : 'application/json',
-        },
-        body: JSON.stringify({
-            "nombre_apellido": nombre_apellido,
-            "telefono": telefono,
-            "email": email,
-            "domicilio": domicilio,
-            "localidad": localidad,
-            "provincia": provincia,
-            "producto": producto,
-            "falla": falla,
-            "defecto_encontrado": defecto_encontrado,
-            "factura": factura,
-            "valor_reparacion": valor_reparacion,
-            "fecha_alta": fecha_alta,
-            "fecha_reparacion": fecha_reparacion,
-            "fecha_retiro": fecha_retiro,
-            "estado": estado
-    })
-})
+    if(!modificando){
+        const response = await fetch('/reparacion', {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({
+                "nombre_apellido": nombre_apellido,
+                "telefono": telefono,
+                "email": email,
+                "domicilio": domicilio,
+                "localidad": localidad,
+                "provincia": provincia,
+                "producto": producto,
+                "falla": falla,
+                "defecto_encontrado": defecto_encontrado,
+                "factura": factura,
+                "valor_reparacion": valor_reparacion,
+                "fecha_alta": fecha_alta,
+                "fecha_reparacion": fecha_reparacion,
+                "fecha_retiro": fecha_retiro,
+                "estado": estado
+            })/*json*/
+        })/*response*/
+        const NuevoUsuario = await response.json();
+        alert(NuevoUsuario['msg']);
+    }else{
+        const response = await fetch(`/reparacion/${reparacionId}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "nombre_apellido": nombre_apellido,
+                "telefono": telefono,
+                "email": email,
+                "domicilio": domicilio,
+                "localidad": localidad,
+                "provincia": provincia,
+                "nro_reparacion":nro_reparacion,
+                "producto": producto,
+                "falla": falla,
+                "defecto_encontrado": defecto_encontrado,
+                "factura": factura,
+                "valor_reparacion": valor_reparacion,
+                "fecha_alta": fecha_alta,
+                "fecha_reparacion": fecha_reparacion,
+                "fecha_retiro": fecha_retiro,
+                "estado": estado
+            })
+        })
+        const reparacionModificada = await response.json();
+        alert(reparacionModificada['msg'])
+        modificando = false
+        reparacionId = null  
+    }   
 
 
-const NuevoUsuario = await response.json();
-alert(NuevoUsuario['msg']);
+
 
 Modal.classList.remove('MostrarModal');
-location.reload();  
-
+const response = await fetch("/reparaciones");
+const data = await response.json()
+reparaciones = data
+contenido = reparaciones.length
+mostrarData(reparaciones)
+FormUsuarios.reset();
 })

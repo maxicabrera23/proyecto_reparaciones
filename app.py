@@ -146,7 +146,7 @@ def mostrarReparacion(id):
 @app.route('/reparaciones',methods=['GET'])
 def mostrarReparaciones():
     reparaciones = []
-    for doc in db_reparaciones.find().sort('nro_reparacion',1):
+    for doc in db_reparaciones.find().sort('nro_reparacion',-1):
         reparaciones.append({
             'id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre_apellido'], 
@@ -236,10 +236,10 @@ def modificarReparacion(id):
         'domicilio' : request.json['domicilio'],
         'localidad' : request.json['localidad'],
         'provincia' : request.json['provincia'],
-        'nro_reparacion': request.json['nro_reparacion'],
+        'nro_reparacion': int(request.json['nro_reparacion']),
         'producto' : request.json['producto'],
         'falla' : request.json['falla'],
-        'defecto_encontrado': request.json['defecto_encotrado'],
+        'defecto_encontrado': request.json['defecto_encontrado'],
         'factura': request.json['factura'],
         'valor_reparacion': request.json['valor_reparacion'],
         'fecha_alta': request.json['fecha_alta'],
