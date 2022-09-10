@@ -336,6 +336,9 @@ input, select{
     text-align: center;
     color: aliceblue;
 }
+#mostrar_clientes{
+    margin-bottom: 15px;
+}
 
 input::placeholder { 
     color: rgb(192, 192, 192); 

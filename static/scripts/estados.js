@@ -63,7 +63,7 @@ FormEstados.addEventListener('submit', async e =>{
             <h3>Fecha de Reparacion: ${est.fecha_reparacion}</h3>
             <h3>Falla: ${est.falla}</h3>
             <h3>Defecto Encontrado: ${est.defecto_encontrado}</h3> 
-            <h3>Fecha de Retiro/Envio: ${est.Fecha_retiro}</h3>
+            <h3>Fecha de Retiro/Envio: ${est.fecha_retiro}</h3>
             `
         estadoInfo.append(estadoItem)
         })

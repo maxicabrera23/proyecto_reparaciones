@@ -20,6 +20,10 @@
         </nav>
         
         <h1> Lista de Reparaciones </h1>
+
+        <div class="Acciones">
+            <button class="BotonAbrirModal">Agregar una nueva reparacion</button>    
+        </div>
         
         <div class="CajaColor" id="ListaReparaciones">
             <ul id="ListaReparaciones"></ul>
@@ -56,9 +60,7 @@
 
         </div>
 
-        <div class="Acciones">
-            <button class="BotonAbrirModal">Agregar una nueva reparacion</button>    
-        </div>
+        
 
         <section class="Modal">
             <div class="Der"><button class="CerrarModal">X</button></div>
@@ -70,8 +72,13 @@
                             <h2> Datos Cliente</h2>
 
                             <div class="CampoInput">
+                                
+                                <select id="mostrar_clientes">
+                                    <option disabled selected>Buscar Cliente</option>
+                                </select> 
                                 <label for="nombre_apellido">Nombre y Apellido</label>
-                                <input name="nombre_apellido" type="text" placeholder="Ingresar Nombre y Apellido" required>
+                                <input name="nombre_apellido" id="nombre_cliente" type="text" placeholder="Ingresar Nombre y Apellido" autocomplete="off" required>
+                                
                             </div>
 
                             <div class="CampoInput">

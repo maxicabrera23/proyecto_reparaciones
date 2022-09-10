@@ -4,8 +4,12 @@ let reparacionId = null
 let contenido = null
 let contador = 1
 
+let listaClientes = []
+
 const FormUsuarios = document.querySelector('#FormUsuarios');
 const ReparacionesLista = document.querySelector('#ListaReparaciones');
+const nombre_cliente = document.querySelector('#nombre_cliente');
+const most_clientes =document.querySelector('#mostrar_clientes')
 
 
 const campoNumero = document.querySelector('#nro_repa');
@@ -17,7 +21,6 @@ AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
-    console.log(`el valor de modifiando es ${modificando}`)
 });
 
 CerrarModal.addEventListener('click', ()=>{
@@ -33,8 +36,52 @@ window.addEventListener("DOMContentLoaded", async() => {
     reparaciones = data
     contenido = reparaciones.length
     mostrarData(reparaciones)
+
+    data_clientes = await cargar_clientes()
+    listaClientes = data_clientes
+    mostrar_clientes_ol(listaClientes)
+    
 });
 
+/*##################### input  elejir cliente #######################*/
+async function cargar_clientes(){
+    const response = await fetch("/clientes")
+    return await response.json()
+}
+
+const crearItemClientes = cliente => cliente.map(cliente =>
+    `<option value = ${cliente._id}> ${cliente.nombre_apellido}</option>`)
+
+    
+function mostrar_clientes_ol(cliente){
+    const stringCliente = crearItemClientes(cliente)
+    most_clientes.innerHTML=`<option value ="buscar_cliente" selected>Buscar Cliente</option>${stringCliente}`
+}
+
+most_clientes.addEventListener('change', async e =>{
+    
+    const clienteSelecinado = listaClientes.filter(listaClientes => listaClientes._id.includes(most_clientes.value))
+    console.log(most_clientes.value)
+    if (most_clientes.value == "buscar_cliente"){
+        FormUsuarios['nombre_apellido'].value = "";
+        FormUsuarios['telefono'].value = "";
+        FormUsuarios['email'].value = "";
+        FormUsuarios['domicilio'].value = "";
+        FormUsuarios['localidad'].value = "";
+        FormUsuarios['provincia'].value = "";
+    }else{
+        clienteSelecinado.map(clienteSelecinado =>`${
+        FormUsuarios['nombre_apellido'].value = clienteSelecinado.nombre_apellido,
+        FormUsuarios['telefono'].value = clienteSelecinado.telefono,
+        FormUsuarios['email'].value = clienteSelecinado.email,
+        FormUsuarios['domicilio'].value = clienteSelecinado.domicilio,
+        FormUsuarios['localidad'].value = clienteSelecinado.localidad,
+        FormUsuarios['provincia'].value = clienteSelecinado.provincia}`)
+    }
+})
+
+
+/*######################################################*/
 
 function mostrarData(reparaciones){
     
@@ -124,9 +171,7 @@ function mostrarData(reparaciones){
                         FormUsuarios['fecha_retiro'].value = repa.fecha_retiro
                         FormUsuarios['estado'].value = repa.estado
                         
-                        console.log(modificando)
                         reparacionId = repa.id
-                        console.log(reparacionId)
                     });
             
 /*###################################################################################*/
@@ -136,7 +181,6 @@ function mostrarData(reparaciones){
 
             const reparacionTarjeta = document.querySelector(`#div${contador}`);
             color = repa.estado
-            console.log(`el estado de la reparacion es ${color}`)
             
             if (color == "ingresada"){
                 reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
@@ -178,7 +222,6 @@ function mostrarData(reparaciones){
 
 FormUsuarios.addEventListener('submit', async e=>{
     e.preventDefault()
-    console.log(`el valor de modifiando es ${modificando}`)
     const nombre_apellido = FormUsuarios['nombre_apellido'].value
     const telefono = FormUsuarios['telefono'].value
     const email = FormUsuarios['email'].value
