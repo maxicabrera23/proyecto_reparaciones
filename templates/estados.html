@@ -14,23 +14,43 @@
             </div>
             <div class="Links">
                 <a href="/1">CLIENTES</a>
-                <a href="http://localhost:5000/">REPARACIONES</a>
+                <a href="/">REPARACIONES</a>
                 <a><span class="Activo">ESTADOS</span></a>
             </div>
         </nav>
         
         <h1> Buscador de estados </h1>
 
-        <form action="GET">
-            <div class="CampoInput">
-                <input class="CajaColor" placeholder="Ingrese el numero de reparacion" required>
+        <form action="" method="GET"   id="EForm" >
+            <div class="CajaBuscador">
+                <label><h2>Ingrese el numero de reparacion</h2></label>
+                <input class="CajaEstados" name="nro_reparacion" required>
             </div>
             
             <div class="Acciones">
-                <button> Buscar </button>    
+                <button type="submit"> Buscar </button>    
             </div>
         </form>
+        <div id="Info">
+            
+        </div>
 
-        <script src="main.js"></script>
+        <footer id="footer">
+            <div class="Services">
+                <h2>Services</h2>
+                <p>Web design</p>
+                <p>Development</p>
+            </div>
+            <div class="Services">
+                <h2>About</h2>
+                <p>Company</p>
+                <p>Team</p>
+            </div>
+            <div class="Copyright">
+            <img src="./static/images/MTI_Logo.png" alt="Logo">
+            <p>Copyright ©2022 | Designed by MTI Tech</p>
+            </div>
+        </footer>
+        <script src="./static/scripts/estados.js"></script>
     </body>
 </html>
