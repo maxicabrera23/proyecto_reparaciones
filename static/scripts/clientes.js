@@ -10,12 +10,14 @@ const clienteLista = document.querySelector('#ListaClientes')
 const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
+const modifi = FormClientes.querySelector('#botonAlta')
 
 AbrirModal.addEventListener('click', ()=>{
     modificando = false
     FormClientes.reset();
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
+    modifi.innerHTML="Dar de alta"
 
 });
 
@@ -114,6 +116,7 @@ window.addEventListener("DOMContentLoaded", async() => {
                         const response = await fetch (`/cliente/${clie._id}`);
                         const data = await response.json()
                         Modal.classList.add('MostrarModal')
+                        modifi.innerHTML="Modificar"
                         FormClientes['nombre_apellido'].value = data.nombre_apellido
                         FormClientes['telefono'].value = data.telefono
                         FormClientes['email'].value = data.email

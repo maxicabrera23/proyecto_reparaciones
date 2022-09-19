@@ -230,6 +230,15 @@ h1{
     margin: 10px 50px;
 }
 
+.Acciones .BotonAbrirModal{
+background: rgb(50,97,7);
+background: linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%);
+}
+
+.Modal .Der .CerrarModal{
+background:  rgba(220, 20, 60, 0.507);
+border: solid 2px crimson;
+}						   
 .Acciones button, .CerrarModal{
     align-items: center;
     appearance: none;
@@ -249,6 +258,9 @@ h1{
     margin: 10px;
 }
 
+.Modal .Der .CerrarModal:hover{
+    background:  rgb(230, 31, 31);
+}							   
 .Acciones button:hover, .CerrarModal:hover{
     border-bottom: rgba(4,216,255,1) solid 2px;
 }
@@ -331,7 +343,7 @@ form h2{
 }
 
 h2{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 input, select{

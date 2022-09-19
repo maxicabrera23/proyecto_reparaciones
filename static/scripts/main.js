@@ -5,6 +5,7 @@ let contenido = null
 let contador = 1
 let estados = null 
 
+
 let listaClientes = []
 
 const FormUsuarios = document.querySelector('#FormUsuarios');
@@ -12,6 +13,7 @@ const ReparacionesLista = document.querySelector('#ListaReparaciones');
 const nombre_cliente = document.querySelector('#nombre_cliente');
 const most_clientes =document.querySelector('#mostrar_clientes')
 const estadoReparacion = document.querySelector('#estadoRepa')
+const modifi = FormUsuarios.querySelector('#botonAlta')
 
 
 const campoNumero = document.querySelector('#nro_repa');
@@ -23,6 +25,7 @@ AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
+    modifi.innerHTML="Dar de alta";
 
     estados = FormUsuarios['estado'].value
     console.log(estados)
@@ -237,6 +240,9 @@ function mostrarData(reparaciones){
                         const response = await fetch (`/reparacion/${repa.id}`);
                         const data = await response.json()
                         Modal.classList.add('MostrarModal')
+                        
+                        modifi.innerHTML="Modificar"
+                        
                         FormUsuarios['nombre_apellido'].value = repa.nombre_apellido
                         FormUsuarios['telefono'].value = repa.telefono
                         FormUsuarios['email'].value = repa.email
