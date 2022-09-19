@@ -88,34 +88,47 @@
 
                             <div class="CampoInput">
                                 <label for="email">Email</label>
-                                <input name="email" type="email" placeholder="example@gmail.com" required>
+                                <input name="email" type="email" placeholder="example@gmail.com" >
                             </div>
 
                             <div class="CampoInput">
                                 <label for="domicilio">Domicilio</label>
-                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio" required>
+                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio" >
                             </div>
 
                             <div class="CampoInput">
                                 <label for="localidad">Localidad</label>
-                                <input name="localidad" type="text" placeholder="Ingresar Localidad" required>
+                                <input name="localidad" type="text" placeholder="Ingresar Localidad" >
                             </div>
 
                             <div class="CampoInput">
                                 <label for="provincia">Provincia</label>
-                                <input name="provincia" type="text" placeholder="Ingresar Provincia" required>
+                                <input name="provincia" type="text" placeholder="Ingresar Provincia" >
                             </div>
 
                         </div>
 
                         <div class="DatosPortero">
-                            <h2>Datos Portero</h2>
+                            <h2>Datos Producto</h2>
 
                             <div class="CampoInput" id="nro_repa">
                                 <label for="nro_reparacion">NRO Reparacion</label>
                                 <input name="nro_reparacion" type="text" placeholder="nro reparacion" readonly>
                             </div>
 
+                            <div class="CampoInput">
+                                <label for="estado">Estado</label>
+                                <select id="estadoRepa" name="estado"required>
+                                    <option value="ingresada"selected >INGRESADA</option>
+                                    <option value="revision presupuesto" >REVISION PARA PRESUPUESTO</option>
+                                    <option value="espera confirmacion presupuesto">ESPERA CONFIRMACION PRESUPUESTO</option>
+                                    <option value="en curso">EN CURSO</option>
+                                    <option value="reparada/terminada">REPARADA/TERMINADA</option>
+                                    <option value="retirada/enviada">RETIRADA/ENVIADA</option>
+                                </select>
+                            </div>
+                            
+                            
                             <div class="CampoInput">
                                 <label for="producto">Producto</label>
                                 <input name="producto" type="text" placeholder="Ingresar Producto" required>
@@ -126,19 +139,20 @@
                                 <input name="falla" type="text" placeholder="¿Cual es la Falla?" required>
                             </div>
 
-                            <div class="CampoInput">
+                            <div class="CampoInput" id="defEncontrado">
                                 <label for="defecto_encontrado">Defecto Encontrado</label>
-                                <input name="defecto_encontrado" type="text" placeholder="Ingresar Defecto" required>
+                                <input name="defecto_encontrado" type="text" placeholder="Ingresar Defecto" >
                             </div>
 
-                            <div class="CampoInput">
-                                <label for="factura">Factura</label>
-                                <input name="factura" type="text" placeholder="¿LLeva Factura?" required>
-                            </div>
-
-                            <div class="CampoInput">
+                            
+                            <div class="CampoInput" id="valRepa">
                                 <label for="valor_reparacion">Valor de la reparacion</label>
-                                <input name="valor_reparacion" type="text" placeholder="valor de reparacion" required>
+                                <input name="valor_reparacion" type="text" placeholder="valor de reparacion" >
+                            </div>
+
+                            <div class="CampoInput" id="fact" >
+                                <label for="factura">Factura</label>
+                                <input name="factura" type="text" placeholder="¿LLeva Factura?">
                             </div>
                         </div>
 
@@ -146,30 +160,20 @@
                             <h2>Datos Fecha</h2>
                             <div class="CampoInput">
                                 <label for="fecha_alta">Fecha de Alta</label>
-                                <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" required>
+                                <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" >
                             </div>
 
-                            <div class="CampoInput">
+                            <div class="CampoInput" id="fechaRepa">
                                 <label for="fecha_reparacion">Fecha de Recparacion</label>
-                                <input name="fecha_reparacion" type="date" placeholder="Ingresar Fecha de Recparacion" required>
+                                <input name="fecha_reparacion" type="date" placeholder="Ingresar Fecha de Reparacion">
                             </div>
 
-                            <div class="CampoInput">
+                            <div class="CampoInput" id="fechaRet">
                                 <label for="fecha_retiro">Fecha de Retiro</label>
-                                <input name="fecha_retiro" type="date" placeholder="Ingresar Fecha de Retiro" required>
+                                <input name="fecha_retiro" type="date" placeholder="Ingresar Fecha de Retiro" >
                             </div>
 
-                            <div class="CampoInput">
-                                <label for="estado">Estado</label>
-                                <select name="estado"required>
-                                    <option value="ingresada"selected >INGRESADA</option>
-                                    <option value="revision presupuesto" >REVISION PARA PRESUPUESTO</option>
-                                    <option value="espera confirmacion presupuesto">ESPERA CONFIRMACION PRESUPUESTO</option>
-                                    <option value="en curso">EN CURSO</option>
-                                    <option value="reparada/terminada">REPARADA/TERMINADA</option>
-                                    <option value="retirada/enviada">RETIRADA/ENVIADA</option>
-                                </select>
-                            </div>
+                            
                         </div>
                     
                     </div>

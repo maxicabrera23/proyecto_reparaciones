@@ -3,6 +3,7 @@ let modificando = false
 let reparacionId = null
 let contenido = null
 let contador = 1
+let estados = null 
 
 let listaClientes = []
 
@@ -10,6 +11,7 @@ const FormUsuarios = document.querySelector('#FormUsuarios');
 const ReparacionesLista = document.querySelector('#ListaReparaciones');
 const nombre_cliente = document.querySelector('#nombre_cliente');
 const most_clientes =document.querySelector('#mostrar_clientes')
+const estadoReparacion = document.querySelector('#estadoRepa')
 
 
 const campoNumero = document.querySelector('#nro_repa');
@@ -21,6 +23,10 @@ AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
+
+    estados = FormUsuarios['estado'].value
+    console.log(estados)
+    mostarEstados(estados)
 });
 
 CerrarModal.addEventListener('click', ()=>{
@@ -40,6 +46,9 @@ window.addEventListener("DOMContentLoaded", async() => {
     data_clientes = await cargar_clientes()
     listaClientes = data_clientes
     mostrar_clientes_ol(listaClientes)
+    estados = estadoReparacion.value
+    console.log(estados)
+    mostarEstados(estados)
     
 });
 
@@ -83,6 +92,75 @@ most_clientes.addEventListener('change', async e =>{
 
 /*######################################################*/
 
+/*##################### estados de reparacion inputs #################################*/
+
+
+
+function mostarEstados(estado){
+    if (estado == "ingresada"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "none";
+        FormUsuarios.querySelector('#valRepa').style.display = "none";
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "none";
+        FormUsuarios.querySelector('#fechaRet').style.display = "none";
+        
+
+    }
+    
+    if (estado == "revision presupuesto"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "none";
+        FormUsuarios.querySelector('#valRepa').style.display = "none";
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "none";
+        FormUsuarios.querySelector('#fechaRet').style.display = "none";
+    }
+    
+    if (estado == "en curso"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "";
+        FormUsuarios.querySelector('#valRepa').style.display = "";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "none";
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        FormUsuarios.querySelector('#fechaRet').style.display = "none";
+
+    }
+    
+    
+    
+    if (estado == "espera confirmacion presupuesto"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "";
+        FormUsuarios.querySelector('#valRepa').style.display = "";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "none";
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        FormUsuarios.querySelector('#fechaRet').style.display = "none";
+
+    }
+    
+    if (estado == "reparada/terminada"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "";
+        FormUsuarios.querySelector('#valRepa').style.display = "";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "";
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        FormUsuarios.querySelector('#fechaRet').style.display = "none";
+
+    }
+    if (estado == "retirada/enviada"){
+        FormUsuarios.querySelector('#defEncontrado').style.display = "";
+        FormUsuarios.querySelector('#valRepa').style.display = "";
+        FormUsuarios.querySelector('#fact').style.display = "";
+        FormUsuarios.querySelector('#fechaRepa').style.display = "";
+        FormUsuarios.querySelector('#fechaRet').style.display = "";
+        
+    }
+}
+
+estadoReparacion.addEventListener('change', async e=> {
+    estados = FormUsuarios['estado'].value
+    mostarEstados(estados)
+    
+}) 
+
+/*######################################################*/
+
 function mostrarData(reparaciones){
     
     ReparacionesLista.innerHTML =''
@@ -110,13 +188,13 @@ function mostrarData(reparaciones){
                         <h3>Localidad<p>${repa.localidad}</p></h3> 
                         <h3>Provincia<p>${repa.provincia}</p></h3>
                         <h3>Producto<p>${repa.producto}</p></h3>
-                        <h3>falla<p>${repa.falla}</p></h3>
-                        <h3>defecto_encontrado<p>${repa.defecto_encontrado}</p></h3>
-                        <h3>factura<p>${repa.factura}</p></h3>
-                        <h3>valor_reparacion<p>${repa.valor_reparacion}</p></h3>
-                        <h3>fecha_alta<p>${repa.fecha_alta}</p></h3>
-                        <h3>fecha_reparacion<p>${repa.fecha_reparacion}</p></h3>
-                        <h3>fecha_retiro<p>${repa.fecha_retiro}</p></h3>
+                        <h3>Falla<p>${repa.falla}</p></h3>
+                        <h3>Defecto encontrado<p>${repa.defecto_encontrado}</p></h3>
+                        <h3>Factura<p>${repa.factura}</p></h3>
+                        <h3>Valor reparacion<p>${repa.valor_reparacion}</p></h3>
+                        <h3>Fecha alta<p>${repa.fecha_alta}</p></h3>
+                        <h3>Fecha de reparacion<p>${repa.fecha_reparacion}</p></h3>
+                        <h3>Fecha de retiro<p>${repa.fecha_retiro}</p></h3>
                     </div>
                 </div>
 
@@ -151,6 +229,11 @@ function mostrarData(reparaciones){
                     btnModificar.addEventListener('click', async() => {
                         campoNumero.style.display="flex"
                         modificando = true
+                        
+                        estados = repa.estado
+                        console.log(estados)
+                        mostarEstados(estados)
+                        
                         const response = await fetch (`/reparacion/${repa.id}`);
                         const data = await response.json()
                         Modal.classList.add('MostrarModal')
@@ -185,6 +268,8 @@ function mostrarData(reparaciones){
             if (color == "ingresada"){
                 reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
                 reparacionTarjeta.style.border = "solid 2px crimson";
+                FormUsuarios.querySelector('#defEncontrado').style.display = "none";
+                
 
             }
             if (color == "revision presupuesto"){

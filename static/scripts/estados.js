@@ -61,7 +61,7 @@ FormEstados.addEventListener('submit', async e =>{
             <h3>Nombre y apellido: ${est.nombre_apellido}</h3>
             <h3>Producto: ${est.producto}</h3>
             <h3>Fecha de Reparacion: ${est.fecha_reparacion}</h3>
-            <h3>Falla: ${est.falla}</h3>
+            <h3>Falla denunciada: ${est.falla}</h3>
             <h3>Defecto Encontrado: ${est.defecto_encontrado}</h3> 
             <h3>Fecha de Retiro/Envio: ${est.fecha_retiro}</h3>
             `
