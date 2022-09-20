@@ -26,6 +26,7 @@ AbrirModal.addEventListener('click', ()=>{
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
     modifi.innerHTML="Dar de alta";
+    modifi.style.background="linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%)"
 
     estados = FormUsuarios['estado'].value
     console.log(estados)
@@ -242,6 +243,7 @@ function mostrarData(reparaciones){
                         Modal.classList.add('MostrarModal')
                         
                         modifi.innerHTML="Modificar"
+                        modifi.style.background="#f0ad4e"
                         
                         FormUsuarios['nombre_apellido'].value = repa.nombre_apellido
                         FormUsuarios['telefono'].value = repa.telefono
