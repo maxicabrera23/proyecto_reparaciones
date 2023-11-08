@@ -173,37 +173,40 @@ function mostrarData(reparaciones){
         const reparacionItem = document.createElement('li')
         reparacionItem.innerHTML = `
             <div class="ModuloRep">
-                <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+                <!-- <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo"> -->
 
-                <label for="${repa.nro_reparacion}">
-                    <div class="drop">
-                        <h3>${repa.nombre_apellido}</h3> | <h3>Nro° de Reparacion<p>${repa.nro_reparacion}</p></h3>
-                    </div>
-                    <div class="ColorEstado" id="div${contador}">${repa.estado}</div>
-                </label>               
+                    <div class="info">
+                        <div class="drop">
+                            <p class="numeroService">N° ${repa.nro_reparacion}</p><p class="nombreCliente">${repa.nombre_apellido}</p>
+                        </div>
+
+                        <div class="ColorEstado" id="div${contador}">${repa.estado}</div>
+                        
+                    </div>               
                 
                     <input type="checkbox" class="touch" id="${repa.nro_reparacion}"> 
 
-                <div class="slide">
-                    <div class="DatosModulo">
-                        <h3>Telefono<p>${repa.telefono}</p></h3>
-                        <h3>Email<p>${repa.email}</p></h3>
-                        <h3>Domicilio<p>${repa.domicilio}</p></h3>
-                        <h3>Localidad<p>${repa.localidad}</p></h3> 
-                        <h3>Provincia<p>${repa.provincia}</p></h3>
-                        <h3>Producto<p>${repa.producto}</p></h3>
-                        <h3>Falla<p>${repa.falla}</p></h3>
-                        <h3>Defecto encontrado<p>${repa.defecto_encontrado}</p></h3>
-                        <h3>Factura<p>${repa.factura}</p></h3>
-                        <h3>Valor reparacion<p>${repa.valor_reparacion}</p></h3>
-                        <h3>Fecha alta<p>${repa.fecha_alta}</p></h3>
-                        <h3>Fecha de reparacion<p>${repa.fecha_reparacion}</p></h3>
-                        <h3>Fecha de retiro<p>${repa.fecha_retiro}</p></h3>
+                    <div class="slide">
+                        <div class="DatosModulo">
+                            <h3>Telefono<p>${repa.telefono}</p></h3>
+                            <h3>Email<p>${repa.email}</p></h3>
+                            <h3>Domicilio<p>${repa.domicilio}</p></h3>
+                            <h3>Localidad<p>${repa.localidad}</p></h3> 
+                            <h3>Provincia<p>${repa.provincia}</p></h3>
+                            <h3>Producto<p>${repa.producto}</p></h3>
+                            <h3>Falla<p>${repa.falla}</p></h3>
+                            <h3>Defecto encontrado<p>${repa.defecto_encontrado}</p></h3>
+                            <h3>Factura<p>${repa.factura}</p></h3>
+                            <h3>Valor reparacion<p>${repa.valor_reparacion}</p></h3>
+                            <h3>Fecha alta<p>${repa.fecha_alta}</p></h3>
+                            <h3>Fecha de reparacion<p>${repa.fecha_reparacion}</p></h3>
+                            <h3>Fecha de retiro<p>${repa.fecha_retiro}</p></h3>
+                        </div>
                     </div>
-                </div>
-
-                <button class="botonModificar CerrarModal">Modificar</button>
-                <button class="botonEliminar CerrarModal">Eliminar</button>
+                    <div class="acciones">
+                        <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"/></button>
+                        <button class="botonEliminar CerrarModal"><img class="icon_b" src="./static/images/trash.png"/></button>
+                    </div>
             </div>
         `
 
@@ -275,34 +278,34 @@ function mostrarData(reparaciones){
             
             if (color == "ingresada"){
                 reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
-                reparacionTarjeta.style.border = "solid 2px crimson";
+                reparacionTarjeta.style.padding = "5px";
                 FormUsuarios.querySelector('#defEncontrado').style.display = "none";
                 
 
             }
             if (color == "revision presupuesto"){
                 reparacionTarjeta.style.background = "rgba(255, 127, 80, 0.61)";
-                reparacionTarjeta.style.border = "solid 2px coral";
+                reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "espera confirmacion presupuesto"){
                 reparacionTarjeta.style.background = "rgba(240, 255, 255, 0.616)";
-                reparacionTarjeta.style.border = "solid 2px azure";
+                reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "en curso"){
                 reparacionTarjeta.style.background = "rgba(0, 255, 255, 0.582)";
-                reparacionTarjeta.style.border = "solid 2px aqua";
+                reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "reparada/terminada"){
                 reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
-                reparacionTarjeta.style.border = "solid 2px navy";
+                reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "retirada/enviada"){
                 reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
-                reparacionTarjeta.style.border = "solid 2px green";
+                reparacionTarjeta.style.padding = "5px";
             }
             contador = contador + 1
         });

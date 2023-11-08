@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/styles/style.css">
+
     <title>Soporte Tecnico</title>
 </head>
     <body>
+        
         <nav>
             <div class="Logo">
-                <img src="./static/images/MTI_Logo.png" alt="Logo">
+                <!-- <img src="./static/images/MTI_Logo.png" alt="Logo"> -->
             </div>
             <div class="Links">
                 <a href="/1">CLIENTES</a>
@@ -18,15 +23,20 @@
                 <a href="/2">ESTADOS</a>
             </div>
         </nav>
-        
-        <h1> Lista de Reparaciones </h1>
 
+        <h1> REGISTRO DE REPARACIONES </h1>
+        
         <div class="Acciones">
-            <button class="BotonAbrirModal">Agregar una nueva reparacion</button>    
+            <!-- <button class="BotonAbrirModal">
+                <img class="agregar" src="./static/images/agregar2.png"/>   
+            </button> -->
+            <button class="BotonAbrirModal"><img class="agregar" src="./static/images/agregar2.png"/><p class="nuevaRepa">Agregar Reparacion</p></button>
         </div>
         
         <div class="CajaColor" id="ListaReparaciones">
+            
             <ul id="ListaReparaciones"></ul>
+            
             <!--<div class="Vacio">
                 <h3>No hay reparaciones pendientes<span class="Animacion">...</span></h3>
             </div>

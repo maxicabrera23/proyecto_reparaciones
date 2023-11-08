@@ -1,8 +1,18 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:"JetBrains Mono",monospace;
+    /* font-family:"JetBrains Mono",monospace; */
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
+}
+
+:root{
+    --colorPrincipal: #191A19;
+    --colorPrincipal2: #00587A;
+    --colorSecundario: #0F3057;
+    --colorTextos: #D8E9A8;
+    --colorResaltado: #008891;
+    --colorBlanco: #f1f1f1;
 }
 
 body{
@@ -10,7 +20,8 @@ body{
     position: relative;
     padding-bottom: 3em;
     min-height:100vh;
-    background: rgba(40,40,40,1);
+    background-color: #f1f1f1;
+    
     padding-bottom: 100px;
 }
 
@@ -26,14 +37,21 @@ body{
 
 /*------------- Barra de Navegacion ---------------*/
 nav{
-    display: flex;
+    /* display: flex;
     align-items: center;
     flex-wrap: wrap;
     padding: 20px 5%;
-    background: rgb(4,216,255);
-    background: linear-gradient(173deg, rgba(4,216,255,1) 0%, rgba(0,34,77,1) 100%);
-    border-radius: 0px 0px 40px 40px;
-    border-bottom: 1px solid rgb(4,216,255);
+    background: var(--colorPrincipal2);
+    /* border-bottom: 1px solid var(--colorResaltado); */
+    box-shadow: 0px 0px 20px var(--colorResaltado); 
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    background: var(--colorPrincipal2);
+    /* border-bottom: 1px solid var(--colorResaltado); */
+    box-shadow: 0px 0px 20px var(--colorResaltado);
 }
 
 .Logo img{
@@ -49,42 +67,79 @@ nav{
 
 .Links a{
     text-decoration: none;
-    color: aliceblue;
+    color: var(--colorBlanco);
     margin: 0px 15px;
-    font-size: large;
+    font-size: 14px;
+    font-weight: lighter;
     padding: 5px 15px;
-    border-bottom: rgba(4,216,255,0) solid 2px;
+    /* border-bottom: rgba(4,216,255,0) solid 2px; */
     border-radius:0px 0px 5px 5px;
     cursor: pointer;
 }
 
 .Links a:hover{
-    border-bottom: rgba(4,216,255,1) solid 2px;
-    text-shadow: 0px 1px 2px aliceblue;
+    font-weight: bolder;
 }
 
-a .Activo{
-    color: rgba(4,216,255,1);
+/* .Links a:hover{
+    border:2px solid rgba(4,216,255,1);
+    text-shadow: 0px 1px 2px aliceblue;
+ }  */
+
+.Links a .Activo{
+    padding: 10px 15px;
+    font-weight: bolder;
+    background-color: white;
+    color: var(--colorPrincipal2);
+
+    /* background-color: var(--colorSecundario); */
+    /* border:1px solid var(--colorResaltado); */
+    /* box-shadow: 0px 0px 20px var(--colorResaltado); */
+    border-radius: 30px;
 }
 
 .Activo{
-    text-shadow: 0px 1px 1px rgba(4,216,255,1);
+    
+}
+.agregar{
+    height: 20px;
+    width: 20px;
 }
 /*---------------------------------------------*/
 
 
 .ModuloRep{
-    border: 2px black solid;
+    border: 2px var(--colorPrincipal2) solid;
     border-radius: 10px;
     width: 95%;
     padding: 10px 50px;
     margin: 10px;
-    background: rgba(40,40,40,1);
-    box-shadow: rgba(45, 35, 66, 0.986) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(2, 6, 30, 0.5) 0 -3px 0 inset;
+    background: #f1f1f1;
+    /* box-shadow:rgb(65 37 123 / 61%) 0 2px 4px, rgba(45, 35, 66, .3) 0 6px 4px 0px, rgba(2, 6, 30, 0.5) 0 -3px 0 inset;; */
+    box-shadow: var(--colorPrincipal2) 0 -3px 0 inset;;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border: 2px solid white;
 }
+
+.info{
+    height: auto;
+    width: auto;
+    
+}
+
+.numeroService{
+    font-size: 20px !important;
+    width: 100%;
+    
+}
+
+.nombreCliente{
+    margin: 10px 0;
+}
+
+
 
 .DatosModulo{
     display: flex;
@@ -135,7 +190,7 @@ a .Activo{
 
 .Blanco{
     appearance: none;
-    background-color:azure;
+    background-color:rgb(88, 29, 84);
     border: 1px white solid;
     height: 25px;
     width: 25px;
@@ -188,10 +243,14 @@ a .Activo{
 
 
 h1{
-    color: aliceblue;
+    color: var(--colorPrincipal2);
     text-align: center;
-    margin: 20px;
-    text-decoration: underline aqua;
+    margin: 50px auto 120px;
+
+    font-size: 40px;
+    /* text-align: center; */
+    /* margin: 20px; */
+    /*text-decoration: underline aqua;*/
 }
 
 .CajaColor{
@@ -199,21 +258,25 @@ h1{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: rgb(53, 53, 53);
-    margin: 50px 30px 20px 30px;
+    background-color: var(--colorPrincipal2);
+    /* margin: 30px 30px 20px 30px; */
+    margin:auto;
+    padding: 10px ;
     min-height: 100px;
     max-height: 500px;
     height: auto;
-    border: solid;
-    border-image-slice: 1;
-    border-width: 3px;
-    border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1));
+    /* border: solid; */
+    /* border-image-slice: 1; */
+    /* border-width: 3px; */
+    /* border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1)); */
     overflow: auto;
 }
 
 .CajaColor p{
-    color: aliceblue;
+    color: black;
     font-size: medium;
+    text-transform: capitalize;
+    font-weight: bold;
 }
 
 .CajaColor::placeholder{ 
@@ -226,13 +289,29 @@ h1{
 
 .Acciones{
     display: flex;
-    justify-content: space-evenly;
-    margin: 10px 50px;
+    justify-content: right; 
+    padding: 40px;
+    /* margin: 10px 50px; */
+    flex-direction: row;
+    align-items:flex-end;
+    margin:auto;
+    background-color: var(--colorPrincipal2);
 }
 
 .Acciones .BotonAbrirModal{
-background: rgb(50,97,7);
-background: linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%);
+/* margin: auto; */
+background: var(--colorBlanco);
+text-align: center;
+/* margin: 0 0 0 80%; */
+
+/* background: rgb(50,97,7); */
+/* background: linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%); */
+}
+
+.nuevaRepa{
+    color: black;
+    padding: 5px 10px;
+    font-size: 14px;
 }
 
 .Modal .Der .CerrarModal{
@@ -415,6 +494,10 @@ footer {
     align-items:flex-start;
 }
 
+footer p{
+    font-size: 11px;
+}
+
 .Services{
     display: flex;
     flex-direction: column;
@@ -443,6 +526,7 @@ footer {
     list-style: none;
     display: flex;
     justify-content: center;
+    background: var(--colorPrincipal2);
     /*
     min-height: 100px;
     max-height: 500px;
@@ -460,23 +544,40 @@ footer {
     margin: 10px;
 }
 .botonModificar{
-    background: #f0ad4e;
+    background: #3d3d3d2e
 }
 .botonEliminar{
-    background: #d9534f;
+    background: #d11010ab
 }
 /*---------------------------------------------*/
 
 .drop {
+    width:25%;
     color : white;
     cursor : pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-align: center;
+    width: auto;
+    height: auto;
+}
+.drop p {
+    padding: 3px;
 }
   
 .drop::after {
     float: right;
+}
+
+.icon_b {
+    width: 16px;
+    height: 16px;
+
+}
+.acciones{
+    display: flex;
+    justify-content: center;
 }
   
 .slide {
@@ -500,9 +601,11 @@ footer {
 li a {text-decoration : none; color : #2d2f31;}
 
 .ColorEstado{
+    width: 25%;
     text-align: center;
     color: aliceblue;
     border-radius: 20px;
+    width: 20vw;
 }
 
 /*----------------- Pantalla Celular -----------------*/
