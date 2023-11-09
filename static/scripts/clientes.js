@@ -36,7 +36,7 @@ console.log(modificando)
 
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
-    const response = await fetch("/clientes");
+    const response = await fetch("/clientes?page=1&limit=10&offset=0");
     const data = await response.json()
     clientes = data
     contenido = clientes.length

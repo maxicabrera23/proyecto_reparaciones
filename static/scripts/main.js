@@ -41,17 +41,18 @@ CerrarModal.addEventListener('click', ()=>{
 
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
-    const response = await fetch("/reparaciones");
+    const response = await fetch("/reparaciones?page=1&limit=10&offset=0");
     const data = await response.json()
     reparaciones = data
+    console.log(reparaciones[1])
     contenido = reparaciones.length
-    mostrarData(reparaciones)
+    mostrarData(reparaciones[0])
 
     data_clientes = await cargar_clientes()
     listaClientes = data_clientes
     mostrar_clientes_ol(listaClientes)
     estados = estadoReparacion.value
-    console.log(estados)
+    // console.log(estados)
     mostarEstados(estados)
     
 });
