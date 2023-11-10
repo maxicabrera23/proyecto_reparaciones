@@ -226,12 +226,12 @@ def mostrarReparaciones():
     cantidadRegistros = len(registros)
     
     print(f'la cantidad de registros es: {cantidadRegistros}')
-    nextPage = f'http://localhost:5000/reparaciones?page={nextp}&limit={limit}&offset={next}'
+    nextPage = f'/reparaciones?page={nextp}&limit={limit}&offset={next}'
 
     if prev < 0:
         prevPage = ""
     else:
-        prevPage = f'http://localhost:5000/reparaciones?page={prevp}&limit={limit}&offset={prev}'
+        prevPage = f'/reparaciones?page={prevp}&limit={limit}&offset={prev}'
     
     if int(cantidadRegistros) < limit:
         nextPage = ""

@@ -20,6 +20,7 @@ const campoNumero = document.querySelector('#nro_repa');
 const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
+const divPaginacion = document.querySelector('#paginacion')
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -39,14 +40,26 @@ CerrarModal.addEventListener('click', ()=>{
     FormUsuarios.reset();
 });
 
-/* mostar clientes */
+/* mostar reparaciones */
 window.addEventListener("DOMContentLoaded", async() => {
-    const response = await fetch("/reparaciones?page=1&limit=10&offset=0");
-    const data = await response.json()
-    reparaciones = data
-    console.log(reparaciones[1])
+    const ruta = "/reparaciones?page=1&limit=10&offset=0";
+    var respuesta = await cargar(ruta)
+    // console.log(respuesta)
+    divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${respuesta[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
+    
+    // console.log(respuesta)
+    var bprev = document.getElementById("anterior")
+    bprev.addEventListener('click' , async() =>{
+        link(respuesta[1].anterior)
+    })
+    
+    var bSig = document.getElementById("siguiente")
+    bSig.addEventListener('click' , async() =>{
+        link(respuesta[1].siguiente)
+    })
+    
     contenido = reparaciones.length
-    mostrarData(reparaciones[0])
+    mostrarData(respuesta[0])
 
     data_clientes = await cargar_clientes()
     listaClientes = data_clientes
@@ -165,8 +178,38 @@ estadoReparacion.addEventListener('change', async e=> {
 }) 
 
 /*######################################################*/
+async function link(link){
+    console.log(link)
+    res = await cargar(link)
+    console.log(`respuesta desde link:${res[0]} , ${res[1].anterior} , ${res[1].siguiente}`)
+    divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${res[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
+    
+    bprev.addEventListener('click' , async() =>{
+        link(res[1].anterior)
+    })
+    bSig.addEventListener('click' , async() =>{
+        link(res[1].siguiente)
+    })
+    
+    
+    respuesta = res
+    
+    
+    mostrarData(res[0])
+    
+}
+
+
+async function cargar(ruta) {
+    const response = await fetch(ruta);
+    const data = await response.json()
+    reparaciones = data
+    return reparaciones
+}
 
 function mostrarData(reparaciones){
+
+    
     
     ReparacionesLista.innerHTML =''
 

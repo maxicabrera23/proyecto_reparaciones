@@ -293,7 +293,7 @@ h1{
 
 .Acciones{
     display: flex;
-    justify-content: right; 
+    justify-content: space-between; 
     padding: 40px;
     /* margin: 10px 50px; */
     flex-direction: row;
