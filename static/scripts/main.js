@@ -48,18 +48,10 @@ window.addEventListener("DOMContentLoaded", async() => {
     divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${respuesta[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
     
     // console.log(respuesta)
-    var bprev = document.getElementById("anterior")
-    bprev.addEventListener('click' , async() =>{
-        link(respuesta[1].anterior)
-    })
     
-    var bSig = document.getElementById("siguiente")
-    bSig.addEventListener('click' , async() =>{
-        link(respuesta[1].siguiente)
-    })
     
     contenido = reparaciones.length
-    mostrarData(respuesta[0])
+    mostrarData(respuesta)
 
     data_clientes = await cargar_clientes()
     listaClientes = data_clientes
@@ -179,23 +171,21 @@ estadoReparacion.addEventListener('change', async e=> {
 
 /*######################################################*/
 async function link(link){
-    console.log(link)
     res = await cargar(link)
-    console.log(`respuesta desde link:${res[0]} , ${res[1].anterior} , ${res[1].siguiente}`)
-    divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${res[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
-    
-    bprev.addEventListener('click' , async() =>{
-        link(res[1].anterior)
-    })
-    bSig.addEventListener('click' , async() =>{
-        link(res[1].siguiente)
-    })
+    // console.log(`respuesta desde link:${res[0]} , ${res[1].anterior} , ${res[1].siguiente}`)
     
     
-    respuesta = res
+    // bprev.addEventListener('click' , async() =>{
+    //     link(res[1].anterior)
+    // })
+    // bSig.addEventListener('click' , async() =>{
+    //     link(res[1].siguiente)
+    // })
     
     
-    mostrarData(res[0])
+    // respuesta = res
+    mostrarData(res)
+    return res
     
 }
 
@@ -204,16 +194,29 @@ async function cargar(ruta) {
     const response = await fetch(ruta);
     const data = await response.json()
     reparaciones = data
+    console.log(`respuesta desde cargar${reparaciones[0]} ,>>>${reparaciones[1]}`)
     return reparaciones
+
 }
 
 function mostrarData(reparaciones){
+    // Botones de paginacion y pagina. 
+    divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${reparaciones[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
 
+    var bprev = document.getElementById("anterior")
+    bprev.addEventListener('click' , async() =>{
+        const nuevoParp = await link(reparaciones[1].anterior)
+    })
+    
+    var bSig = document.getElementById("siguiente")
+    bSig.addEventListener('click' , async() =>{
+        const nuevoPars = await link(reparaciones[1].siguiente)
+    })
     
     
     ReparacionesLista.innerHTML =''
 
-    reparaciones.forEach(repa => {
+    reparaciones[0].forEach(repa => {
         const reparacionItem = document.createElement('li')
         reparacionItem.innerHTML = `
             <div class="ModuloRep">
