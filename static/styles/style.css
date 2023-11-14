@@ -98,7 +98,7 @@ nav{
 }
 
 .Links a:hover{
-    font-weight: bolder;
+    font-weight:normal;
 }
 
 /* .Links a:hover{
@@ -108,7 +108,7 @@ nav{
 
 .Links a .Activo{
     padding: 10px 15px;
-    font-weight: bolder;
+    font-weight:bold;
     background-color: white;
     color: var(--colorPrincipal2);
 
@@ -373,11 +373,11 @@ main{
 
 .Acciones{
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     padding: 40px;
     margin: 0 40px;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: center;
     border-radius: 10px 10px 0 0;
     margin-top: 20px;
     background-color: #00587acc;
@@ -385,10 +385,44 @@ main{
     border-bottom: 0;
 }
 
-.paginacion{
+#paginacion{
     color: var(--colorBlanco);
     opacity: .8;
+    display: flex;
+    align-items: center;
 }
+
+#paginacion button{
+    background-color: #d8e9a800;
+    box-shadow: none;
+}
+
+#paginacion img{
+    width: 14px;
+    height: 30px;
+}
+
+.Acciones #paginacion button:hover{
+    border:1px solid --colorBlanco;
+}
+
+/* #anterior{
+    background-color: #D8E9A8;
+    width: 30px;
+    border-radius: 10px;
+}
+#siguiente{
+    background-color: #D8E9A8;
+    width: 30px;
+    border-radius: 10px;
+} */
+
+
+/* #anterior , #siguiente{
+    background-color:var(--colorBlanco);
+    color: black;
+} */
+
 
 .Acciones .BotonAbrirModal{
 /* margin: auto; */
@@ -698,23 +732,24 @@ footer p{
 
 /*---------------------------------------------*/
 
-.drop {
-    width:25%;
-    color : white;
+.info {
     cursor : pointer;
+    /* width:25%;
+    color : white;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: auto;
-    height: auto;
+    height: auto; */
+    transition: 1s ease;
 }
-.drop p {
+/* .drop p {
     padding: 3px;
-}
+} */
   
-.drop::after {
-    float: right;
+.info::after {
+    transition: 1s ease;
 }
 
 .icon_b {
@@ -727,15 +762,13 @@ footer p{
     justify-content: center;
     
 }
-  
+
 .slide {
-    
     width: 100%;
     margin: 20px 20px;
     height: auto;
     overflow: auto;
-    transition: 1s ease;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-direction: row;

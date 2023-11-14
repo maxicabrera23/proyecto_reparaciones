@@ -194,14 +194,27 @@ async function cargar(ruta) {
     const response = await fetch(ruta);
     const data = await response.json()
     reparaciones = data
-    console.log(`respuesta desde cargar${reparaciones[0]} ,>>>${reparaciones[1]}`)
+    
     return reparaciones
 
+}
+var estadorepa = false
+function mostrar(id){
+    
+    if (estadorepa == false){
+        document.getElementById(id).style.display = "flex";
+        document.getElementById(id).style.transition = " 1s ease";
+        estadorepa = true
+    }else{
+        document.getElementById(id).style.display = "none";
+        estadorepa = false
+    }
+    
 }
 
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
-    divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${reparaciones[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
+    divPaginacion.innerHTML = `<button id="anterior" ><img class="imagenes" src="./static/images/anterior.svg"></button> <p> -- Page ${reparaciones[1].pagina} -- </p><button id="siguiente" class="botones"><img class="imagenes" src="./static/images/siguiente.svg"></button>`
 
     var bprev = document.getElementById("anterior")
     bprev.addEventListener('click' , async() =>{
@@ -220,64 +233,158 @@ function mostrarData(reparaciones){
         const reparacionItem = document.createElement('li')
         reparacionItem.innerHTML = `
             <div class="ModuloRep">
-                <!-- <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo"> -->
-
-                    <div class="info">
-                        <div class="drop">
-                            <p class="numeroService">N° ${repa.nro_reparacion}</p><p class="nombreCliente">${repa.nombre_apellido}</p>
+                        <div class="infoOculta">
+                                <div class="info" onclick="mostrar(${contador})">
+                                    <p class="numeroService">N° ${repa.nro_reparacion}</p>
+                                    
+                                    <p class="nombreCliente">${repa.nombre_apellido}</p>
+                                </div>  
+                            <div class="ColorEstado" id="div${contador}" style="padding: 5px;">${repa.estado}
+                            </div>
+                            
+                            <div class="acciones">
+                                    <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+                                    <button class="botonEliminar CerrarModal"><img class="icon_b" src="./static/images/trash.png"></button>
+                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+                            </div>
                         </div>
 
-                        <div class="ColorEstado" id="div${contador}">${repa.estado}</div>
-                        
-                    </div>               
+                        <input type="checkbox" class="touch" id="${repa.nro_reparacion}"> 
                 
-                    <input type="checkbox" class="touch" id="${repa.nro_reparacion}"> 
-
-                    <div class="slide">
+                        <div class="slide" id='${contador}'>
                         <div class="DatosModulo">
-                            <h3>Telefono<p>${repa.telefono}</p></h3>
-                            <h3>Email<p>${repa.email}</p></h3>
-                            <h3>Domicilio<p>${repa.domicilio}</p></h3>
-                            <h3>Localidad<p>${repa.localidad}</p></h3> 
-                            <h3>Provincia<p>${repa.provincia}</p></h3>
-                            <h3>Producto<p>${repa.producto}</p></h3>
-                            <h3>Falla<p>${repa.falla}</p></h3>
-                            <h3>Defecto encontrado<p>${repa.defecto_encontrado}</p></h3>
-                            <h3>Factura<p>${repa.factura}</p></h3>
-                            <h3>Valor reparacion<p>${repa.valor_reparacion}</p></h3>
-                            <h3>Fecha alta<p>${repa.fecha_alta}</p></h3>
-                            <h3>Fecha de reparacion<p>${repa.fecha_reparacion}</p></h3>
-                            <h3>Fecha de retiro<p>${repa.fecha_retiro}</p></h3>
+                            <div class="columnaIzq">
+                                <div class="datoCliente fechaService">
+                                    <h3>Fecha alta:</h3>
+                                    <p>${repa.fecha_alta}</p>
+                                </div>
+                                <div class="datoCliente contacto">
+                                    <h3>Cliente:</h3>
+                                    <p>${repa.nombre_apellido}</p>
+                                </div>
+                                <div class="datoCliente contacto">
+                                    <h3>Teléfono:</h3>
+                                    <p>${repa.telefono}</p>
+                                </div>
+                                <div class="datoCliente contacto">
+                                    <h3>Mail:</h3>
+                                    <p>${repa.email}</p>
+                                </div>
+
+                            </div>
+                            <div class="columnaCentro">
+                                <div class="datoCliente fechaService">
+                                    <h3>Fecha de reparación:</h3>
+                                    <p>${repa.fecha_reparacion}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Producto:</h3>
+                                    <p>${repa.producto}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Falla:</h3>
+                                    <p>${repa.falla}</p>
+                                </div>
+                                <div class="datoCliente defecto">
+                                    <h3>Defecto encontrado:</h3>
+                                    <p>${repa.defecto_encontrado}</p>
+                                </div>
+
+
+                            </div>
+                            <div class="columnaDer">
+                                <div class="datoCliente fechaService">
+                                    <h3>Fecha de retiro:</h3>
+                                    <p>${repa.fecha_retiro}</p>
+                                    
+                                </div>
+                                <div class="datoCliente valorRepa">
+                                    <h3>Valor reparación:</h3>
+                                    <p>${repa.valor_reparacion}</p>
+                                </div>
+                                <div class="datoCliente valorRepa">
+                                    <h3>Factura:</h3>
+                                    <p>${repa.factura}</p>
+                                </div>   
+                                <div class="datoCliente valorRepa">
+                                    <h3>Garantía:</h3>
+                                    <p>Si/No</p>
+                                </div> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="acciones">
-                        <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"/></button>
-                        <button class="botonEliminar CerrarModal"><img class="icon_b" src="./static/images/trash.png"/></button>
-                    </div>
-            </div>
+                </div> 
         `
+        
+            
+        
+        
+        
+        
+        // <div class="info">
+        //         <div class="drop">
+        //             <p class="numeroService">N° ${repa.nro_reparacion}</p>
+        //             <p class="nombreCliente">${repa.nombre_apellido}</p>
+        //         </div>
+        //     </div>   
 
-            const btnEliminar = reparacionItem.querySelector('.botonEliminar')
-                btnEliminar.addEventListener('click', async () => {
-                    const seguro = confirm('Esta seguro de eliminar este Cliente')
+        //     <div class="ColorEstado" id="div${contador}" ; padding: 5px;">${repa.estado}</div>
+        // <!-- <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo"> -->
 
-                    if (seguro){
-                        const response = await fetch(`/reparacion/${repa.id}`,{
-                            method:'DELETE',
-                            headers:{
-                                'Content-Type' : 'application/json',
-                                    }
-                        })
-                        const data = await response.json()
-                        const cons_response = await fetch("/reparaciones");
-                        const cons_data = await cons_response.json()
-                        reparaciones = cons_data
-                        contenido = reparaciones.length
-                        mostrarData(reparaciones)
-                        alert(`${data.msg}`)
+        //             <div class="info">
+        //                 <div class="drop">
+        //                     <p class="numeroService">N° ${repa.nro_reparacion}</p><p class="nombreCliente">${repa.nombre_apellido}</p>
+        //                 </div>
+
+        //                 <div class="ColorEstado" id="div${contador}">${repa.estado}</div>
                         
-                    }
-            });
+        //             </div>               
+                
+        //             <input type="checkbox" class="touch" id="${repa.nro_reparacion}"> 
+
+        //             <div class="slide">
+        //                 <div class="DatosModulo">
+        //                     <h3>Telefono<p>${repa.telefono}</p></h3>
+        //                     <h3>Email<p>${repa.email}</p></h3>
+        //                     <h3>Domicilio<p>${repa.domicilio}</p></h3>
+        //                     <h3>Localidad<p>${repa.localidad}</p></h3> 
+        //                     <h3>Provincia<p>${repa.provincia}</p></h3>
+        //                     <h3>Producto<p>${repa.producto}</p></h3>
+        //                     <h3>Falla<p>${repa.falla}</p></h3>
+        //                     <h3>Defecto encontrado<p>${repa.defecto_encontrado}</p></h3>
+        //                     <h3>Factura<p>${repa.factura}</p></h3>
+        //                     <h3>Valor reparacion<p>${repa.valor_reparacion}</p></h3>
+        //                     <h3>Fecha alta<p>${repa.fecha_alta}</p></h3>
+        //                     <h3>Fecha de reparacion<p>${repa.fecha_reparacion}</p></h3>
+        //                     <h3>Fecha de retiro<p>${repa.fecha_retiro}</p></h3>
+        //                 </div>
+        //             </div>
+        //             <div class="acciones">
+        //                 <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"/></button>
+        //                 <button class="botonEliminar CerrarModal"><img class="icon_b" src="./static/images/trash.png"/></button>
+        //             </div>
+        //     </div>
+
+            // const btnEliminar = reparacionItem.querySelector('.botonEliminar')
+            //     btnEliminar.addEventListener('click', async () => {
+            //         const seguro = confirm('Esta seguro de eliminar este Cliente')
+
+            //         if (seguro){
+            //             const response = await fetch(`/reparacion/${repa.id}`,{
+            //                 method:'DELETE',
+            //                 headers:{
+            //                     'Content-Type' : 'application/json',
+            //                         }
+            //             })
+            //             const data = await response.json()
+            //             const cons_response = await fetch("/reparaciones");
+            //             const cons_data = await cons_response.json()
+            //             reparaciones = cons_data
+            //             contenido = reparaciones.length
+            //             mostrarData(reparaciones)
+            //             alert(`${data.msg}`)
+                        
+            //      }
+        //});
 /*###################################################################################*/           
             const btnModificar = reparacionItem.querySelector('.botonModificar')
                     btnModificar.addEventListener('click', async() => {
