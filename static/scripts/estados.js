@@ -29,42 +29,52 @@ FormEstados.addEventListener('submit', async e =>{
         estado.forEach(est => {
             color = est.estado 
             if (color == "ingresada"){
-                estadoInfo.style.background = "rgba(220, 20, 60, 0.507)";
-                estadoInfo.style.border = "solid 2px crimson";
+                estadoInfo.style.background = "rgba(96, 8, 8, 0.78)";
+                estadoInfo.style.border = "solid 2px #9e2121";
             
             }else if (color == "revision presupuesto"){
-                estadoInfo.style.background = "rgba(255, 127, 80, 0.61)";
-                estadoInfo.style.border = "solid 2px coral";
+                estadoInfo.style.background = "rgba(125, 1145, 0, 0.51)";
+                estadoInfo.style.border = "2px solid #88ac48";
             
             }else if (color == "espera confirmacion presupuesto"){
-                estadoInfo.style.background = "rgba(240, 255, 255, 0.616)";
-                estadoInfo.style.border = "solid 2px azure";
+                estadoInfo.style.background = "rgba(13, 13, 13, 0.79)";
+                estadoInfo.style.border = "solid 2px black";
             
             }else if (color == "en curso"){
-                estadoInfo.style.background = "rgba(0, 255, 255, 0.582)";
-                estadoInfo.style.border = "solid 2px aqua";
+                estadoInfo.style.background = "rgba(3, 93, 165, 0.64)";
+                estadoInfo.style.border = "solid 2px #2694df";
             
             }else if (color == "reparada/terminada"){
                 estadoInfo.style.background = "rgba(0, 0, 128, 0.637)";
                 estadoInfo.style.border = "solid 2px navy";
             
             }else if (color == "retirada/enviada"){
-                estadoInfo.style.background = "rgba(0, 128, 0, 0.637)";
-                estadoInfo.style.border = "solid 2px green";
+                estadoInfo.style.background = "rgba(0, 114, 0, 0.74)";
+                estadoInfo.style.border = "2px solid #2ea72e";
             }
-
+ 
 
             const estadoItem = document.createElement('li')
             estadoItem.innerHTML = `
-            <center><h2>Estado: ${color}</h2></center><br>
-            <h3>Fecha Ingreso: ${est.fecha_alta}</h3>
-            <h3>Nombre y apellido: ${est.nombre_apellido}</h3>
-            <h3>Producto: ${est.producto}</h3>
-            <h3>Fecha de Reparacion: ${est.fecha_reparacion}</h3>
-            <h3>Falla denunciada: ${est.falla}</h3>
-            <h3>Defecto Encontrado: ${est.defecto_encontrado}</h3> 
-            <h3>Fecha de Retiro/Envio: ${est.fecha_retiro}</h3>
+            <center><h3>N° ${est.nro_reparacion}</h3></center><br>
+            <center><h3>${color}</h3></center><br>
+            <div class="infoRepa">
+            <div class="columnaIzq"> 
+            <p class="campo">Fecha Ingreso: </p> <p> ${est.fecha_alta}</p>
+            <p class="campo">Nombre y apellido:</p><p> ${est.nombre_apellido}</p>
+            <p class="campo">Producto:</p><p> ${est.producto}</p>
+            <p class="campo">Falla denunciada:</p><p> ${est.falla}</p>
+            </div>
+            <div class="columnaDer"> 
+            <p class="campo">Fecha de Reparación:</p><p> ${est.fecha_reparacion}</p>
+            <p class="campo">Defecto Encontrado:</p><p> ${est.defecto_encontrado}</p> 
+            <p class="campo">Fecha de Retiro/Envio:</p><p> ${est.fecha_retiro}</p>
+            </div> 
+            </div>
             `
+            // cambie los h3 por p, les agregue la clase campo a los titulos para ponerlos en negrita 
+            // Habria que poner tambien el numero de reparacion en el div que se despliega con toda la info
+            // cuando buscas el estado se borra el n° del buscador y no sabes cual estas viendo :( //
         estadoInfo.append(estadoItem)
         })
     }
