@@ -222,7 +222,7 @@ def mostrarReparaciones():
     next = offset + limit
     prev = offset - limit 
     
-    registros = list(db_reparaciones.find().sort('nombre',1).skip(offset).limit(limit))
+    registros = list(db_reparaciones.find().sort('nro_reparacion', -1).skip(offset).limit(limit))
     cantidadRegistros = len(registros)
     
     print(f'la cantidad de registros es: {cantidadRegistros}')
