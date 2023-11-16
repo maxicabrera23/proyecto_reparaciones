@@ -33,8 +33,8 @@ FormEstados.addEventListener('submit', async e =>{
                 estadoInfo.style.border = "solid 2px #9e2121";
             
             }else if (color == "revision presupuesto"){
-                estadoInfo.style.background = "rgba(125, 1145, 0, 0.51)";
-                estadoInfo.style.border = "2px solid #88ac48";
+                estadoInfo.style.background = "rgb(240 184 46 / 59%)";
+                estadoInfo.style.border = "2px solid rgb(196 171 79)";
             
             }else if (color == "espera confirmacion presupuesto"){
                 estadoInfo.style.background = "rgba(13, 13, 13, 0.79)";
@@ -45,12 +45,12 @@ FormEstados.addEventListener('submit', async e =>{
                 estadoInfo.style.border = "solid 2px #2694df";
             
             }else if (color == "reparada/terminada"){
-                estadoInfo.style.background = "rgba(0, 0, 128, 0.637)";
-                estadoInfo.style.border = "solid 2px navy";
+                estadoInfo.style.background = "rgb(44 44 172 / 64%)";
+                estadoInfo.style.border = "2px solid #4f4fc1de";
             
             }else if (color == "retirada/enviada"){
-                estadoInfo.style.background = "rgba(0, 114, 0, 0.74)";
-                estadoInfo.style.border = "2px solid #2ea72e";
+                estadoInfo.style.background = "rgb(85 169 85 / 89%)";
+                estadoInfo.style.border = "2px solid rgb(29 135 29)";
             }
  
 
@@ -59,13 +59,13 @@ FormEstados.addEventListener('submit', async e =>{
             <center><h3>N° ${est.nro_reparacion}</h3></center><br>
             <center><h3>${color}</h3></center><br>
             <div class="infoRepa">
-            <div class="columnaIzq"> 
+            <div class="columnaIzqestado"> 
             <p class="campo">Fecha Ingreso: </p> <p> ${est.fecha_alta}</p>
             <p class="campo">Nombre y apellido:</p><p> ${est.nombre_apellido}</p>
             <p class="campo">Producto:</p><p> ${est.producto}</p>
             <p class="campo">Falla denunciada:</p><p> ${est.falla}</p>
             </div>
-            <div class="columnaDer"> 
+            <div class="columnaDerestado"> 
             <p class="campo">Fecha de Reparación:</p><p> ${est.fecha_reparacion}</p>
             <p class="campo">Defecto Encontrado:</p><p> ${est.defecto_encontrado}</p> 
             <p class="campo">Fecha de Retiro/Envio:</p><p> ${est.fecha_retiro}</p>

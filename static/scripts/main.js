@@ -27,7 +27,7 @@ AbrirModal.addEventListener('click', ()=>{
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
     modifi.innerHTML="Dar de alta";
-    modifi.style.background="linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%)"
+    modifi.style.background="#0d860dcf";
 
     estados = FormUsuarios['estado'].value
     console.log(estados)
@@ -244,8 +244,8 @@ function mostrarData(reparaciones){
                             
                             <div class="acciones">
                                     <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-                                    <button class="botonEliminar CerrarModal"><img class="icon_b" src="./static/images/trash.png"></button>
                                     <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+                                    <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
                             </div>
                         </div>
 
@@ -399,8 +399,8 @@ function mostrarData(reparaciones){
                         const data = await response.json()
                         Modal.classList.add('MostrarModal')
                         
-                        modifi.innerHTML="Modificar"
-                        modifi.style.background="#f0ad4e"
+                        modifi.innerHTML="Guardar"
+                        modifi.style.background="rgb(16 105 169 / 92%)"
                         
                         FormUsuarios['nombre_apellido'].value = repa.nombre_apellido
                         FormUsuarios['telefono'].value = repa.telefono
@@ -431,24 +431,24 @@ function mostrarData(reparaciones){
             color = repa.estado
             
             if (color == "ingresada"){
-                reparacionTarjeta.style.background = "rgba(220, 20, 60, 0.507)";
+                reparacionTarjeta.style.background = "rgb(161 43 43 / 90%)";
                 reparacionTarjeta.style.padding = "5px";
                 FormUsuarios.querySelector('#defEncontrado').style.display = "none";
                 
 
             }
             if (color == "revision presupuesto"){
-                reparacionTarjeta.style.background = "rgba(255, 127, 80, 0.61)";
+                reparacionTarjeta.style.background = "rgba(240, 184, 46, 0.59)";
                 reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "espera confirmacion presupuesto"){
-                reparacionTarjeta.style.background = "rgba(240, 255, 255, 0.616)";
+                reparacionTarjeta.style.background = "rgba(13, 13, 13, 0.79)";
                 reparacionTarjeta.style.padding = "5px";
 
             }
             if (color == "en curso"){
-                reparacionTarjeta.style.background = "rgba(0, 255, 255, 0.582)";
+                reparacionTarjeta.style.background = "rgba(3, 93, 165, 0.64)";
                 reparacionTarjeta.style.padding = "5px";
 
             }

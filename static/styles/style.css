@@ -44,6 +44,8 @@ body{
 }
 
 /*------------- Barra de Navegacion ---------------*/
+
+
 nav{
     /* display: flex;
     align-items: center;
@@ -51,13 +53,12 @@ nav{
     padding: 20px 5%;
     background: var(--colorPrincipal2);
     /* border-bottom: 1px solid var(--colorResaltado); */
-    box-shadow: 0px 0px 1px white;
-
+    box-shadow: 0px 0px 1px #ffffff6b;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     padding: 10px 20px;
-    background: var(--colorPrincipal2);
+    background: #00587a5c;
     /* border-bottom: 1px solid var(--colorResaltado); */
     /* box-shadow: 0px 0px 20px var(--colorResaltado); */
 }
@@ -70,9 +71,9 @@ nav{
 }
 
 .Logo p{
+    display: none;
     color: var(--colorBlanco);
     font-family: 'Bodoni Moda', serif;;
-    /* font-family: 'M PLUS Code Latin', monospace;     */
     font-size: 18px;
     text-align: center;
 }
@@ -82,7 +83,7 @@ nav{
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-end;
 }
 
 .Links a{
@@ -92,35 +93,25 @@ nav{
     font-size: 18px;
     font-weight: lighter;
     padding: 5px 15px;
-    /* border-bottom: rgba(4,216,255,0) solid 2px; */
-    border-radius:0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
     cursor: pointer;
 }
 
-.Links a:hover{
-    font-weight:normal;
-}
 
-/* .Links a:hover{
-    border:2px solid rgba(4,216,255,1);
-    text-shadow: 0px 1px 2px aliceblue;
- }  */
+.Links a:hover{
+    opacity: .7;
+    
+ } 
 
 .Links a .Activo{
     padding: 10px 15px;
-    font-weight:bold;
+    font-weight: normal;
     background-color: white;
     color: var(--colorPrincipal2);
-
-    /* background-color: var(--colorSecundario); */
-    /* border:1px solid var(--colorResaltado); */
-    /* box-shadow: 0px 0px 20px var(--colorResaltado); */
     border-radius: 30px;
 }
 
-.Activo{
-    
-}
+
 .agregar{
     height: 20px;
     width: 20px;
@@ -135,10 +126,12 @@ nav{
 
 .encabezado h1{
     color: var(--colorBlanco);
+    text-shadow: 2px 2px #00000096;
     font-size: 44px;
     font-weight: 400;
     text-align: center;
     margin-top: 50px;
+    
 
 
 }
@@ -163,7 +156,8 @@ main{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: 2px solid white;
+    /* border: 1px solid #00000008; */
+    box-shadow: rgba(45, 35, 66, 0.986) -2px 7px 15px 1px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(2, 6, 30, 0.5) -3px -5px 20px 0px
 }
 
 
@@ -241,7 +235,7 @@ main{
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /*------------- Colores Estados ---------------*/
@@ -347,7 +341,7 @@ main{
     /* border-width: 3px; */
     /* border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1)); */
     overflow: auto;
-    border: solid 1px white;
+    border: solid 1px #ffffff52;
     border-top: 0
 }
 
@@ -381,7 +375,7 @@ main{
     border-radius: 10px 10px 0 0;
     margin-top: 20px;
     background-color: #00587acc;
-    border: solid 1px white;
+    border: solid 1px #ffffff52;
     border-bottom: 0;
 }
 
@@ -425,13 +419,10 @@ main{
 
 
 .Acciones .BotonAbrirModal{
-/* margin: auto; */
+
 background: var(--colorBlanco);
 text-align: center;
-/* margin: 0 0 0 80%; */
 
-/* background: rgb(50,97,7); */
-/* background: linear-gradient(90deg, rgba(50,97,7,1) 0%, rgb(63, 110, 16) 37%, rgba(23,78,0,1) 100%); */
 }
 
 .nuevaRepa{
@@ -441,8 +432,10 @@ text-align: center;
 }
 
 .Modal .Der .CerrarModal{
-background:  rgba(220, 20, 60, 0.507);
-border: solid 2px crimson;
+    background: rgb(37 37 37 / 0%);
+    border: solid 1px #fdfdfd;
+    height: 2em;
+    width: 2em;
 }						   
 .Acciones button, .CerrarModal{
     align-items: center;
@@ -467,8 +460,15 @@ border: solid 2px crimson;
     background:  rgb(230, 31, 31);
 }							   
 .Acciones button:hover, .CerrarModal:hover{
-    border-bottom: rgba(4,216,255,1) solid 2px;
+    border-bottom: rgb(9, 11, 11) solid 1px;
+    opacity: .8;
 }
+
+#botonAlta{
+    background: rgb(16 105 169 / 92%);
+
+}
+
 
 .Modal{
     opacity: 0;
@@ -500,17 +500,11 @@ border: solid 2px crimson;
 }
 
 .ContenedorModal{
-    border: 2px solid white;
-    /* border-image-slice: 1; */
-    /* border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1)); */
-    background:rgb(4 46 63 / 5%);
-    /* background: linear-gradient(344deg, rgba(0,10,11,1) 0%, rgba(64,64,64,1) 100%); */
-    /*background-color: rgba(255,255,255,0.3);
-    -webkit-backdrop-filter: blur(10px);backdrop-filter: blur(10px);*/
-    padding: 30px;
-    max-height: 50%;
-    overflow: auto;
-    margin-bottom: 50px;
+    border: 1px solid #ffffff80;
+    background: rgb(4 46 63 / 21%);
+    padding: 80px 60px;
+    max-height: 80%;
+    overflow: scroll;
     height: auto;
 }
 
@@ -530,9 +524,9 @@ form h2{
     color: aliceblue;
     text-align: center;
     font-size: 1.5em;
+    margin: 20px 20px 29px 20px;
     text-transform: uppercase;
-    margin: 20px 20px 10px 20px
-    
+    text-shadow: 2px 1px #010059;
    
 }
 
@@ -583,8 +577,9 @@ input::placeholder {
 
 
 /*----------------- Pantalla Estados -----------------*/
-h1{
+.titleEstados{
     color: var(--colorBlanco);
+    text-shadow: 2px 2px #00000096;
     font-size: 44px;
     font-weight: 400;
     text-align: center;
@@ -597,7 +592,7 @@ h1{
     width: 90%;
     height: auto;
     border-radius: 25px;
-    border: solid 1px white;
+    border: solid 1px #ffffff4f;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -607,10 +602,12 @@ h1{
 
 }
 
-.CajaBuscador h2{
+.CajaBuscador .ingreseNumero{
     margin: 0;
     font-size: 1.6em;
     font-weight: normal;
+    text-transform: capitalize
+    
 }
 
 .CajaBuscador input{
@@ -660,7 +657,7 @@ h1{
 
 #Info p{
     font-size: 1em;
-    padding: 10px;
+    padding-top: 5px;
     font-size: 1em;
 }
 
@@ -668,7 +665,10 @@ h1{
     font-weight: bold;
     text-transform: capitalize;
     font-size: 16px;
+    opacity: .7;
+    padding-top: 21px;
 }
+
 
 #Info li{
     display: flex;
@@ -682,7 +682,7 @@ h1{
     
 }
 
-#Info .infoRepa .columnaIzq, .columnaDer{
+#Info .infoRepa .columnaIzqestado, .columnaDerestado{
     width: 50%;
 }
 
@@ -714,11 +714,12 @@ footer p{
     cursor: pointer;
     margin: 0px 10px;
     align-items: center;
+    width: 25%;
 }
 
 .Services p{
     color: rgb(193, 193, 193);
-    font-size: 14px;
+    font-size: 11px;
     margin: 5px;
 }
 
@@ -726,7 +727,12 @@ footer p{
     color: rgb(213, 213, 213);
 }
 .Services h2{
-    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+.Copyright{
+    width: 50%;
 }
 
 .Copyright img{
@@ -738,6 +744,8 @@ footer p{
 
 
 /*----------------- Pantalla Clientes -----------------*/
+
+
 #ListaClientes li, #ListaReparaciones li{
     list-style: none;
     display: flex;
@@ -764,10 +772,10 @@ footer p{
     
 }
 .botonModificar{
-    background: #3d3d3d2e
+    background: #3d3d3d2e;
 }
 .botonEliminar{
-    background: #d11010ab
+    background: #d11010ab;
 }
 .botonImprimir{
     background: rgb(238 238 238);
@@ -856,14 +864,18 @@ footer p{
 li a {text-decoration : none; color : #2d2f31;}
 
 .ColorEstado{
-    width: 25%;
+    /* width: 25%; */
     text-align: center;
     color: aliceblue;
     border-radius: 20px;
-    width: 20vw;
+    /* width: 20vw; */
     padding: 15px !important;
     text-transform: capitalize;
     
+}
+
+.info, .ColorEstado, .acciones {
+    width: 33%;
 }
 
 /*----------------- Pantalla Celular -----------------*/
@@ -900,6 +912,7 @@ li a {text-decoration : none; color : #2d2f31;}
 
 h1{
     color: var(--colorBlanco);
+    text-shadow: 2px 2px #00000096;
     font-size: 44px;
     font-weight: 400;
     text-align: center;
