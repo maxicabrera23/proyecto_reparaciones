@@ -21,6 +21,7 @@ const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 const divPaginacion = document.querySelector('#paginacion')
+let buscar = document.getElementById('buscador');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -212,9 +213,24 @@ function mostrar(id){
     
 }
 
+function busca(value){
+    console.log(value)
+}
+
+
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
-    divPaginacion.innerHTML = `<button id="anterior" ><img class="imagenes" src="./static/images/anterior.svg"></button> <p> -- Page ${reparaciones[1].pagina} -- </p><button id="siguiente" class="botones"><img class="imagenes" src="./static/images/siguiente.svg"></button>`
+    divPaginacion.innerHTML = `
+    <div class="pages">
+        <button id="anterior" ><img class="imagenes" src="./static/images/anterior.svg"></button> 
+        <p> -- Page ${reparaciones[1].pagina} -- </p>
+        <button id="siguiente" class="botones"><img class="imagenes" src="./static/images/siguiente.svg"></button>
+    </div>
+    <div>
+        <label for="buscar"></label><input onkeyup="busca(this.value)" "type="text" name="buscar" id="buscador">
+    </div>
+    
+    `
 
     var bprev = document.getElementById("anterior")
     bprev.addEventListener('click' , async() =>{
