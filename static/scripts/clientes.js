@@ -17,7 +17,7 @@ AbrirModal.addEventListener('click', ()=>{
     FormClientes.reset();
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
-    modifi.innerHTML="Dar de alta"
+    modifi.innerHTML="Agregar cliente"
 
 });
 
@@ -25,9 +25,6 @@ CerrarModal.addEventListener('click', ()=>{
     Modal.classList.remove('MostrarModal');
     document.getElementById("footer").style.display = "";
 });
-
-
-
 
 
 console.log(modificando)
@@ -44,8 +41,6 @@ window.addEventListener("DOMContentLoaded", async() => {
     
 });
 
-
-
     function mostrarData(clientes){
         /*if (contenido == 0){
 
@@ -57,13 +52,17 @@ window.addEventListener("DOMContentLoaded", async() => {
         clientes.forEach(clie => {
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
-            <div class="ModuloRep">
-            <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+            <div class="ModuloCli">
+            <div class="usuarioCliente">
+            <img class="Usuario" src="./static/images/user.svg" alt="Logo">
             <label for="${clie.nombre_apellido}">
                 <div class="drop">
                     <h3>${clie.nombre_apellido}</h3>
                 </div>
             </label>
+            
+            </div>
+            
 
             <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
 
@@ -76,9 +75,14 @@ window.addEventListener("DOMContentLoaded", async() => {
                 <h3>Provincia<p>${clie.provincia}</p></h3>
                 </div>
             </div>
+
+            <div class="botonesCli">
+            <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+            <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/trash.png"></button>
             
-            <button class="botonModificar CerrarModal">Modificar</button>
-            <button class="botonEliminar CerrarModal">Eliminar</button>
+            </div>
+            
+            
             </div>
             `
 
@@ -86,7 +90,7 @@ window.addEventListener("DOMContentLoaded", async() => {
                 const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
                     btnEliminar.addEventListener('click', async () => {
-                        const seguro = confirm('Esta seguro de eliminar este Cliente')
+                        const seguro = confirm('Está seguro que desea eliminar este Cliente?')
 
                         if (seguro){
 

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=M+PLUS+Code+Latin:wght@300&family=Montserrat:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/styles/style.css">
     <title>Soporte Tecnico</title>
 </head>
@@ -14,16 +17,24 @@
                 <p>MIL Tech</p>
             </div>
             <div class="Links">
-                <a><span class="Activo">Clientes</span></a>
                 <a href="/">Reparaciones</a>
                 <a href="/2">Consultar estados</a>
+                <a><span class="Activo">Clientes</span></a>
             </div>
         </nav>
+
+        <div class="encabezado">
+            <h1> Lista de Clientes </h1>
+        </div>
         
-        <h1> Lista de Clientes </h1>
+       
         
-        <div class="Acciones">
-            <button class="BotonAbrirModal">Agregar un nuevo cliente</button>    
+        <div class="AccionesClientes">
+            <button class="BotonAbrirModal">
+                <img class="agregar" src="./static/images/agregar2.png"/>
+                
+                <p class="nuevoCliente"> Nuevo cliente</p>     
+            </button>    
         </div>
 
         <div class="CajaColor" >
