@@ -3,11 +3,12 @@ from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo, ObjectId
 
 ipDb="192.168.1.221"
+ipDb2="localhost"
 # instanciar servidor
 app = Flask(__name__)
 
 # crear link con la base de datos
-app.config['MONGO_URI']=f'mongodb://{ipDb}:27017/reparaciones_db'
+app.config['MONGO_URI']=f'mongodb://{ipDb2}:27017/reparaciones_db'
 
 # intsnacia de la base de datos
 mongo = PyMongo(app)

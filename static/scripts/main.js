@@ -27,7 +27,7 @@ AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
     campoNumero.style.display="none";
-    modifi.innerHTML="Dar de alta";
+    modifi.innerHTML="Guardar";
     modifi.style.background="#0d860dcf";
 
     estados = FormUsuarios['estado'].value
@@ -220,17 +220,7 @@ function busca(value){
 
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
-    divPaginacion.innerHTML = `
-    <div class="pages">
-        <button id="anterior" ><img class="imagenes" src="./static/images/anterior.svg"></button> 
-        <p> -- Page ${reparaciones[1].pagina} -- </p>
-        <button id="siguiente" class="botones"><img class="imagenes" src="./static/images/siguiente.svg"></button>
-    </div>
-    <div>
-        <label for="buscar"></label><input onkeyup="busca(this.value)" "type="text" name="buscar" id="buscador">
-    </div>
-    
-    `
+    divPaginacion.innerHTML = `<button id="anterior" ><img class="imagenes" src="./static/images/anterior.svg"></button> <p> -- Page ${reparaciones[1].pagina} -- </p><button id="siguiente" class="botones"><img class="imagenes" src="./static/images/siguiente.svg"></button>`
 
     var bprev = document.getElementById("anterior")
     bprev.addEventListener('click' , async() =>{

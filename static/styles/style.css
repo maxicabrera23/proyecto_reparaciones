@@ -1,9 +1,10 @@
 *{
     margin: 0;
     padding: 0;
-    /* font-family:"JetBrains Mono",monospace; */
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
+    word-spacing: normal !important;
+    letter-spacing: normal !important;
 }
 
 :root{
@@ -113,8 +114,9 @@ nav{
 
 
 .agregar{
-    height: 20px;
-    width: 20px;
+    height: 14px;
+    width: 14px;
+    opacity: .8;
 }
 
 /*------------- Encabezado ---------------*/
@@ -225,9 +227,19 @@ main{
     align-items: flex-start;
 }
 
-
+.usuarioCliente{
+    width: 25%;
+    text-align: center;
+}
 .Usuario{
-    width: 40px;
+    width: 22px;
+    opacity: .5;
+}
+
+.botonesCli{
+    width: 50%;
+    text-align: right;
+
 }
 
 .infoOculta{
@@ -400,21 +412,32 @@ main{
     opacity: .8;
     display: flex;
     align-items: center;
+    margin: 0 20px;
+}
+
+#paginacion .pagina{
+    color: var(--colorBlanco);
+   
+    margin: 0 20px;
 }
 
 #paginacion button{
     background-color: #d8e9a800;
+   
     box-shadow: none;
+    margin: 0;
+    padding: 0;
 }
 
-#paginacion img{
-    width: 14px;
-    height: 30px;
+#paginacion svg{
+    opacity: .5;
+}
+#paginacion svg:hover{
+    
+    opacity: 1;
 }
 
-.Acciones #paginacion button:hover{
-    border:1px solid --colorBlanco;
-}
+
 
 /* #anterior{
     background-color: #D8E9A8;
@@ -443,7 +466,7 @@ text-align: center;
 
 .nuevaRepa{
     color: black;
-    padding: 5px 10px;
+    padding: 5px 0px 5px 10px;
     font-size: 18px;
 }
 
@@ -470,18 +493,28 @@ text-align: center;
     padding:0px 16px;
     font-size: 18px;
     margin: 10px;
+    transition: .2s ease;
+
 }
+    
 
 .Modal .Der .CerrarModal:hover{
     background:  rgb(230, 31, 31);
-}							   
+}	
+
 .Acciones button:hover, .CerrarModal:hover{
-    border-bottom: rgb(9, 11, 11) solid 1px;
-    opacity: .8;
+    /* border-bottom: rgb(9, 11, 11) solid 1px; */
+    border-radius: 20px;
+    
+    
+    
 }
+
 
 #botonAlta{
     background: rgb(16 105 169 / 92%);
+    font-family: 'Montserrat', sans-serif ;
+    margin-top: 40px;
 
 }
 
@@ -620,10 +653,10 @@ input::placeholder {
 
 .CajaBuscador .ingreseNumero{
     margin: 0;
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: normal;
-    text-transform: capitalize
-    
+    text-transform: capitalize;
+    text-shadow: none;    
 }
 
 .CajaBuscador input{
@@ -760,13 +793,45 @@ footer p{
 
 
 /*----------------- Pantalla Clientes -----------------*/
+.AccionesClientes{
+    display: flex;
+    justify-content: flex-end;
+    padding: 40px;
+    margin: 0 40px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    margin-top: 20px;
+    background-color: #00587acc;
+    border: solid 1px #ffffff52;
+    border-bottom: 0;
 
+}
+
+.AccionesClientes .BotonAbrirModal{
+    display: flex;
+    border-radius: 6px;
+    align-items: center;
+    padding: 10px;
+    box-shadow: rgba(45, 35, 66, 0.986) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(2, 6, 30, 0.5) 0 -3px 0 inset;
+    transition: .2s ease;
+    height: 53px;
+    width: auto;
+}
+
+.AccionesClientes .BotonAbrirModal:hover{
+    border-radius: 20px;
+}
+
+#ListaClientes {
+    width: 100%;
+}
 
 #ListaClientes li, #ListaReparaciones li{
-    list-style: none;
+    width: 100%;
     display: flex;
     justify-content: center;
-    width: 100%;
+    list-style: none;
     /* background: #00587acc; */
     /*
     min-height: 100px;
@@ -781,12 +846,28 @@ footer p{
     margin: 5px;
     color: var(--colorPrincipal2);
     font-size: 18px;
+    text-transform: capitalize;
     
 }
 #ListaClientes li p{
     margin: 10px;
     
 }
+.ModuloCli{
+    border-radius: 10px;
+    width: 95%;
+    padding: 10px 30px;
+    margin: 10px;
+    background: #f1f1f1db;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(45, 35, 66, 0.986) -2px 7px 15px 1px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(2, 6, 30, 0.5) -3px -5px 20px 0px
+
+
+}
+
 .botonModificar{
     background: #3d3d3d2e;
 }
@@ -796,6 +877,14 @@ footer p{
 .botonImprimir{
     background: rgb(238 238 238);
 }
+
+.nuevoCliente{
+    color: rgba(0, 0, 0, 0.748);
+    padding: 5px 0px 5px 10px;
+    font-size: 18px;
+}
+
+
 
 /*---------------------------------------------*/
 

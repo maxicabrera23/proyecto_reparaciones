@@ -17,7 +17,7 @@ AbrirModal.addEventListener('click', ()=>{
     FormClientes.reset();
     Modal.classList.add('MostrarModal');
     document.getElementById("footer").style.display = "none";
-    modifi.innerHTML="Dar de alta"
+    modifi.innerHTML="Agregar cliente"
 
 });
 
@@ -25,9 +25,6 @@ CerrarModal.addEventListener('click', ()=>{
     Modal.classList.remove('MostrarModal');
     document.getElementById("footer").style.display = "";
 });
-
-
-
 
 
 console.log(modificando)
@@ -120,7 +117,7 @@ async function cargar(ruta) {
                 const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
                     btnEliminar.addEventListener('click', async () => {
-                        const seguro = confirm('Esta seguro de eliminar este Cliente')
+                        const seguro = confirm('Está seguro que desea eliminar este Cliente?')
 
                         if (seguro){
 
