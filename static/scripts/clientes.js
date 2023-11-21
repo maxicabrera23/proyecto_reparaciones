@@ -2,6 +2,7 @@ let clientes = []
 let modificando = false
 let clienteId = null
 let contenido = null
+let contador = 1
 
 const FormClientes = document.querySelector('#EFormClientes');
 const clienteLista = document.querySelector('#ListaClientes')
@@ -49,6 +50,21 @@ async function cargar(ruta) {
     return reparaciones
 }
 
+
+var estadocliente = false
+function mostrar(id){
+    console.log("clic")
+        if (estadocliente == false){
+        document.getElementById(id).style.display = "flex";
+        document.getElementById(id).style.transition = " 1s ease";
+        estadocliente = true
+    }else{
+        document.getElementById(id).style.display = "none";
+        estadocliente = false
+    }
+    
+}
+
     function mostrarData(clientes){
         /*if (contenido == 0){
 
@@ -62,7 +78,7 @@ async function cargar(ruta) {
             clienteItem.innerHTML = `
             <div class="ModuloRep">
             <div class="infoOculta">
-                            <div class="info" onclick="mostrar()">
+                            <div class="info" onclick="mostrar(${contador})">
                                 <p class="numeroService">${clie.nombre_apellido}</p>    
                                 <!--     <p class="nombreCliente">${clie.nombre_apellido}</p> --> 
                             </div>
@@ -73,6 +89,43 @@ async function cargar(ruta) {
                                     <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
                             </div>
                 </div>
+            
+                <div class="slide" id='${contador}'>
+                        <div class="DatosModulo">
+                            <div class="columnaIzq">
+                                <div class="datoCliente fechaService">
+                                    <h3>Telefono:</h3>
+                                    <p>${clie.telefono}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Mail:</h3>
+                                    <p>${clie.email}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Domicilio:</h3>
+                                    <p>${clie.domicilio}</p>
+                                </div>
+                        
+                            </div>
+                        <div class="columnaCentro">
+                                
+                              
+                                <div class="datoCliente defecto">
+                                    <h3>Localidad:</h3>
+                                    <p>${clie.localidad}</p>
+                                </div>
+                                <div class="datoCliente defecto">
+                                    <h3>Provincia:</h3>
+                                    <p>${clie.provincia}</p>
+                                </div>
+
+
+                            
+                            
+                        </div>
+            
+            
+            
             </div>                   
         `
         // <div class="ModuloRep">
@@ -163,7 +216,7 @@ async function cargar(ruta) {
         let contenido = clientes.length
 
         clienteLista.append(clienteItem)
-            
+        contador = contador + 1  
         });
     }
 /* crear clientes */

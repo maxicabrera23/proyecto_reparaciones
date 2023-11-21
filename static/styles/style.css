@@ -407,7 +407,7 @@ main{
 }
 #paginacion{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: var(--colorBlanco);
     opacity: .8;
     display: flex;
