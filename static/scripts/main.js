@@ -45,7 +45,7 @@ CerrarModal.addEventListener('click', ()=>{
 window.addEventListener("DOMContentLoaded", async() => {
     const ruta = "/reparaciones?page=1&limit=10&offset=0";
     var respuesta = await cargar(ruta)
-    // console.log(respuesta)
+    console.log(respuesta)
     divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${respuesta[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
     
     // console.log(respuesta)
@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", async() => {
 
 /*##################### input  elejir cliente #######################*/
 async function cargar_clientes(){
-    const response = await fetch("/clientes")
+    const response = await fetch("/clientes1")
     return await response.json()
 }
 
@@ -566,7 +566,7 @@ FormUsuarios.addEventListener('submit', async e=>{
 
 
 Modal.classList.remove('MostrarModal');
-const response = await fetch("/reparaciones");
+const response = await fetch("/reparaciones?page=1&limit=10&offset=0");
 const data = await response.json()
 reparaciones = data
 contenido = reparaciones.length

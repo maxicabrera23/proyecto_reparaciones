@@ -36,51 +36,85 @@ console.log(modificando)
 
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
-    const response = await fetch("/clientes?page=1&limit=10&offset=0");
-    const data = await response.json()
-    clientes = data
+    const ruta = "/clientes?page=1&limit=10&offset=0"
+    var respuesta = await cargar(ruta) 
+    console.log(respuesta)
     contenido = clientes.length
-    mostrarData(clientes)
+    mostrarData(respuesta)
     
 });
 
-
+async function cargar(ruta) {
+    const response = await fetch(ruta);
+    const data = await response.json()
+    reparaciones = data
+    
+    return reparaciones
+}
 
     function mostrarData(clientes){
         /*if (contenido == 0){
 
         }*/
         clientes.sort()
-        console .log(`los datos actuales de clientes son: ${clientes}`)
+        console .log(`los datos actuales de clientes son: ${clientes[1]}`)
         clienteLista.innerHTML =''
 
-        clientes.forEach(clie => {
+        clientes[1].forEach(clie => {
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
             <div class="ModuloRep">
-            <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
-            <label for="${clie.nombre_apellido}">
-                <div class="drop">
-                    <h3>${clie.nombre_apellido}</h3>
+            <div class="infoOculta">
+                            <div class="info" onclick="mostrar()">
+                                <p class="numeroService">${clie.nombre_apellido}</p>    
+                                <!--     <p class="nombreCliente">${clie.nombre_apellido}</p> --> 
+                            </div>
+                            
+                            <div class="acciones">
+                                    <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+                                    <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+                            </div>
                 </div>
-            </label>
+            </div>                   
+        `
+        // <div class="ModuloRep">
+        //     <div class="infoOculta">
+        //                       <!--  <div class="info" onclick="mostrar(${contador})">
+        //                             <p class="nombreCliente">${clie.nombre_apellido}</p>
+        //                         </div> --> 
+                            
+        //                     <div class="acciones">
+        //                             <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+        //                             <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+        //                             <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+        //                     </div>
+        //         </div>
+        //     </div>    
+        //     <!--<div class="ModuloRep">
+        //     <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+        //     <label for="${clie.nombre_apellido}">
+        //         <div class="drop">
+        //             <h3>${clie.nombre_apellido}</h3>
+        //         </div>
+        //     </label>
 
-            <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
+        //     <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
 
-            <div class="slide">
-                <div class="DatosModulo">
-                <h3>Telefono<p>${clie.telefono}</p></h3>
-                <h3>Email<p>${clie.email}</p></h3>
-                <h3>Domicilio<p>${clie.domicilio}</p></h3>
-                <h3>Localidad<p>${clie.localidad}</p></h3> 
-                <h3>Provincia<p>${clie.provincia}</p></h3>
-                </div>
-            </div>
+        //     <div class="slide">
+        //         <div class="DatosModulo">
+        //         <h3>Telefono<p>${clie.telefono}</p></h3>
+        //         <h3>Email<p>${clie.email}</p></h3>
+        //         <h3>Domicilio<p>${clie.domicilio}</p></h3>
+        //         <h3>Localidad<p>${clie.localidad}</p></h3> 
+        //         <h3>Provincia<p>${clie.provincia}</p></h3>
+        //         </div>
+        //     </div>
             
-            <button class="botonModificar CerrarModal">Modificar</button>
-            <button class="botonEliminar CerrarModal">Eliminar</button>
-            </div>
-            `
+        //     <button class="botonModificar CerrarModal">Modificar</button>
+        //     <button class="botonEliminar CerrarModal">Eliminar</button>
+        //     </div> -->
+        //     `
 
             
                 const btnEliminar = clienteItem.querySelector('.botonEliminar')
@@ -165,7 +199,7 @@ FormClientes.addEventListener('submit', async e =>{
     const NuevoCliente = await response.json();
     console.log(NuevoCliente)
     /*clientes.unshift(NuevoCliente)*/
-    const response_clientes = await fetch("/clientes");
+    const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
     const data_clientes = await response_clientes.json()
     clientes = data_clientes
     alert(NuevoCliente['msg']);
@@ -190,7 +224,7 @@ FormClientes.addEventListener('submit', async e =>{
         console.log(clienteModificado)
         alert(clienteModificado['msg'])
         /*clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)*/
-        const response_clientes = await fetch("/clientes");
+        const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
         const data_clientes = await response_clientes.json()
         clientes = data_clientes
         console .log(`los datos actuales de clientes en modificar son: ${clientes}`)
