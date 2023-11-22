@@ -548,7 +548,8 @@ FormUsuarios.addEventListener('submit', async e=>{
             })
         })
         const reparacionModificada = await response.json();
-        alert(reparacionModificada['msg'])
+        swal("Listo!", "Reparación modificada.", "success");
+        // alert(reparacionModificada['msg'])
         modificando = false
         reparacionId = null  
     }   
