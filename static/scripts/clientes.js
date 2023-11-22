@@ -257,7 +257,8 @@ FormClientes.addEventListener('submit', async e =>{
     const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
     const data_clientes = await response_clientes.json()
     clientes = data_clientes
-    alert(NuevoCliente['msg']);
+    swal("Cliente creado!", "Se agregó el nuevo cliente.", "success");
+    // alert(NuevoCliente['msg']);
         
         
     }else{
@@ -277,7 +278,8 @@ FormClientes.addEventListener('submit', async e =>{
         })
         const clienteModificado = await response.json();
         console.log(clienteModificado)
-        alert(clienteModificado['msg'])
+        swal("Listo!", "Cliente modificado.", "success");
+        // alert(clienteModificado['msg'])
         /*clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)*/
         const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
         const data_clientes = await response_clientes.json()
