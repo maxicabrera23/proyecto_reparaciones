@@ -187,7 +187,7 @@ function mostrar(id){
                             })
                             const data = await response.json()
                             /*clientes = clientes.filter(clie => clie._id != data._id)*/
-                            const response_clientes = await fetch("/clientes");
+                            const response_clientes = await fetch("/clientes?page=1&limit=20&offset=0");
                             const data_clientes = await response_clientes.json()
                             clientes = data_clientes
                             mostrarData(clientes)
