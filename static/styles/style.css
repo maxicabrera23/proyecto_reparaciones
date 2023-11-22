@@ -169,7 +169,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-   
+    color: white;
     
 }
 
@@ -245,7 +245,7 @@ main{
 .infoOculta{
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
@@ -391,7 +391,23 @@ main{
     border-bottom: 0;
 }
 
+#buscador{
+    border-radius: 30px;
+    width: 30vw;
+    background-color: #ffffff1f;
+    border: 1px solid whitesmoke;
+}
+
+#paginacion .pages{
+    display: flex;
+    flex-direction: row;
+    color: var(--colorBlanco);
+    opacity: .8;
+    align-items: center;
+}
 #paginacion{
+    display: flex;
+    flex-direction: row;
     color: var(--colorBlanco);
     opacity: .8;
     display: flex;

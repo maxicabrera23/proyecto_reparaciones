@@ -2,6 +2,7 @@ let clientes = []
 let modificando = false
 let clienteId = null
 let contenido = null
+let contador = 1
 
 const FormClientes = document.querySelector('#EFormClientes');
 const clienteLista = document.querySelector('#ListaClientes')
@@ -33,87 +34,212 @@ console.log(modificando)
 
 /* mostar clientes */
 window.addEventListener("DOMContentLoaded", async() => {
-    const response = await fetch("/clientes?page=1&limit=10&offset=0");
-    const data = await response.json()
-    clientes = data
+    const ruta = "/clientes?page=1&limit=10&offset=0"
+    var respuesta = await cargar(ruta) 
+    console.log(respuesta)
     contenido = clientes.length
-    mostrarData(clientes)
+    mostrarData(respuesta)
     
 });
+
+async function cargar(ruta) {
+    const response = await fetch(ruta);
+    const data = await response.json()
+    reparaciones = data
+    
+    return reparaciones
+}
+
+
+var estadocliente = false
+function mostrar(id){
+    console.log("clic")
+        if (estadocliente == false){
+        document.getElementById(id).style.display = "flex";
+        document.getElementById(id).style.transition = " 1s ease";
+        estadocliente = true
+    }else{
+        document.getElementById(id).style.display = "none";
+        estadocliente = false
+    }
+    
+}
 
     function mostrarData(clientes){
         /*if (contenido == 0){
 
         }*/
         clientes.sort()
-        console .log(`los datos actuales de clientes son: ${clientes}`)
+        console .log(`los datos actuales de clientes son: ${clientes[1]}`)
         clienteLista.innerHTML =''
 
-        clientes.forEach(clie => {
+        clientes[1].forEach(clie => {
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
-            <div class="ModuloCli">
-            <div class="usuarioCliente">
-            <img class="Usuario" src="./static/images/user.svg" alt="Logo">
-            <label for="${clie.nombre_apellido}">
-                <div class="drop">
-                    <h3>${clie.nombre_apellido}</h3>
-                </div>
-            </label>
-            
+            <div class="ModuloRep">
+            <div class="infoOculta">
+                        
+                        <div class="usuarioCliente" onclick="mostrar(${contador})">
+                        <img class="Usuario" src="./static/images/user.svg" alt="Logo">
+                        <label for="${clie.nombre_apellido}">
+                            <div class="drop">
+                                <h3>${clie.nombre_apellido}</h3>
+                            </div>
+                        </label>
+                        
+                        </div>     
+                        
+                        <div class="acciones">
+                            <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+                            <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+                        </div>
             </div>
             
+                <div class="slide" id='${contador}'>
+                        <div class="DatosModulo">
+                            <div class="columnaIzq">
+                                <div class="datoCliente fechaService">
+                                    <h3>Telefono:</h3>
+                                    <p>${clie.telefono}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Mail:</h3>
+                                    <p>${clie.email}</p>
+                                </div>
+                                <div class="datoCliente falla">
+                                    <h3>Domicilio:</h3>
+                                    <p>${clie.domicilio}</p>
+                                </div>
+                        
+                            </div>
+                        <div class="columnaCentro">
+                                
+                              
+                                <div class="datoCliente defecto">
+                                    <h3>Localidad:</h3>
+                                    <p>${clie.localidad}</p>
+                                </div>
+                                <div class="datoCliente defecto">
+                                    <h3>Provincia:</h3>
+                                    <p>${clie.provincia}</p>
+                                </div>
 
-            <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
 
-            <div class="slide">
-                <div class="DatosModulo">
-                <h3>Telefono<p>${clie.telefono}</p></h3>
-                <h3>Email<p>${clie.email}</p></h3>
-                <h3>Domicilio<p>${clie.domicilio}</p></h3>
-                <h3>Localidad<p>${clie.localidad}</p></h3> 
-                <h3>Provincia<p>${clie.provincia}</p></h3>
-                </div>
-            </div>
+                            
+                            
+                        </div>
+            
+            
+            
+            </div>                   
+        `
+        // <div class="ModuloRep">
+        //     <div class="infoOculta">
+        //                       <!--  <div class="info" onclick="mostrar(${contador})">
+        //                             <p class="nombreCliente">${clie.nombre_apellido}</p>
+        //                         </div> --> 
+                            
+        //                     <div class="acciones">
+        //                             <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+        //                             <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+        //                             <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+        //                     </div>
+        //         </div>
+        //     </div>    
+        //     <!--<div class="ModuloRep">
+        //     <img class="Usuario" src="./static/images/vista-de-calle.png" alt="Logo">
+        //     <label for="${clie.nombre_apellido}">
+        //         <div class="drop">
+        //             <h3>${clie.nombre_apellido}</h3>
+        //         </div>
+        //     </label>
 
-            <div class="botonesCli">
-            <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-            <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/trash.png"></button>
+        //     <input type="checkbox" class="touch" id="${clie.nombre_apellido}">
+
+        //     <div class="slide">
+        //         <div class="DatosModulo">
+        //         <h3>Telefono<p>${clie.telefono}</p></h3>
+        //         <h3>Email<p>${clie.email}</p></h3>
+        //         <h3>Domicilio<p>${clie.domicilio}</p></h3>
+        //         <h3>Localidad<p>${clie.localidad}</p></h3> 
+        //         <h3>Provincia<p>${clie.provincia}</p></h3>
+        //         </div>
+        //     </div>
             
-            </div>
-            
-            
-            </div>
-            `
+        //     <button class="botonModificar CerrarModal">Modificar</button>
+        //     <button class="botonEliminar CerrarModal">Eliminar</button>
+        //     </div> -->
+        //     `
 
             
                 const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
                     btnEliminar.addEventListener('click', async () => {
-                        const seguro = confirm('Está seguro que desea eliminar este Cliente?')
-
-                        if (seguro){
-
-                            const response = await fetch(`/cliente/${clie._id}`,{
-                                method:'DELETE',
-                                headers:{
-                                    'Content-Type' : 'application/json',
-                                }
-                            })
-                            const data = await response.json()
-                            /*clientes = clientes.filter(clie => clie._id != data._id)*/
-                            const response_clientes = await fetch("/clientes");
-                            const data_clientes = await response_clientes.json()
+                        swal({
+                            title: "Borrar cliente",
+                            text: "Está seguro que desea eliminar este cliente?",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                          })
+                          .then(async(willDelete) => {
+                            if (willDelete) {
+                                const response = await fetch(`/cliente/${clie._id}`,{
+                                    method:'DELETE',
+                                    headers:{
+                                        'Content-Type' : 'application/json',
+                                    }
+                                    
+                                })
+                               swal("El cliente se ha eliminado", {
+                                icon: "success",
+                              });
+                            } else {
+                              swal("No se eliminó el cliente.");
+                            }
+                            console.log("se borro")
+                            const response_clientes = await fetch("/clientes?page=1&limit=20&offset=0");
+                            const data_clientes =  response_clientes.json()
                             clientes = data_clientes
-                            mostrarData(clientes)
-                            alert(`${data.msg}`)
-                            
-                            /*const data = await response.json()
-                            clientes = clientes.filter(clie => clie._id != data._id)
-                            clienteLista.append(clientes)
-                            mostrarData(clientes)*/
-                        }
+                            console.log(clientes)
+                            mostrarData(clientes[0])  
+                        
+                        
+                        });
+                        
+
                     });
+
+
+
+                        
+                        // const seguro = confirm('Está seguro que desea eliminar este Cliente?')
+
+                        // if (seguro){
+
+                            // const response = await fetch(`/cliente/${clie._id}`,{
+                            //     method:'DELETE',
+                            //     headers:{
+                            //         'Content-Type' : 'application/json',
+                            //     }
+                            // })
+                        //     const data = await response.json()
+                        //     /*clientes = clientes.filter(clie => clie._id != data._id)*/
+                            // const response_clientes = await fetch("/clientes?page=1&limit=20&offset=0");
+                            // const data_clientes = await response_clientes.json()
+                            // clientes = data_clientes
+                            // console.log(clientes)
+                            // mostrarData(clientes)
+
+                        //     swal(`${data.msg}`);
+                        //     // alert(`${data.msg}`)
+                            
+                        //     /*const data = await response.json()
+                        //     clientes = clientes.filter(clie => clie._id != data._id)
+                        //     clienteLista.append(clientes)
+                        //     mostrarData(clientes)*/
+                        // }
+                  
                 const btnModificar = clienteItem.querySelector('.botonModificar')
                     btnModificar.addEventListener('click', async() => {
                         modificando = true
@@ -136,7 +262,7 @@ window.addEventListener("DOMContentLoaded", async() => {
         let contenido = clientes.length
 
         clienteLista.append(clienteItem)
-            
+        contador = contador + 1  
         });
     }
 /* crear clientes */
@@ -169,10 +295,11 @@ FormClientes.addEventListener('submit', async e =>{
     const NuevoCliente = await response.json();
     console.log(NuevoCliente)
     /*clientes.unshift(NuevoCliente)*/
-    const response_clientes = await fetch("/clientes");
+    const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
     const data_clientes = await response_clientes.json()
     clientes = data_clientes
-    alert(NuevoCliente['msg']);
+    swal("Cliente creado!", "Se agregó el nuevo cliente.", "success");
+    // alert(NuevoCliente['msg']);
         
         
     }else{
@@ -192,9 +319,10 @@ FormClientes.addEventListener('submit', async e =>{
         })
         const clienteModificado = await response.json();
         console.log(clienteModificado)
-        alert(clienteModificado['msg'])
+        swal("Listo!", "Cliente modificado.", "success");
+        // alert(clienteModificado['msg'])
         /*clientes = clientes.map(clientes => clientes._id === clienteModificado._id ? clienteModificado: clientes)*/
-        const response_clientes = await fetch("/clientes");
+        const response_clientes = await fetch("/clientes?page=1&limit=10&offset=0");
         const data_clientes = await response_clientes.json()
         clientes = data_clientes
         console .log(`los datos actuales de clientes en modificar son: ${clientes}`)

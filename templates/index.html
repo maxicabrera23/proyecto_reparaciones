@@ -38,7 +38,14 @@
             <!-- <button class="BotonAbrirModal">
                 <img class="agregar" src="./static/images/agregar2.png"/>   
             </button> -->
-            <div id="paginacion"></div>
+            <div id="paginacion">
+                <div>
+                    <label for="buscar"></label><input type="text" name="buscar" id="buscador">
+                </div>
+            </div>
+            
+            
+            
             <div>
                 <button class="BotonAbrirModal">
                     <img class="agregar" src="./static/images/agregar2.png"/>
@@ -48,11 +55,7 @@
         </div>
         
         <div class="CajaColor" id="ListaReparaciones">
-           
-        <ul id="ListaReparaciones"></ul>
-            
-                
-                
+            <ul id="ListaReparaciones"></ul>
         </div>
 
         
@@ -69,7 +72,7 @@
                             <div class="CampoInput">
                                 
                                 <select id="mostrar_clientes">
-                                    <option disabled selected>Buscar Cliente</option>
+                                    <option selected>Buscar Cliente</option>
                                 </select> 
                                 <label for="nombre_apellido">Nombre y Apellido</label>
                                 <input name="nombre_apellido" id="nombre_cliente" type="text" placeholder="Ingresar Nombre y Apellido" autocomplete="off" required>
@@ -136,13 +139,13 @@
 
                             <div class="CampoInput" id="defEncontrado">
                                 <label for="defecto_encontrado">Defecto Encontrado</label>
-                                <input name="defecto_encontrado" type="text" placeholder="Ingresar Defecto" >
+                                <input name="defecto_encontrado" type="text" placeholder="Ingresar Defecto" required>
                             </div>
 
                             
                             <div class="CampoInput" id="valRepa">
                                 <label for="valor_reparacion">Valor de la reparación</label>
-                                <input name="valor_reparacion" type="text" placeholder="valor de reparacion" >
+                                <input name="valor_reparacion" type="text" placeholder="valor de reparacion" required>
                             </div>
 
                             <div class="CampoInput" id="fact" >
@@ -155,7 +158,7 @@
                             <h2>Datos Fecha</h2>
                             <div class="CampoInput">
                                 <label for="fecha_alta">Fecha de Alta</label>
-                                <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" >
+                                <input name="fecha_alta" type="date" placeholder="Ingresar Fecha de Alta" required>
                             </div>
 
                             <div class="CampoInput" id="fechaRepa">
@@ -167,8 +170,6 @@
                                 <label for="fecha_retiro">Fecha de Retiro</label>
                                 <input name="fecha_retiro" type="date" placeholder="Ingresar Fecha de Retiro" >
                             </div>
-
-                            
                         </div>
                     
                     </div>
@@ -201,7 +202,6 @@
             
 </footer>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        
 <script src="./static/scripts/main.js"></script>
 </body>
 </html>

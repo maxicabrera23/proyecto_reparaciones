@@ -2,11 +2,13 @@ import re
 from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo, ObjectId
 
+ipDb="192.168.1.221"
+ipDb2="localhost"
 # instanciar servidor
 app = Flask(__name__)
 
 # crear link con la base de datos
-app.config['MONGO_URI']='mongodb://127.0.0.1:27017/reparaciones_db'
+app.config['MONGO_URI']=f'mongodb://{ipDb2}:27017/reparaciones_db'
 
 # intsnacia de la base de datos
 mongo = PyMongo(app)
@@ -45,6 +47,30 @@ def mostrarCliente(id):
         'provincia': cliente['provincia']
     })
 
+
+
+# mostrar todos los clientes
+@app.route('/clientes1',methods=['GET'])
+def mostrarClientes1():
+    # muestra todos los clientes de la tabla
+    # string = '{nombre:1}'
+    clientes = []
+    
+    registros = list(db_clientes.find().sort('nombre',1))
+    
+    for doc in registros:
+        clientes.append({
+            '_id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre'],
+            'telefono': doc['telefono'],
+            'email': doc['email'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia']
+            })
+    return jsonify(clientes)
+
+
 # mostrar todos los clientes
 @app.route('/clientes',methods=['GET'])
 def mostrarClientes():
@@ -63,12 +89,12 @@ def mostrarClientes():
     cantidadRegistros = len(registros)
     
     print(f'la cantidad de registros es: {cantidadRegistros}')
-    nextPage = f'http://localhost:5000/clientes?page={nextp}&limit={limit}&offset={next}'
+    nextPage = f'/clientes?page={nextp}&limit={limit}&offset={next}'
 
     if prev < 0:
         prevPage = ""
     else:
-        prevPage = f'http://localhost:5000/clientes?page={prevp}&limit={limit}&offset={prev}'
+        prevPage = f'/clientes?page={prevp}&limit={limit}&offset={prev}'
     
     if int(cantidadRegistros) < limit:
         nextPage = ""
@@ -222,7 +248,7 @@ def mostrarReparaciones():
     next = offset + limit
     prev = offset - limit 
     
-    registros = list(db_reparaciones.find().sort('nombre',1).skip(offset).limit(limit))
+    registros = list(db_reparaciones.find().sort('nro_reparacion', -1).skip(offset).limit(limit))
     cantidadRegistros = len(registros)
     
     print(f'la cantidad de registros es: {cantidadRegistros}')

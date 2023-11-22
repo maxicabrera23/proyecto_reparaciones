@@ -21,6 +21,7 @@ const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 const divPaginacion = document.querySelector('#paginacion')
+let buscar = document.getElementById('buscador');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -44,7 +45,7 @@ CerrarModal.addEventListener('click', ()=>{
 window.addEventListener("DOMContentLoaded", async() => {
     const ruta = "/reparaciones?page=1&limit=10&offset=0";
     var respuesta = await cargar(ruta)
-    // console.log(respuesta)
+    console.log(respuesta)
     divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${respuesta[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
     
     // console.log(respuesta)
@@ -64,7 +65,7 @@ window.addEventListener("DOMContentLoaded", async() => {
 
 /*##################### input  elejir cliente #######################*/
 async function cargar_clientes(){
-    const response = await fetch("/clientes")
+    const response = await fetch("/clientes1")
     return await response.json()
 }
 
@@ -212,9 +213,14 @@ function mostrar(id){
     
 }
 
+function busca(value){
+    console.log(value)
+}
+
+
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
-    divPaginacion.innerHTML = `<button id="anterior"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button> <p class="pagina"> Pág. ${reparaciones[1].pagina}  </p><button id="siguiente" class="botones"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></button>`
+    divPaginacion.innerHTML = divPaginacion.innerHTML = `<button id="anterior"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button> <p class="pagina"> Pág. ${reparaciones[1].pagina}  </p><button id="siguiente" class="botones"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></button>`
 
     var bprev = document.getElementById("anterior")
     bprev.addEventListener('click' , async() =>{
@@ -452,12 +458,12 @@ function mostrarData(reparaciones){
                 reparacionTarjeta.style.padding = "5px";
 
             }
-            if (color == "reparada/terminada"){
-                reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
-                reparacionTarjeta.style.padding = "5px";
-
-            }
             if (color == "retirada/enviada"){
+            reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
+            reparacionTarjeta.style.padding = "5px";
+            
+            }
+            if (color == "reparada/terminada"){
                 reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
                 reparacionTarjeta.style.padding = "5px";
             }
@@ -514,8 +520,8 @@ FormUsuarios.addEventListener('submit', async e=>{
             })/*json*/
         })/*response*/
         const NuevoUsuario = await response.json();
-        // alert(NuevoUsuario['msg']);
         swal("Reparación creada!", "", "success");
+        // alert(NuevoUsuario['msg']);
     }else{
         const response = await fetch(`/reparacion/${reparacionId}`,{
             method:"PUT",
@@ -552,7 +558,7 @@ FormUsuarios.addEventListener('submit', async e=>{
 
 
 Modal.classList.remove('MostrarModal');
-const response = await fetch("/reparaciones");
+const response = await fetch("/reparaciones?page=1&limit=10&offset=0");
 const data = await response.json()
 reparaciones = data
 contenido = reparaciones.length
