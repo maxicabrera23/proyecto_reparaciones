@@ -76,11 +76,11 @@ function mostrar(id){
         clientes[1].forEach(clie => {
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
-            <div class="ModuloRep">
-            <div class="infoOculta">
+            <div class="ModuloRep" id="ModuloCli">
+                <div class="infoOculta">
                         
                         <div class="usuarioCliente" onclick="mostrar(${contador})">
-                        <img class="Usuario" src="./static/images/user.svg" alt="Logo">
+                        <img class="Usuario" src="./static/images/user.svg" alt="user">
                         <label for="${clie.nombre_apellido}">
                             <div class="drop">
                                 <h3>${clie.nombre_apellido}</h3>
@@ -90,43 +90,41 @@ function mostrar(id){
                         </div>     
                         
                         <div class="acciones">
-                            <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-                            <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+                            <button class="botonModificar CerrarModal">
+                            <img class="icon_b" src="./static/images/edit.png">
+                            </button>
+                            <button class="botonEliminar CerrarModal">
+                            <img alt="anular" class="icon_b"  src="./static/images/anular.svg">
+                            </button>
                         </div>
             </div>
             
                 <div class="slide" id='${contador}'>
                         <div class="DatosModulo">
-                            <div class="columnaIzq">
-                                <div class="datoCliente fechaService">
+                            <div class="clientesIzq">
+                                <div class="infoCliente">
                                     <h3>Telefono:</h3>
                                     <p>${clie.telefono}</p>
                                 </div>
-                                <div class="datoCliente falla">
+                                <div class="infoCliente">
                                     <h3>Mail:</h3>
                                     <p>${clie.email}</p>
                                 </div>
-                                <div class="datoCliente falla">
+                                <div class="infoCliente">
                                     <h3>Domicilio:</h3>
                                     <p>${clie.domicilio}</p>
                                 </div>
                         
                             </div>
-                        <div class="columnaCentro">
-                                
-                              
-                                <div class="datoCliente defecto">
+                        <div class="clienteDer">                             
+                                <div class="infoCliente">
                                     <h3>Localidad:</h3>
                                     <p>${clie.localidad}</p>
                                 </div>
-                                <div class="datoCliente defecto">
+                                <div class="infoCliente">
                                     <h3>Provincia:</h3>
                                     <p>${clie.provincia}</p>
                                 </div>
-
-
-                            
-                            
                         </div>
             
             
