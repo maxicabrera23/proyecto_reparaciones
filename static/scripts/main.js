@@ -458,12 +458,12 @@ function mostrarData(reparaciones){
                 reparacionTarjeta.style.padding = "5px";
 
             }
-            if (color == "reparada/terminada"){
-                reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
-                reparacionTarjeta.style.padding = "5px";
-
-            }
             if (color == "retirada/enviada"){
+            reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
+            reparacionTarjeta.style.padding = "5px";
+            
+            }
+            if (color == "reparada/terminada"){
                 reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
                 reparacionTarjeta.style.padding = "5px";
             }

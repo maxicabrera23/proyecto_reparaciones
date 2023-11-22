@@ -175,30 +175,71 @@ function mostrar(id){
                 const btnEliminar = clienteItem.querySelector('.botonEliminar')
 
                     btnEliminar.addEventListener('click', async () => {
-                        const seguro = confirm('Está seguro que desea eliminar este Cliente?')
-
-                        if (seguro){
-
-                            const response = await fetch(`/cliente/${clie._id}`,{
-                                method:'DELETE',
-                                headers:{
-                                    'Content-Type' : 'application/json',
-                                }
-                            })
-                            const data = await response.json()
-                            /*clientes = clientes.filter(clie => clie._id != data._id)*/
-                            const response_clientes = await fetch("/clientes");
-                            const data_clientes = await response_clientes.json()
+                        swal({
+                            title: "Borrar cliente",
+                            text: "Está seguro que desea eliminar este cliente?",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                          })
+                          .then(async(willDelete) => {
+                            if (willDelete) {
+                                const response = await fetch(`/cliente/${clie._id}`,{
+                                    method:'DELETE',
+                                    headers:{
+                                        'Content-Type' : 'application/json',
+                                    }
+                                    
+                                })
+                               swal("El cliente se ha eliminado", {
+                                icon: "success",
+                              });
+                            } else {
+                              swal("No se eliminó el cliente.");
+                            }
+                            console.log("se borro")
+                            const response_clientes = await fetch("/clientes?page=1&limit=20&offset=0");
+                            const data_clientes =  response_clientes.json()
                             clientes = data_clientes
-                            mostrarData(clientes)
-                            alert(`${data.msg}`)
-                            
-                            /*const data = await response.json()
-                            clientes = clientes.filter(clie => clie._id != data._id)
-                            clienteLista.append(clientes)
-                            mostrarData(clientes)*/
-                        }
+                            console.log(clientes)
+                            mostrarData(clientes[0])  
+                        
+                        
+                        });
+                        
+
                     });
+
+
+
+                        
+                        // const seguro = confirm('Está seguro que desea eliminar este Cliente?')
+
+                        // if (seguro){
+
+                            // const response = await fetch(`/cliente/${clie._id}`,{
+                            //     method:'DELETE',
+                            //     headers:{
+                            //         'Content-Type' : 'application/json',
+                            //     }
+                            // })
+                        //     const data = await response.json()
+                        //     /*clientes = clientes.filter(clie => clie._id != data._id)*/
+                            // const response_clientes = await fetch("/clientes?page=1&limit=20&offset=0");
+                            // const data_clientes = await response_clientes.json()
+                            // clientes = data_clientes
+                            // console.log(clientes)
+                            // mostrarData(clientes)
+
+                        //     swal(`${data.msg}`);
+                        //     // alert(`${data.msg}`)
+                            
+                        //     /*const data = await response.json()
+                        //     clientes = clientes.filter(clie => clie._id != data._id)
+                        //     clienteLista.append(clientes)
+                        //     mostrarData(clientes)*/
+                        // }
+                  
                 const btnModificar = clienteItem.querySelector('.botonModificar')
                     btnModificar.addEventListener('click', async() => {
                         modificando = true
