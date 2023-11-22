@@ -78,17 +78,22 @@ function mostrar(id){
             clienteItem.innerHTML = `
             <div class="ModuloRep">
             <div class="infoOculta">
-                            <div class="info" onclick="mostrar(${contador})">
-                                <p class="numeroService">${clie.nombre_apellido}</p>    
-                                <!--     <p class="nombreCliente">${clie.nombre_apellido}</p> --> 
+                        
+                        <div class="usuarioCliente" onclick="mostrar(${contador})">
+                        <img class="Usuario" src="./static/images/user.svg" alt="Logo">
+                        <label for="${clie.nombre_apellido}">
+                            <div class="drop">
+                                <h3>${clie.nombre_apellido}</h3>
                             </div>
-                            
-                            <div class="acciones">
-                                    <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
-                                    <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
-                            </div>
-                </div>
+                        </label>
+                        
+                        </div>     
+                        
+                        <div class="acciones">
+                            <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
+                            <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
+                        </div>
+            </div>
             
                 <div class="slide" id='${contador}'>
                         <div class="DatosModulo">
