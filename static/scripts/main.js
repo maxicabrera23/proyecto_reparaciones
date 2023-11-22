@@ -520,7 +520,8 @@ FormUsuarios.addEventListener('submit', async e=>{
             })/*json*/
         })/*response*/
         const NuevoUsuario = await response.json();
-        alert(NuevoUsuario['msg']);
+        // alert(NuevoUsuario['msg']);
+        swal("Reparación creada!", "", "success");
     }else{
         const response = await fetch(`/reparacion/${reparacionId}`,{
             method:"PUT",
@@ -547,7 +548,8 @@ FormUsuarios.addEventListener('submit', async e=>{
             })
         })
         const reparacionModificada = await response.json();
-        alert(reparacionModificada['msg'])
+        swal("Listo!", "Reparación modificada.", "success");
+        // alert(reparacionModificada['msg'])
         modificando = false
         reparacionId = null  
     }   
