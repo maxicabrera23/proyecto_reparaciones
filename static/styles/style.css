@@ -27,7 +27,7 @@ body{
     background-position: center;
     background-position-y: top;
     background-repeat: no-repeat;
-    background-size: inherit;
+    background-size: cover;
     padding-bottom: 100px;
 }
 
