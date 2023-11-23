@@ -459,8 +459,8 @@ function mostrarData(reparaciones){
 
             }
             if (color == "retirada/enviada"){
-            reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
-            reparacionTarjeta.style.padding = "5px";
+                reparacionTarjeta.style.background = "rgba(0, 0, 128, 0.637)";
+                reparacionTarjeta.style.padding = "5px";
             
             }
             if (color == "reparada/terminada"){
