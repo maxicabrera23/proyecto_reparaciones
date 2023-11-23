@@ -403,6 +403,7 @@ main{
     height: 40px;
     background-color: transparent;
     box-shadow: none;
+    margin: auto;
 }
 #bBuscador .lupa{
     width: 20px;
