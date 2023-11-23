@@ -169,7 +169,7 @@ main{
 
 
 .numeroService{
-    font-size:30px ;
+    font-size:24px ;
     width: 100%;
     color: black;
     font-weight: bold;
@@ -387,6 +387,17 @@ main{
     border: 1px solid whitesmoke;
 }
 
+#iBuscador{
+    font-size: 1em;
+    border-radius: 20px;
+    color: black;
+    width: 80%;
+}
+
+#iBuscador:hover{
+    border: none;
+}
+
 #bBuscador{
     width: 40px;
     height: 40px;
@@ -397,6 +408,10 @@ main{
     width: 20px;
     height: 20px;
 
+}
+
+#bBuscador:hover{
+    opacity: .6;
 }
 
 #paginacion .pages{
@@ -438,6 +453,10 @@ main{
     opacity: 1;
 }
 
+.contenedor-nuevaRepa{
+    text-align: right;
+}
+
 
 
 /* #anterior{
@@ -463,6 +482,10 @@ main{
 background: var(--colorBlanco);
 text-align: center;
 
+}
+
+.Acciones div{
+    width: 33%;
 }
 
 .nuevaRepa{
