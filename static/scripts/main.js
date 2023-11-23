@@ -21,7 +21,8 @@ const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 const divPaginacion = document.querySelector('#paginacion')
-let buscar = document.getElementById('buscador');
+const ibuscar = document.getElementById('iBuscador');
+const bbuscar = document.getElementById('bBuscador');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -195,7 +196,7 @@ async function cargar(ruta) {
     const response = await fetch(ruta);
     const data = await response.json()
     reparaciones = data
-    
+    console.log(reparaciones)
     return reparaciones
 
 }
@@ -213,9 +214,20 @@ function mostrar(id){
     
 }
 
-function busca(value){
-    console.log(value)
-}
+// seccion buscador 
+bbuscar.addEventListener('click', async() => {
+    objetivo = ibuscar.value
+    url = `prueba/${objetivo}`
+    buscarInfo = await cargar(url)
+    console.log(buscarInfo)
+    await mostrarData(buscarInfo)
+    console.log(url)
+
+});
+
+
+
+
 
 
 function mostrarData(reparaciones){
@@ -464,6 +476,7 @@ function mostrarData(reparaciones){
             
             }
             if (color == "reparada/terminada"){
+            
                 reparacionTarjeta.style.background = "rgba(0, 128, 0, 0.637)";
                 reparacionTarjeta.style.padding = "5px";
             }

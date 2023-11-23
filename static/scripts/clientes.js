@@ -12,6 +12,7 @@ const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 const modifi = FormClientes.querySelector('#botonAlta')
+const divPaginacion = document.getElementById('paginacion');
 
 AbrirModal.addEventListener('click', ()=>{
     modificando = false
@@ -33,21 +34,29 @@ console.log(modificando)
 
 
 /* mostar clientes */
+
 window.addEventListener("DOMContentLoaded", async() => {
-    const ruta = "/clientes?page=1&limit=10&offset=0"
+    const ruta = "/clientes1"
     var respuesta = await cargar(ruta) 
-    console.log(respuesta)
+    console.log(`respuesta: ${respuesta}`)
     contenido = clientes.length
     mostrarData(respuesta)
     
 });
 
 async function cargar(ruta) {
+    console.log(`ruta:${ruta}`)
     const response = await fetch(ruta);
     const data = await response.json()
-    reparaciones = data
-    
+    reparaciones = data    
     return reparaciones
+}
+
+async function link(link){
+    res = await cargar(link)
+    mostrarData(res)
+    return res
+    
 }
 
 
@@ -66,17 +75,15 @@ function mostrar(id){
 }
 
     function mostrarData(clientes){
-        /*if (contenido == 0){
-
-        }*/
         clientes.sort()
         console .log(`los datos actuales de clientes son: ${clientes[1]}`)
         clienteLista.innerHTML =''
 
-        clientes[1].forEach(clie => {
+        clientes.forEach(clie => {
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
             <div class="ModuloRep" id="ModuloCli">
+
                 <div class="infoOculta">
                         
                         <div class="usuarioCliente" onclick="mostrar(${contador})">
@@ -94,7 +101,7 @@ function mostrar(id){
                             <img class="icon_b" src="./static/images/edit.png">
                             </button>
                             <button class="botonEliminar CerrarModal">
-                            <img alt="anular" class="icon_b"  src="./static/images/anular.svg">
+                            <img alt="anular" class="icon_b"  src="./static/images/trash.png">
                             </button>
                         </div>
             </div>

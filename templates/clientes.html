@@ -30,27 +30,33 @@
        
         
         <div class="AccionesClientes">
+            <div id="paginacion"></div>
+            <div>
+                <label for="buscar"></label>
+                <input type="text" name="buscar" id="buscador">
+            </div>
+            
             <button class="BotonAbrirModal">
-                <img class="agregar" src="./static/images/agregar2.png"/>
-                
+                <img class="agregar" src="./static/images/agregar2.png"/>                
                 <p class="nuevoCliente"> Nuevo cliente</p>     
             </button>    
         </div>
 
         <div class="CajaColor">
              <ul id="ListaClientes"></ul>
-            
         </div>
         
         <section class="Modal">
-            <div class="Der"><button class="CerrarModal">X</button></div>
+            <div class="Der">
+                <button class="CerrarModal">X</button>
+            </div>
+            
             <div class="ContenedorModal">
 
                 <form id="EFormClientes">
                     <div class="Formulario">
                         <div class="DatosCliente">    
                             <h2> Datos Cliente</h2>
-
                             <div class="CampoInput">
                                 <label for="nombre_apellido">Nombre y Apellido</label>
                                 <input name="nombre_apellido" type="text" placeholder="Ingresar Nombre y Apellido" required>
@@ -63,12 +69,12 @@
 
                             <div class="CampoInput">
                                 <label for="email">Email</label>
-                                <input name="email" type="email" placeholder="example@gmail.com" >
+                                <input name="email" type="email" placeholder="example@gmail.com">
                             </div>
 
                             <div class="CampoInput">
                                 <label for="domicilio">Domicilio</label>
-                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio" >
+                                <input name="domicilio" type="text" placeholder="Ingresar Domicilio">
                             </div>
 
                             <div class="CampoInput">
@@ -78,10 +84,10 @@
 
                             <div class="CampoInput">
                                 <label for="provincia">Provincia</label>
-                                <input name="provincia" type="text" placeholder="Ingresar Provincia" >
+                                <input name="provincia" type="text" placeholder="Ingresar Provincia">
                             </div>
                             
-                            <button type="submit" class="CerrarModal" id="botonAlta" >Dar de alta</button>
+                            <button type="submit" class="CerrarModal" id="botonAlta">Guardar</button>
                         </div>
                     
                 </form>

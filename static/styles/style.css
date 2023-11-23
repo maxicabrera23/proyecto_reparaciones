@@ -27,7 +27,7 @@ body{
     background-position: center;
     background-position-y: top;
     background-repeat: no-repeat;
-    background-size: inherit;
+    background-size: cover;
     padding-bottom: 100px;
 }
 
@@ -908,10 +908,7 @@ footer p{
     height: auto; */
     transition: 1s ease;
 }
-/* .drop p {
-    padding: 3px;
-} */
-  
+
 .info::after {
     transition: 1s ease;
 }
@@ -1001,6 +998,7 @@ li a {text-decoration : none; color : #2d2f31;}
 
 /*----------------- Pantalla Celular -----------------*/
 
+
 @media (max-width:700px) {
     .Logo{
         flex-basis: 100%;
@@ -1029,6 +1027,18 @@ li a {text-decoration : none; color : #2d2f31;}
         max-height: 350px;
     }
 }
+
+/*----------------- Pantalla Xlarge -----------------*/
+
+@media screen and (min-width: 1024px){
+    .Links a{
+        font-weight: 400;
+    }
+}
+    
+
+
+
 /*---------------------------------------------*/
 
 h1{

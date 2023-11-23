@@ -85,7 +85,7 @@ def mostrarClientes():
     next = offset + limit
     prev = offset - limit 
     
-    registros = list(db_clientes.find().sort('nombre',1).skip(offset).limit(limit))
+    registros = list(db_clientes.find().sort('nombre', -1).skip(offset).limit(limit))
     cantidadRegistros = len(registros)
     
     print(f'la cantidad de registros es: {cantidadRegistros}')
@@ -113,49 +113,33 @@ def mostrarClientes():
     return jsonify(clientes , {'anterior':prevPage , 'pagina':page,'siguiente':nextPage})
 
 # prueba paginacion
-@app.route('/prueba',methods=['GET'])
-def mostrarReg():
-    # muestra todos los clientes de la tabla
-    clientes = []
-    string = '{nombre:1}'
-    
-    page = int(request.args['page'])
-    offset = int(request.args['offset'] )
-    limit = int(request.args['limit'])
-    nextp = page + 1
-    prevp = page - 1
-    next = offset + limit
-    prev = offset - limit 
+@app.route('/prueba/<id>',methods=['GET'])
+def mostrarReg(id):
+    reparacion = []
+    #buscar = 'nro_reparacion':id
     
     
-        
-    registros = list(db_clientes.find().sort('nombre',1).skip(offset).limit(limit))
-    cantidadRegistros = len(registros)
-    print(registros)
-    print(f'la cantidad de registros es: {cantidadRegistros}')
-    nextPage = f'http://localhost:5000/prueba?page={nextp}&limit={limit}&offset={next}'
-
-    if prev < 0:
-        prevPage = ""
-    else:
-        prevPage = f'http://localhost:5000/prueba?page={prevp}&limit={limit}&offset={prev}'
-    
-    if int(cantidadRegistros) < limit:
-        nextPage = ""
-    # for doc in registros:
-    #     print (doc)
-    
-    
-    #     clientes.append({
-    #         '_id':str(ObjectId(doc['_id'])),
-    #         'nombre_apellido': doc['nombre'],
-    #         'telefono': doc['telefono'],
-    #         'email': doc['email'],
-    #         'domicilio': doc['domicilio'],
-    #         'localidad': doc['localidad'],
-    #         'provincia': doc['provincia']
-    #         })
-    return f' -- <a href="{prevPage}">Anterior</a> page: {page} --  <a href="{nextPage}">Siguiente</a>{registros}{cantidadRegistros}'
+    for doc in db_reparaciones.find({"nro_reparacion":int(id)}):
+        reparacion.append({
+            'id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre_apellido'], 
+            'telefono': doc['telefono'],
+            'email': doc['email'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia'],
+            'nro_reparacion': doc['nro_reparacion'],
+            'producto': doc['producto'],
+            'falla': doc['falla'],
+            'defecto_encontrado': doc['defecto_encontrado'],
+            'factura': doc['factura'],
+            'valor_reparacion': doc['valor_reparacion'],
+            'fecha_alta': doc['fecha_alta'],
+            'fecha_reparacion': doc['fecha_reparacion'],
+            'fecha_retiro': doc['fecha_retiro'],
+            'estado': doc['estado']
+        })
+    return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
 
 # crear un cliente
 @app.route('/cliente',methods=['POST'])
