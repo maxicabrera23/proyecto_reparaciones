@@ -21,7 +21,8 @@ const AbrirModal = document.querySelector('.BotonAbrirModal');
 const Modal = document.querySelector('.Modal');
 const CerrarModal = document.querySelector('.CerrarModal');
 const divPaginacion = document.querySelector('#paginacion')
-let buscar = document.getElementById('buscador');
+const ibuscar = document.getElementById('iBuscador');
+const bbuscar = document.getElementById('bBuscador');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -213,9 +214,15 @@ function mostrar(id){
     
 }
 
+// seccion buscador 
 function busca(value){
     console.log(value)
 }
+
+
+
+
+
 
 
 function mostrarData(reparaciones){
