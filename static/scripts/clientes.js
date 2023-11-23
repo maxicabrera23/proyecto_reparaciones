@@ -34,6 +34,7 @@ console.log(modificando)
 
 
 /* mostar clientes */
+
 window.addEventListener("DOMContentLoaded", async() => {
     const ruta = "/clientes1"
     var respuesta = await cargar(ruta) 
@@ -47,8 +48,7 @@ async function cargar(ruta) {
     console.log(`ruta:${ruta}`)
     const response = await fetch(ruta);
     const data = await response.json()
-    reparaciones = data
-    
+    reparaciones = data    
     return reparaciones
 }
 
@@ -83,6 +83,7 @@ function mostrar(id){
             const clienteItem = document.createElement('li')
             clienteItem.innerHTML = `
             <div class="ModuloRep" id="ModuloCli">
+
                 <div class="infoOculta">
                         
                         <div class="usuarioCliente" onclick="mostrar(${contador})">
@@ -100,7 +101,7 @@ function mostrar(id){
                             <img class="icon_b" src="./static/images/edit.png">
                             </button>
                             <button class="botonEliminar CerrarModal">
-                            <img alt="anular" class="icon_b"  src="./static/images/anular.svg">
+                            <img alt="anular" class="icon_b"  src="./static/images/trash.png">
                             </button>
                         </div>
             </div>
