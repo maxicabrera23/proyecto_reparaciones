@@ -196,7 +196,7 @@ async function cargar(ruta) {
     const response = await fetch(ruta);
     const data = await response.json()
     reparaciones = data
-    
+    console.log(reparaciones)
     return reparaciones
 
 }
@@ -215,10 +215,15 @@ function mostrar(id){
 }
 
 // seccion buscador 
-function busca(value){
-    console.log(value)
-}
+bbuscar.addEventListener('click', async() => {
+    objetivo = ibuscar.value
+    url = `prueba/${objetivo}`
+    buscarInfo = await cargar(url)
+    console.log(buscarInfo)
+    await mostrarData(buscarInfo)
+    console.log(url)
 
+});
 
 
 
