@@ -215,7 +215,7 @@ main{
 .DatosModulo p{
     color: black;
     font-weight: normal;
-    margin: 0 5px;
+    
 
 
 }
@@ -223,7 +223,6 @@ main{
 .DatosModulo .columnaIzq, .columnaCentro, .columnaDer{
     display: flex;
     flex-direction: column;
-  
     align-items: flex-start;
 }
 
@@ -245,10 +244,18 @@ main{
 .infoOculta{
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
+
+.clientesIzq, .clientesDer{
+    width: 50%;
+    margin: 0 10px;
+
+}
+
+
 
 /*------------- Colores Estados ---------------*/
 .Rojo{
@@ -793,6 +800,7 @@ footer p{
 
 
 /*----------------- Pantalla Clientes -----------------*/
+
 .AccionesClientes{
     display: flex;
     justify-content: flex-end;
@@ -843,7 +851,7 @@ footer p{
     */
 }
 #ListaClientes li h3, #ListaReparaciones li h3 {
-    margin: 5px;
+    /* margin: 5px; */
     color: var(--colorPrincipal2);
     font-size: 18px;
     text-transform: capitalize;
@@ -853,14 +861,14 @@ footer p{
     margin: 10px;
     
 }
-.ModuloCli{
+#ModuloCli{
     border-radius: 10px;
     width: 95%;
     padding: 10px 30px;
     margin: 10px;
     background: #f1f1f1db;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     box-shadow: rgba(45, 35, 66, 0.986) -2px 7px 15px 1px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(2, 6, 30, 0.5) -3px -5px 20px 0px
@@ -915,13 +923,13 @@ footer p{
 }
 .acciones{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     
 }
 
 .slide {
-    width: 100%;
-    margin: 20px 20px;
+    width: 75%;
+    margin: 40px 20px 20px 20px;
     height: auto;
     overflow: auto;
     display: none;
@@ -954,7 +962,15 @@ footer p{
 }
 
 
+.infoCliente{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    
 
+}
 
 
 

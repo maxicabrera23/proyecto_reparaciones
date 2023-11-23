@@ -44,11 +44,11 @@ FormEstados.addEventListener('submit', async e =>{
                 estadoInfo.style.background = "rgba(3, 93, 165, 0.64)";
                 estadoInfo.style.border = "solid 2px #2694df";
             
-            }else if (color == "reparada/terminada"){
+            }else if (color == "retirada/enviada"){
                 estadoInfo.style.background = "rgb(44 44 172 / 64%)";
                 estadoInfo.style.border = "2px solid #4f4fc1de";
             
-            }else if (color == "retirada/enviada"){
+            }else if (color == "reparada/terminada"){
                 estadoInfo.style.background = "rgb(85 169 85 / 89%)";
                 estadoInfo.style.border = "2px solid rgb(29 135 29)";
             }
