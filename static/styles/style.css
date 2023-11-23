@@ -48,24 +48,18 @@ body{
 
 
 nav{
-    /* display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 20px 5%;
-    background: var(--colorPrincipal2);
-    /* border-bottom: 1px solid var(--colorResaltado); */
     box-shadow: 0px 0px 1px #ffffff6b;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     padding: 10px 20px;
     background: #00587a5c;
-    /* border-bottom: 1px solid var(--colorResaltado); */
-    /* box-shadow: 0px 0px 20px var(--colorResaltado); */
 }
+
 .Logo{
     margin: 0 20px;
 }
+
 .Logo img{
     width: 75px;
     margin: auto 20px;
@@ -144,7 +138,7 @@ main{
 }
 
 
-/*---------------------------------------------*/
+/*------------MODULO REPARACIONES------------*/
 
 
 
@@ -158,7 +152,6 @@ main{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* border: 1px solid #00000008; */
     box-shadow: rgba(45, 35, 66, 0.986) -2px 7px 15px 1px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(2, 6, 30, 0.5) -3px -5px 20px 0px
 }
 
@@ -258,6 +251,7 @@ main{
 
 
 /*------------- Colores Estados ---------------*/
+
 .Rojo{
     appearance: none;
     background-color:crimson;
@@ -348,33 +342,16 @@ main{
     justify-content: flex-start;
     align-items: center;
     background-color: #00587acc;
-    /* margin: 30px 30px 20px 30px; */
     margin: 0px 40px;
     padding: 10px 20px 60px 20px;
     min-height: 100px;
     max-height: 800px;
     height: auto;
     border-radius: 0 0 10px 10px;
-    /* border: solid; */
-    /* border-image-slice: 1; */
-    /* border-width: 3px; */
-    /* border-image-source: linear-gradient(60deg, rgba(0,34,77,1), rgba(4,216,255,1)); */
     overflow: auto;
     border: solid 1px #ffffff52;
     border-top: 0
 }
-
-/* .CajaColor p{
-    color: black;
-    font-size: medium;
-    text-transform: capitalize;
-    font-weight: bold;
-} */
-
-
-
-
-
 
 .CajaColor::placeholder{ 
     font-size: medium;
@@ -398,11 +375,28 @@ main{
     border-bottom: 0;
 }
 
+.contenedor-buscador{
+    display: flex;
+    align-items: center;
+}
+
 #buscador{
     border-radius: 30px;
     width: 30vw;
     background-color: #ffffff1f;
     border: 1px solid whitesmoke;
+}
+
+#bBuscador{
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    box-shadow: none;
+}
+#bBuscador .lupa{
+    width: 20px;
+    height: 20px;
+
 }
 
 #paginacion .pages{
