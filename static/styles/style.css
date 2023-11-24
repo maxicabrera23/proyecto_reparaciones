@@ -1030,11 +1030,35 @@ li a {text-decoration : none; color : #2d2f31;}
     .Links{
         flex-direction: column;
         justify-content: center;
+        
     }
-
     .Links a {
-        margin: 0px 10px;
+        margin: 10px auto;
     }    
+
+    .encabezado h1{
+        font-size: 40px;
+    
+        padding: 40px;
+    }
+    .Acciones{
+        flex-direction: column;
+        padding: 20px 0
+    }
+    .Acciones .BotonAbrirModal{
+        width: 250px;
+        margin:auto;
+    }
+    .nuevaRepa{
+        font-size: 1em;
+    }
+    .Acciones div{
+        width: auto;
+        margin: 20px auto;
+    }
+    #paginacion{
+        display: none;
+    }
 }
 
 @media (max-width:900px) {
