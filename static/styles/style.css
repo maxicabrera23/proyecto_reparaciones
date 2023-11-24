@@ -823,7 +823,7 @@ footer p{
 
 .AccionesClientes{
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding: 40px;
     margin: 0 40px;
     flex-direction: row;
@@ -845,6 +845,7 @@ footer p{
     transition: .2s ease;
     height: 53px;
     width: auto;
+    margin: 0 20px;
 }
 
 .AccionesClientes .BotonAbrirModal:hover{
