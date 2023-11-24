@@ -1077,6 +1077,24 @@ li a {text-decoration : none; color : #2d2f31;}
     .contenedor-nuevaRepa{
         text-align: center;
     }
+    .datoCliente{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 5px;
+        width: 100%;
+        margin: auto;
+    }
+    .DatosModulo p{
+        margin-left: 5px;
+    }
+    .DatosModulo h3{
+        font-size: 16px !important;
+    }
+    .slide{
+        width: 90%;
+    }
 }
 
 @media (max-width:900px) {
