@@ -265,7 +265,7 @@ function mostrarData(reparaciones){
                             
                             <div class="acciones">
                                     <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/print.svg"></button>
+                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/sobre-mail.svg"></button>
                                     <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
                             </div>
                         </div>
