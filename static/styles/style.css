@@ -364,7 +364,7 @@ main{
 .Acciones{
     display: flex;
     justify-content: space-between;
-    padding: 40px;
+    padding: 40px 60px;
     margin: 0 40px;
     flex-direction: row;
     align-items: center;
@@ -378,6 +378,7 @@ main{
 .contenedor-buscador{
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 #buscador{
@@ -403,7 +404,7 @@ main{
     height: 40px;
     background-color: transparent;
     box-shadow: none;
-    margin: auto;
+    margin: 0;
 }
 #bBuscador .lupa{
     width: 20px;
@@ -429,6 +430,7 @@ main{
     opacity: .8;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     margin: 0 20px;
 }
 
@@ -455,7 +457,7 @@ main{
 }
 
 .contenedor-nuevaRepa{
-    text-align: right;
+    text-align: left;
 }
 
 
