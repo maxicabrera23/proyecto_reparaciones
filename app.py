@@ -113,33 +113,62 @@ def mostrarClientes():
     return jsonify(clientes , {'anterior':prevPage , 'pagina':page,'siguiente':nextPage})
 
 # prueba paginacion
-@app.route('/prueba/<id>',methods=['GET'])
-def mostrarReg(id):
+@app.route('/buscar',methods=['GET'])
+def mostrarReg():
+    objetivo = request.args['objetivo']
+    tipo = request.args['tipo']
+    
     reparacion = []
     #buscar = 'nro_reparacion':id
     
+    if tipo == 'true':
+        for doc in db_reparaciones.find({"nro_reparacion":int(objetivo)}):
+            reparacion.append({
+                'id':str(ObjectId(doc['_id'])),
+                'nombre_apellido': doc['nombre_apellido'], 
+                'telefono': doc['telefono'],
+                'email': doc['email'],
+                'domicilio': doc['domicilio'],
+                'localidad': doc['localidad'],
+                'provincia': doc['provincia'],
+                'nro_reparacion': doc['nro_reparacion'],
+                'producto': doc['producto'],
+                'falla': doc['falla'],
+                'defecto_encontrado': doc['defecto_encontrado'],
+                'factura': doc['factura'],
+                'valor_reparacion': doc['valor_reparacion'],
+                'fecha_alta': doc['fecha_alta'],
+                'fecha_reparacion': doc['fecha_reparacion'],
+                'fecha_retiro': doc['fecha_retiro'],
+                'estado': doc['estado']
+            })
+        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
     
-    for doc in db_reparaciones.find({"nro_reparacion":int(id)}):
-        reparacion.append({
-            'id':str(ObjectId(doc['_id'])),
-            'nombre_apellido': doc['nombre_apellido'], 
-            'telefono': doc['telefono'],
-            'email': doc['email'],
-            'domicilio': doc['domicilio'],
-            'localidad': doc['localidad'],
-            'provincia': doc['provincia'],
-            'nro_reparacion': doc['nro_reparacion'],
-            'producto': doc['producto'],
-            'falla': doc['falla'],
-            'defecto_encontrado': doc['defecto_encontrado'],
-            'factura': doc['factura'],
-            'valor_reparacion': doc['valor_reparacion'],
-            'fecha_alta': doc['fecha_alta'],
-            'fecha_reparacion': doc['fecha_reparacion'],
-            'fecha_retiro': doc['fecha_retiro'],
-            'estado': doc['estado']
-        })
-    return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
+    else:
+        for doc in db_reparaciones.find({"nombre_apellido":str(objetivo)}):
+            reparacion.append({
+                'id':str(ObjectId(doc['_id'])),
+                'nombre_apellido': doc['nombre_apellido'], 
+                'telefono': doc['telefono'],
+                'email': doc['email'],
+                'domicilio': doc['domicilio'],
+                'localidad': doc['localidad'],
+                'provincia': doc['provincia'],
+                'nro_reparacion': doc['nro_reparacion'],
+                'producto': doc['producto'],
+                'falla': doc['falla'],
+                'defecto_encontrado': doc['defecto_encontrado'],
+                'factura': doc['factura'],
+                'valor_reparacion': doc['valor_reparacion'],
+                'fecha_alta': doc['fecha_alta'],
+                'fecha_reparacion': doc['fecha_reparacion'],
+                'fecha_retiro': doc['fecha_retiro'],
+                'estado': doc['estado']
+            })
+        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
+    
+    
+    
 
 # crear un cliente
 @app.route('/cliente',methods=['POST'])

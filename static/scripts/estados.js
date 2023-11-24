@@ -13,11 +13,17 @@ FormEstados.addEventListener('submit', async e =>{
     
     const nro_reparacion = FormEstados['nro_reparacion'].value
     console.log(nro_reparacion)
+    
+    let tipo =!isNaN(nro_reparacion)
+    console.log(tipo)
+    url = `/buscar?objetivo=${nro_reparacion}&tipo=${tipo}`
 
-    const response = await fetch('/estados/'+nro_reparacion+'')
+    const response = await fetch(url)
+    
+    // const response = await fetch('/estados/'+nro_reparacion+'')
     const data = await response.json()
     estado = data
-    renderEstados(estado)
+    renderEstados(estado[0])
     
 
     FormEstados.reset();

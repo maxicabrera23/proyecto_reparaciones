@@ -216,14 +216,17 @@ function mostrar(id){
 
 // seccion buscador 
 bbuscar.addEventListener('click', async() => {
+    
     objetivo = ibuscar.value
-    url = `prueba/${objetivo}`
+    let tipo =!isNaN(objetivo)
+    console.log(tipo)
+    url = `/buscar?objetivo=${objetivo}&tipo=${tipo}`
     buscarInfo = await cargar(url)
     console.log(buscarInfo)
-    await mostrarData(buscarInfo)
+    mostrarData(buscarInfo)
     console.log(url)
 
-});
+}); 
 
 
 
