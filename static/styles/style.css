@@ -1017,7 +1017,7 @@ li a {text-decoration : none; color : #2d2f31;}
     width: 33%;
 }
 
-/*----------------- Pantalla Celular -----------------*/
+/*----------------- Vista Mobile -----------------*/
 
 
 @media (max-width:700px) {
@@ -1035,7 +1035,6 @@ li a {text-decoration : none; color : #2d2f31;}
     .Links a {
         margin: 10px auto;
     }    
-
     .encabezado h1{
         font-size: 40px;
     
@@ -1046,18 +1045,37 @@ li a {text-decoration : none; color : #2d2f31;}
         padding: 20px 0
     }
     .Acciones .BotonAbrirModal{
-        width: 250px;
+        width: 220px;
         margin:auto;
     }
     .nuevaRepa{
         font-size: 1em;
     }
     .Acciones div{
-        width: auto;
+        width: 100%;
         margin: 20px auto;
     }
     #paginacion{
         display: none;
+    }
+    .info, .ColorEstado, .acciones {
+        width: 100%;
+        justify-content: center;
+    }
+    .infoOculta{
+        flex-direction: column;
+    }
+    .acciones{
+        margin-top: 10px;
+    }
+    #iBuscador{
+        width: 50%;
+    }
+    .contenedor-buscador{
+        justify-content: center;
+    }
+    .contenedor-nuevaRepa{
+        text-align: center;
     }
 }
 
