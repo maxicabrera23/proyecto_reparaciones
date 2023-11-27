@@ -1,4 +1,4 @@
-let reparaciones = []
+var reparaciones = []
 let modificando = false
 let reparacionId = null
 let contenido = null
@@ -46,7 +46,7 @@ CerrarModal.addEventListener('click', ()=>{
 window.addEventListener("DOMContentLoaded", async() => {
     const ruta = "/reparaciones?page=1&limit=10&offset=0";
     var respuesta = await cargar(ruta)
-    console.log(respuesta)
+    // console.log(respuesta)
     divPaginacion.innerHTML = `<input id=anterior type="button" value="anterior"> -- page: ${respuesta[1].pagina} --  <input id="siguiente" type="button" value="Siguiente">`
     
     // console.log(respuesta)
@@ -174,18 +174,6 @@ estadoReparacion.addEventListener('change', async e=> {
 /*######################################################*/
 async function link(link){
     res = await cargar(link)
-    // console.log(`respuesta desde link:${res[0]} , ${res[1].anterior} , ${res[1].siguiente}`)
-    
-    
-    // bprev.addEventListener('click' , async() =>{
-    //     link(res[1].anterior)
-    // })
-    // bSig.addEventListener('click' , async() =>{
-    //     link(res[1].siguiente)
-    // })
-    
-    
-    // respuesta = res
     mostrarData(res)
     return res
     
@@ -196,7 +184,7 @@ async function cargar(ruta) {
     const response = await fetch(ruta);
     const data = await response.json()
     reparaciones = data
-    console.log(reparaciones)
+    // console.log(reparaciones)
     return reparaciones
 
 }
@@ -228,6 +216,34 @@ bbuscar.addEventListener('click', async() => {
 
 }); 
 
+// enviar mail 
+async function enviarMail (nro){
+    let info = await cargar (`/buscar?objetivo=${nro}&tipo=true`)
+    let mail = info[0][0]
+    let datos = []
+    datos.push(mail.nro_reparacion,mail.email,mail.fecha_alta)
+    console.log(datos)
+    
+    swal({
+        title: "Enviar Mail",
+        text: `Se enviara un email a la direccion "${mail.email}": \n Se ingreso la reparacion ${mail.nro_reparacion} el dia ${mail.fecha_alta} `,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            cargar(`/mail/${mail.nro_reparacion}`)
+          swal("el mail se envio!!", {
+            icon: "success",
+          });
+        } else {
+          swal("El mail no se envio");
+        }
+      });
+
+
+}
 
 
 
@@ -235,6 +251,7 @@ bbuscar.addEventListener('click', async() => {
 
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
+    // console.log(reparaciones[1])
     divPaginacion.innerHTML = divPaginacion.innerHTML = `<button id="anterior"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button> <p class="pagina"> Pág. ${reparaciones[1].pagina}  </p><button id="siguiente" class="botones"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></button>`
 
     var bprev = document.getElementById("anterior")
@@ -265,7 +282,7 @@ function mostrarData(reparaciones){
                             
                             <div class="acciones">
                                     <button class="botonModificar CerrarModal"><img class="icon_b" src="./static/images/edit.png"></button>
-                                    <button class="botonImprimir CerrarModal"><img class="icon_b" src="./static/images/sobre-mail.svg"></button>
+                                    <button class="botonImprimir CerrarModal" onclick="enviarMail(${repa.nro_reparacion})"><img class="icon_b" src="./static/images/sobre-mail.svg"></button>
                                     <button class="botonEliminar CerrarModal"><img alt="anular" class="icon_b"  src="./static/images/anular.svg"></button>
                             </div>
                         </div>
@@ -567,7 +584,7 @@ FormUsuarios.addEventListener('submit', async e=>{
         swal("Listo!", "Reparación modificada.", "success");
         // alert(reparacionModificada['msg'])
         modificando = false
-        reparacionId = null  
+        reparacionId = null 
     }   
 
 
@@ -578,6 +595,7 @@ const response = await fetch("/reparaciones?page=1&limit=10&offset=0");
 const data = await response.json()
 reparaciones = data
 contenido = reparaciones.length
+console.log(reparaciones)
 mostrarData(reparaciones)
 FormUsuarios.reset();
 })
