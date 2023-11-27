@@ -816,6 +816,15 @@ footer p{
     width: 30px;
 }
 
+/*----------------- FOOTER MOBILE -----------------*/
+
+@media (max-width: 768px){
+    footer .Services{
+        display: none;
+    }
+}
+
+
 
 
 
@@ -1116,6 +1125,9 @@ li a {text-decoration : none; color : #2d2f31;}
         margin: 10px auto;
     }
 }
+
+/*----------------- Pantalla Tablet -----------------*/
+
 
 @media (max-width:900px) {
     .ModuloRep, .DatosModulo{
