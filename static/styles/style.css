@@ -65,6 +65,12 @@ nav{
     margin: auto 20px;
 }
 
+@media (max-width: 700px){
+    .Logo img{
+        width: 45px;
+    }
+}
+
 .Logo p{
     display: none;
     color: var(--colorBlanco);
@@ -682,7 +688,7 @@ input::placeholder {
     margin: 0;
     font-size: 1.4em;
     font-weight: normal;
-    text-transform: capitalize;
+    text-transform: none;
     text-shadow: none;    
 }
 
@@ -818,9 +824,12 @@ footer p{
 
 /*----------------- FOOTER MOBILE -----------------*/
 
-@media (max-width: 768px){
+@media (max-width: 700px){
     footer .Services{
         display: none;
+    }
+    .Copyright{
+        width: 100%;
     }
 }
 
@@ -1105,12 +1114,13 @@ li a {text-decoration : none; color : #2d2f31;}
         width: 90%;
     }
     .titleEstados{
-        font-size: 40px;
+        font-size: 34px;
         padding: 40px;
+        margin-top: 20px;
     }
     .CajaBuscador{
         flex-direction: column;
-        align-items: stretch;
+        margin-top: 20px;
     }
     .CajaBuscador .ingreseNumero{
         font-size: 1.2em;
