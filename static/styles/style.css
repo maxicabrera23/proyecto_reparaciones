@@ -1095,11 +1095,46 @@ li a {text-decoration : none; color : #2d2f31;}
     .slide{
         width: 90%;
     }
+    .titleEstados{
+        font-size: 40px;
+        padding: 40px;
+    }
+    .CajaBuscador{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .CajaBuscador .ingreseNumero{
+        font-size: 1.2em;
+        margin: 10px auto;
+    }
+    .CajaBuscador input{
+        width: 95%;
+        margin: 10px auto;
+        
+    }
+    .CajaBuscador .submit{
+        margin: 10px auto;
+    }
 }
 
 @media (max-width:900px) {
     .ModuloRep, .DatosModulo{
         flex-direction: column;
+    }
+    .CajaBuscador{
+        flex-direction: column;
+    }
+    .CajaBuscador .ingreseNumero{
+        font-size: 1.2em;
+        margin: 10px auto;
+    }
+    .CajaBuscador input{
+        width: 95%;
+        margin: 10px auto;
+        
+    }
+    .CajaBuscador .submit{
+        margin: 10px auto;
     }
 }
 
