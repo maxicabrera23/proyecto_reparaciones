@@ -854,6 +854,21 @@ footer p{
 
 }
 
+@media (max-width: 700px){
+    .AccionesClientes{
+        justify-content: center;
+    }
+    .clientesDer, .clientesIzq{
+        margin: 0;
+    }
+    .infoCliente p{
+        width: auto;
+    }
+    .infoCliente{
+        width: auto;
+    }
+}
+
 .AccionesClientes .BotonAbrirModal{
     display: flex;
     border-radius: 6px;
