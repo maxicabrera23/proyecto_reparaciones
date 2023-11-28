@@ -220,9 +220,6 @@ bbuscar.addEventListener('click', async() => {
 async function enviarMail (nro){
     let info = await cargar (`/buscar?objetivo=${nro}&tipo=true`)
     let mail = info[0][0]
-    let datos = []
-    datos.push(mail.nro_reparacion,mail.email,mail.fecha_alta)
-    console.log(datos)
     
     swal({
         title: "Enviar Mail",

@@ -1,6 +1,18 @@
 import re
 from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo, ObjectId
+import os
+from dotenv import load_dotenv
+from flask_mail import Mail, Message 
+
+
+load_dotenv()
+
+serverMail = os.getenv('SERVER_MAIL')
+portMail = os.getenv('PORT_MAIL')
+uesernameMail = os.getenv('USERMAIL_MAIL')
+passMail = os.getenv('PASSWORD_MAIL')
+
 
 ipDb="192.168.1.221"
 ipDb2="localhost"
@@ -12,6 +24,18 @@ app.config['MONGO_URI']=f'mongodb://{ipDb2}:27017/reparaciones_db'
 
 # intsnacia de la base de datos
 mongo = PyMongo(app)
+
+#servicio de mails
+app.config['MAIL_SERVER'] = serverMail
+app.config['MAIL_PORT'] = portMail
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = uesernameMail
+app.config['MAIL_PASSWORD'] = passMail
+
+# intsnacia de mail
+mail = Mail(app)
+
+
 
 # variables de tablas
 db_clientes = mongo.db.clientes
@@ -381,6 +405,12 @@ def modificarReparacion(id):
 
 @app.route('/mail/<nro>', methods=['GET'])
 def enviarMail(nro):
+    def enviar(destinatario, asunto, cuerpo):
+        mensaje = Message(asunto, recipients=[destinatario])
+        mensaje.body = cuerpo
+        mail.send(mensaje)
+        return {'mensaje':'se envio el mail'}
+    
     reparacion = []
     for doc in db_reparaciones.find({"nro_reparacion":int(nro)}):
             reparacion.append({
@@ -394,8 +424,25 @@ def enviarMail(nro):
                 'fecha_reparacion': doc['fecha_reparacion'],
                 'fecha_retiro': doc['fecha_retiro'],
                 'estado': doc['estado']
-            })
-    print (reparacion)
+            }) 
+    
+    destinatario = reparacion[0]['email']
+    asunto = "Producto ingresado para reparar" 
+    
+    if reparacion[0]['estado'] == 'ingresada':
+        asunto = "Producto ingresado para reparar"
+        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]} el dia: {reparacion[0]["fecha_alta"]} '
+              f'el numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        enviar(destinatario, asunto, mensaje)
+        
+    if reparacion[0]['estado'] == 'reparada/terminada':
+        asunto = "Producto ingresado para reparar"
+        mensaje = (f'se finalizo con la reparacion del producto: {reparacion[0]["producto"]} el dia: {reparacion[0]["fecha_reparacion"]} '
+              f'el numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        enviar(destinatario, asunto, mensaje)
+    
+    
+    print (reparacion[0]['estado'])
     return {"recibido":"recibido"}
 
 ######################### estados #################################################
