@@ -224,7 +224,7 @@ def mostrarReg():
         return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
     
     else:
-        for doc in db_reparaciones.find({"nombre_apellido":str(objetivo)}):
+        for doc in db_reparaciones.find({"$text":{"$search":str(objetivo)}}):
             reparacion.append({
                 'id':str(ObjectId(doc['_id'])),
                 'nombre_apellido': doc['nombre_apellido'], 
