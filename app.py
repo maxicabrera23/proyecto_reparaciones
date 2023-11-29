@@ -28,7 +28,8 @@ mongo = PyMongo(app)
 #servicio de mails
 app.config['MAIL_SERVER'] = serverMail
 app.config['MAIL_PORT'] = portMail
-app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = uesernameMail
 app.config['MAIL_PASSWORD'] = passMail
 
@@ -406,9 +407,15 @@ def modificarReparacion(id):
 @app.route('/mail/<nro>', methods=['GET'])
 def enviarMail(nro):
     def enviar(destinatario, asunto, cuerpo):
-        mensaje = Message(asunto, recipients=[destinatario])
+        mensaje = Message(asunto, sender = 'maxi@surix.net', recipients=[destinatario])
         mensaje.body = cuerpo
-        mail.send(mensaje)
+        # mail.send(mensaje)
+        try:
+            mail.send(mensaje)
+        except Exception as err:
+            print(f"Ocurrió un error al enviar el email razon {err}:")
+
+        
         return {'mensaje':'se envio el mail'}
     
     reparacion = []
@@ -427,7 +434,7 @@ def enviarMail(nro):
             }) 
     
     destinatario = reparacion[0]['email']
-    asunto = "Producto ingresado para reparar" 
+    asunto = "informacion importante" 
     
     if reparacion[0]['estado'] == 'ingresada':
         asunto = "Producto ingresado para reparar"
