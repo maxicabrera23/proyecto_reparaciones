@@ -4,6 +4,11 @@
     font-family:"JetBrains Mono",monospace;
     box-sizing: border-box;
 }
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
 body{
     width: 100%;
