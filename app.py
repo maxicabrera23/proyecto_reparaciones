@@ -1,6 +1,19 @@
 import re
 from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo, ObjectId
+import os
+from dotenv import load_dotenv
+from flask_mail import Mail, Message 
+
+load_dotenv()
+
+serverMail = os.getenv('SERVER_MAIL')
+portMail = os.getenv('PORT_MAIL')
+uesernameMail = os.getenv('USERNAME_MAIL')
+passMail = os.getenv('PASSWORD_MAIL')
+
+print(serverMail, portMail,uesernameMail, passMail)
+
 
 ipDb="192.168.1.221"
 ipDb2="localhost"
@@ -12,6 +25,19 @@ app.config['MONGO_URI']=f'mongodb://{ipDb2}:27017/reparaciones_db'
 
 # intsnacia de la base de datos
 mongo = PyMongo(app)
+
+#servicio de mails
+app.config['MAIL_SERVER'] = serverMail
+app.config['MAIL_PORT'] = portMail
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = uesernameMail
+app.config['MAIL_PASSWORD'] = passMail
+
+# intsnacia de mail
+mail = Mail(app)
+
+
 
 # variables de tablas
 db_clientes = mongo.db.clientes
@@ -112,64 +138,6 @@ def mostrarClientes():
             })
     return jsonify(clientes , {'anterior':prevPage , 'pagina':page,'siguiente':nextPage})
 
-# prueba paginacion
-@app.route('/buscar',methods=['GET'])
-def mostrarReg():
-    objetivo = request.args['objetivo']
-    tipo = request.args['tipo']
-    
-    reparacion = []
-    #buscar = 'nro_reparacion':id
-    
-    if tipo == 'true':
-        for doc in db_reparaciones.find({"nro_reparacion":int(objetivo)}):
-            reparacion.append({
-                'id':str(ObjectId(doc['_id'])),
-                'nombre_apellido': doc['nombre_apellido'], 
-                'telefono': doc['telefono'],
-                'email': doc['email'],
-                'domicilio': doc['domicilio'],
-                'localidad': doc['localidad'],
-                'provincia': doc['provincia'],
-                'nro_reparacion': doc['nro_reparacion'],
-                'producto': doc['producto'],
-                'falla': doc['falla'],
-                'defecto_encontrado': doc['defecto_encontrado'],
-                'factura': doc['factura'],
-                'valor_reparacion': doc['valor_reparacion'],
-                'fecha_alta': doc['fecha_alta'],
-                'fecha_reparacion': doc['fecha_reparacion'],
-                'fecha_retiro': doc['fecha_retiro'],
-                'estado': doc['estado']
-            })
-        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
-    
-    else:
-        for doc in db_reparaciones.find({"$text":{"$search":str(objetivo)}}):
-            reparacion.append({
-                'id':str(ObjectId(doc['_id'])),
-                'nombre_apellido': doc['nombre_apellido'], 
-                'telefono': doc['telefono'],
-                'email': doc['email'],
-                'domicilio': doc['domicilio'],
-                'localidad': doc['localidad'],
-                'provincia': doc['provincia'],
-                'nro_reparacion': doc['nro_reparacion'],
-                'producto': doc['producto'],
-                'falla': doc['falla'],
-                'defecto_encontrado': doc['defecto_encontrado'],
-                'factura': doc['factura'],
-                'valor_reparacion': doc['valor_reparacion'],
-                'fecha_alta': doc['fecha_alta'],
-                'fecha_reparacion': doc['fecha_reparacion'],
-                'fecha_retiro': doc['fecha_retiro'],
-                'estado': doc['estado']
-            })
-        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
-    
-    
-    
-
 # crear un cliente
 @app.route('/cliente',methods=['POST'])
 def crearCliente():
@@ -224,6 +192,61 @@ def modificarCliente(id):
         })
 
 ######################## reparaciones ##################################################
+#paginacion repas
+@app.route('/buscar',methods=['GET'])
+def mostrarReg():
+    objetivo = request.args['objetivo']
+    tipo = request.args['tipo']
+    
+    reparacion = []
+    #buscar = 'nro_reparacion':id
+    
+    if tipo == 'true':
+        for doc in db_reparaciones.find({"nro_reparacion":int(objetivo)}):
+            reparacion.append({
+                'id':str(ObjectId(doc['_id'])),
+                'nombre_apellido': doc['nombre_apellido'], 
+                'telefono': doc['telefono'],
+                'email': doc['email'],
+                'domicilio': doc['domicilio'],
+                'localidad': doc['localidad'],
+                'provincia': doc['provincia'],
+                'nro_reparacion': doc['nro_reparacion'],
+                'producto': doc['producto'],
+                'falla': doc['falla'],
+                'defecto_encontrado': doc['defecto_encontrado'],
+                'factura': doc['factura'],
+                'valor_reparacion': doc['valor_reparacion'],
+                'fecha_alta': doc['fecha_alta'],
+                'fecha_reparacion': doc['fecha_reparacion'],
+                'fecha_retiro': doc['fecha_retiro'],
+                'estado': doc['estado']
+            })
+        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
+    
+    else:
+        for doc in db_reparaciones.find({"$text":{"$search":str(objetivo)}}):
+            reparacion.append({
+                'id':str(ObjectId(doc['_id'])),
+                'nombre_apellido': doc['nombre_apellido'], 
+                'telefono': doc['telefono'],
+                'email': doc['email'],
+                'domicilio': doc['domicilio'],
+                'localidad': doc['localidad'],
+                'provincia': doc['provincia'],
+                'nro_reparacion': doc['nro_reparacion'],
+                'producto': doc['producto'],
+                'falla': doc['falla'],
+                'defecto_encontrado': doc['defecto_encontrado'],
+                'factura': doc['factura'],
+                'valor_reparacion': doc['valor_reparacion'],
+                'fecha_alta': doc['fecha_alta'],
+                'fecha_reparacion': doc['fecha_reparacion'],
+                'fecha_retiro': doc['fecha_retiro'],
+                'estado': doc['estado']
+            })
+        return jsonify(reparacion, {'anterior':'' , 'pagina': '1','siguiente':''})
+
 # mostrar una reparacion
 @app.route('/reparacion/<id>',methods=['GET'])
 def mostrarReparacion(id):
@@ -382,6 +405,54 @@ def modificarReparacion(id):
     }})
     return jsonify({'msg':'Reparacion Modificada'})
 
+@app.route('/mail/<nro>', methods=['GET'])
+def enviarMail(nro):
+    def enviar(destinatario, asunto, cuerpo):
+        mensaje = Message(asunto, sender = 'maxi@surix.net', recipients=[destinatario])
+        mensaje.body = cuerpo
+        # mail.send(mensaje)
+        try:
+            mail.send(mensaje)
+        except Exception as err:
+            print(f"Ocurrió un error al enviar el email razon {err}:")
+
+        
+        return {'mensaje':'se envio el mail'}
+    
+    reparacion = []
+    for doc in db_reparaciones.find({"nro_reparacion":int(nro)}):
+            reparacion.append({
+                'email': doc['email'],
+                'nro_reparacion': doc['nro_reparacion'],
+                'producto': doc['producto'],
+                'falla': doc['falla'],
+                'defecto_encontrado': doc['defecto_encontrado'],
+                'valor_reparacion': doc['valor_reparacion'],
+                'fecha_alta': doc['fecha_alta'],
+                'fecha_reparacion': doc['fecha_reparacion'],
+                'fecha_retiro': doc['fecha_retiro'],
+                'estado': doc['estado'],
+                'telefono': ['telefono'],
+            }) 
+    
+    destinatario = reparacion[0]['email']
+    asunto = "informacion importante" 
+    
+    if reparacion[0]['estado'] == 'ingresada':
+        asunto = "Producto ingresado para reparar"
+        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_alta"]} y '
+              f'El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        enviar(destinatario, asunto, mensaje)
+        
+    if reparacion[0]['estado'] == 'reparada/terminada':
+        asunto = "Se finalizo la reparacion del producto "
+        mensaje = (f'Se finalizo con la reparacion del producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_reparacion"]}, '
+              f'El defecto encontrado fue: {reparacion[0]["defecto_encontrado"]} y El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}' )
+        enviar(destinatario, asunto, mensaje)
+    
+    
+    print (reparacion[0]['estado'])
+    return {"recibido":"recibido"}
 
 ######################### estados #################################################
 
