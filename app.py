@@ -409,7 +409,9 @@ def modificarReparacion(id):
 def enviarMail(nro):
     def enviar(destinatario, asunto, cuerpo):
         mensaje = Message(asunto, sender = 'soporte@surix.net', recipients=[destinatario])
-        mensaje.body = cuerpo
+        # mensaje.html= render_template('mail_template.html')
+        mensaje.body= cuerpo
+        
         # mail.send(mensaje)
         try:
             mail.send(mensaje)
@@ -439,15 +441,18 @@ def enviarMail(nro):
     asunto = "informacion importante" 
     
     if reparacion[0]['estado'] == 'ingresada':
-        asunto = "Producto ingresado para reparar"
-        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_alta"]} y '
-              f'El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        asunto = f'Su equipo fue ingresado para revisión. Reparación N°: {reparacion[0]["nro_reparacion"]} '
+        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]}.\n'
+                   f'Fecha de ingreso: {reparacion[0]["fecha_alta"]}.\n'
+                   f'N° de reparación: {reparacion[0]["nro_reparacion"]}')
         enviar(destinatario, asunto, mensaje)
         
     if reparacion[0]['estado'] == 'reparada/terminada':
-        asunto = "Se finalizo la reparacion del producto "
-        mensaje = (f'Se finalizo con la reparacion del producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_reparacion"]}, '
-              f'El defecto encontrado fue: {reparacion[0]["defecto_encontrado"]} y El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}' )
+        asunto = f'Su reparación N° {reparacion[0]["nro_reparacion"]} se encuentra lista para retirar!'
+        mensaje = (f'La reparación N° {reparacion[0]["nro_reparacion"]} ya se encuentra lista para retirar.\n'
+                  f'Producto: {reparacion[0]["producto"]}.\n'
+                  f'Defecto encontrado: {reparacion[0]["defecto_encontrado"]}.\n'
+                  f'Costo de la reparación: {reparacion[0]["valor_reparacion"]}' )
         enviar(destinatario, asunto, mensaje)
     
     

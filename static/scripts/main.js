@@ -222,8 +222,8 @@ async function enviarMail (nro){
     let mail = info[0][0]
     
     swal({
-        title: "Enviar Mail",
-        text: `Se enviara un email a la direccion "${mail.email}": \n Se ingreso la reparacion ${mail.nro_reparacion} el dia ${mail.fecha_alta} `,
+        title: "Enviar por mail",
+        text: `Se enviará un correo a \n ${mail.email}\n  Estado: ${mail.estado}. `,
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -231,11 +231,11 @@ async function enviarMail (nro){
       .then((willDelete) => {
         if (willDelete) {
             cargar(`/mail/${mail.nro_reparacion}`)
-          swal("el mail se envio!!", {
+          swal("Se envió el mail de confirmación.", {
             icon: "success",
           });
         } else {
-          swal("El mail no se envio");
+          swal("El mail no se envió");
         }
       });
 
