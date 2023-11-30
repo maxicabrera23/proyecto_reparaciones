@@ -12,7 +12,7 @@ portMail = os.getenv('PORT_MAIL')
 uesernameMail = os.getenv('USERNAME_MAIL')
 passMail = os.getenv('PASSWORD_MAIL')
 
-print(serverMail, portMail,uesernameMail, passMail)
+#print(serverMail, portMail,uesernameMail, passMail)
 
 
 ipDb="192.168.1.221"
@@ -408,7 +408,7 @@ def modificarReparacion(id):
 @app.route('/mail/<nro>', methods=['GET'])
 def enviarMail(nro):
     def enviar(destinatario, asunto, cuerpo):
-        mensaje = Message(asunto, sender = 'maxi@surix.net', recipients=[destinatario])
+        mensaje = Message(asunto, sender = 'soporte@surix.net', recipients=[destinatario])
         mensaje.body = cuerpo
         # mail.send(mensaje)
         try:
