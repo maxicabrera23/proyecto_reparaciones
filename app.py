@@ -5,13 +5,14 @@ import os
 from dotenv import load_dotenv
 from flask_mail import Mail, Message 
 
-
 load_dotenv()
 
 serverMail = os.getenv('SERVER_MAIL')
 portMail = os.getenv('PORT_MAIL')
-uesernameMail = os.getenv('USERMAIL_MAIL')
+uesernameMail = os.getenv('USERNAME_MAIL')
 passMail = os.getenv('PASSWORD_MAIL')
+
+print(serverMail, portMail,uesernameMail, passMail)
 
 
 ipDb="192.168.1.221"
@@ -430,7 +431,8 @@ def enviarMail(nro):
                 'fecha_alta': doc['fecha_alta'],
                 'fecha_reparacion': doc['fecha_reparacion'],
                 'fecha_retiro': doc['fecha_retiro'],
-                'estado': doc['estado']
+                'estado': doc['estado'],
+                'telefono': ['telefono'],
             }) 
     
     destinatario = reparacion[0]['email']
@@ -438,14 +440,14 @@ def enviarMail(nro):
     
     if reparacion[0]['estado'] == 'ingresada':
         asunto = "Producto ingresado para reparar"
-        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]} el dia: {reparacion[0]["fecha_alta"]} '
-              f'el numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_alta"]} y '
+              f'El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
         enviar(destinatario, asunto, mensaje)
         
     if reparacion[0]['estado'] == 'reparada/terminada':
-        asunto = "Producto ingresado para reparar"
-        mensaje = (f'se finalizo con la reparacion del producto: {reparacion[0]["producto"]} el dia: {reparacion[0]["fecha_reparacion"]} '
-              f'el numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}')
+        asunto = "Se finalizo la reparacion del producto "
+        mensaje = (f'Se finalizo con la reparacion del producto: {reparacion[0]["producto"]}, El dia: {reparacion[0]["fecha_reparacion"]}, '
+              f'El defecto encontrado fue: {reparacion[0]["defecto_encontrado"]} y El numero asignado a la reparacion es: {reparacion[0]["nro_reparacion"]}' )
         enviar(destinatario, asunto, mensaje)
     
     
