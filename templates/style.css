@@ -109,6 +109,11 @@ h1{
     border-bottom: rgba(4,216,255,1) solid 2px;
 }
 
+.Modal .CampoInput .check{
+    margin-bottom: 10px;
+
+}
+
 /*----------------- Pantalla Celular -----------------*/
 
 @media (max-width:700px) {

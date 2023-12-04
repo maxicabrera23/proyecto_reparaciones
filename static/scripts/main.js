@@ -23,6 +23,7 @@ const CerrarModal = document.querySelector('.CerrarModal');
 const divPaginacion = document.querySelector('#paginacion')
 const ibuscar = document.getElementById('iBuscador');
 const bbuscar = document.getElementById('bBuscador');
+const checkFact = FormUsuarios.querySelector('#chFactura');
 
 AbrirModal.addEventListener('click', ()=>{
     Modal.classList.add('MostrarModal');
@@ -116,6 +117,7 @@ function mostarEstados(estado){
         FormUsuarios.querySelector('#fechaRepa').style.display = "none";
         FormUsuarios.querySelector('#fechaRet').style.display = "none";
         
+        
 
     }
     
@@ -161,9 +163,24 @@ function mostarEstados(estado){
         FormUsuarios.querySelector('#fact').style.display = "";
         FormUsuarios.querySelector('#fechaRepa').style.display = "";
         FormUsuarios.querySelector('#fechaRet').style.display = "";
-        
+        FormUsuarios.querySelector('#gar').style.display = "";
+        if (FormUsuarios.querySelector('#chFactura').checked == false){
+            FormUsuarios.querySelector('#fact').style.display = "none";
+        }else{
+            FormUsuarios.querySelector('#fact').style.display = "";
+        }  
     }
 }
+let estado = false
+checkFact.addEventListener('change', async e=> {
+    if (estado == false){
+        FormUsuarios.querySelector('#fact').style.display = "";
+        estado = true
+    }else{
+        FormUsuarios.querySelector('#fact').style.display = "none";
+        estado = false
+    } 
+})
 
 estadoReparacion.addEventListener('change', async e=> {
     estados = FormUsuarios['estado'].value
@@ -248,7 +265,7 @@ async function enviarMail (nro){
 
 function mostrarData(reparaciones){
     // Botones de paginacion y pagina. 
-    // console.log(reparaciones[1])
+    //console.log(reparaciones[0])
     divPaginacion.innerHTML = divPaginacion.innerHTML = `<button id="anterior"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button> <p class="pagina"> Pág. ${reparaciones[1].pagina}  </p><button id="siguiente" class="botones"><svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></button>`
 
     var bprev = document.getElementById("anterior")
@@ -266,6 +283,14 @@ function mostrarData(reparaciones){
 
     reparaciones[0].forEach(repa => {
         const reparacionItem = document.createElement('li')
+        let garantia = ""
+        if (repa.garantia === true){
+            garantia = "En garantia"
+        }else{
+            garantia = "Sin garantia"
+        }
+        
+        
         reparacionItem.innerHTML = `
             <div class="ModuloRep">
                         <div class="infoOculta">
@@ -343,7 +368,7 @@ function mostrarData(reparaciones){
                                 </div>   
                                 <div class="datoCliente valorRepa">
                                     <h3>Garantía:</h3>
-                                    <p>Si/No</p>
+                                    <p>${garantia}</p>
                                 </div> 
                             </div>
                         </div>
@@ -432,6 +457,8 @@ function mostrarData(reparaciones){
                         
                         const response = await fetch (`/reparacion/${repa.id}`);
                         const data = await response.json()
+                        console.log(data)
+                        
                         Modal.classList.add('MostrarModal')
                         
                         modifi.innerHTML="Guardar"
@@ -453,6 +480,12 @@ function mostrarData(reparaciones){
                         FormUsuarios['fecha_reparacion'].value = repa.fecha_reparacion
                         FormUsuarios['fecha_retiro'].value = repa.fecha_retiro
                         FormUsuarios['estado'].value = repa.estado
+                        if (repa.garantia === true){
+                            FormUsuarios['cgarantia'].checked = true
+                        }else{
+                            FormUsuarios['cgarantia'].checked = false
+                        }
+                        
                         
                         reparacionId = repa.id
                     });
@@ -524,6 +557,7 @@ FormUsuarios.addEventListener('submit', async e=>{
     const fecha_reparacion = FormUsuarios['fecha_reparacion'].value
     const fecha_retiro = FormUsuarios['fecha_retiro'].value
     const estado = FormUsuarios['estado'].value
+    const garantia = FormUsuarios['cgarantia'].checked
 
     if(!modificando){
         const response = await fetch('/reparacion', {
@@ -546,7 +580,9 @@ FormUsuarios.addEventListener('submit', async e=>{
                 "fecha_alta": fecha_alta,
                 "fecha_reparacion": fecha_reparacion,
                 "fecha_retiro": fecha_retiro,
-                "estado": estado
+                "estado": estado,
+                "garantia": garantia
+
             })/*json*/
         })/*response*/
         const NuevoUsuario = await response.json();
@@ -574,7 +610,8 @@ FormUsuarios.addEventListener('submit', async e=>{
                 "fecha_alta": fecha_alta,
                 "fecha_reparacion": fecha_reparacion,
                 "fecha_retiro": fecha_retiro,
-                "estado": estado
+                "estado": estado,
+                "garantia": garantia
             })
         })
         const reparacionModificada = await response.json();

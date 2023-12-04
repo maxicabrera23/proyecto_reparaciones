@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-    <meta name="viewport" content="width=device-width, height=100vh, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, height=100vh, initial-scale=1.0"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=M+PLUS+Code+Latin:wght@300&family=Montserrat:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -151,11 +151,19 @@
                                 <label for="valor_reparacion">Valor de la reparación</label>
                                 <input name="valor_reparacion" type="text" placeholder="valor de reparacion">
                             </div>
-
-                            <div class="CampoInput" id="fact" >
-                                <label for="factura">Factura</label>
-                                <input name="factura" type="text" placeholder="¿LLeva Factura?">
+                            
+                            <div class="CampoInput" id="gar" >
+                                <label for="cgarantia">¿Se encuentra en garantia?</label>
+                                <input type="checkbox" name="cgarantia" class="check" id="chGarantia">
                             </div>
+                            
+                            <div class="CampoInput"  >
+                                <label for="factura">Factura</label>
+                                <input type="checkbox" name="cfactura" class="check" id="chFactura">
+                                <input name="factura" id="fact" type="text" placeholder="¿LLeva Factura?">
+                            </div>
+                            
+                            
                         </div>
 
                         <div class="DatosPortero">
@@ -174,6 +182,7 @@
                                 <label for="fecha_retiro">Fecha de Retiro</label>
                                 <input name="fecha_retiro" type="date" placeholder="Ingresar Fecha de Retiro" >
                             </div>
+                            
                         </div>
                     
                     </div>

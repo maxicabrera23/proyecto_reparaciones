@@ -251,26 +251,48 @@ def mostrarReg():
 @app.route('/reparacion/<id>',methods=['GET'])
 def mostrarReparacion(id):
     reparacion = db_reparaciones.find_one({'_id':ObjectId(id)})
-    
-    return jsonify({
-        'id':str(ObjectId(reparacion['_id'])),
-        'nombre_apellido': reparacion['nombre_apellido'], 
-        'telefono': reparacion['telefono'],
-        'email': reparacion['email'],
-        'domicilio': reparacion['domicilio'],
-        'localidad': reparacion['localidad'],
-        'provincia': reparacion['provincia'],
-        'nro_reparacion': reparacion['nro_reparacion'],
-        'producto': reparacion['producto'],
-        'falla': reparacion['falla'],
-        'defecto_encontrado': reparacion['defecto_encontrado'],
-        'factura': reparacion['factura'],
-        'valor_reparacion': reparacion['valor_reparacion'],
-        'fecha_alta': reparacion['fecha_alta'],
-        'fecha_reparacion': reparacion['fecha_reparacion'],
-        'fecha_retiro': reparacion['fecha_retiro'],
-        'estado': reparacion['estado']
-    })
+    if len(reparacion) > 17:
+        return jsonify({
+            'id':str(ObjectId(reparacion['_id'])),
+            'nombre_apellido': reparacion['nombre_apellido'], 
+            'telefono': reparacion['telefono'],
+            'email': reparacion['email'],
+            'domicilio': reparacion['domicilio'],
+            'localidad': reparacion['localidad'],
+            'provincia': reparacion['provincia'],
+            'nro_reparacion': reparacion['nro_reparacion'],
+            'producto': reparacion['producto'],
+            'falla': reparacion['falla'],
+            'defecto_encontrado': reparacion['defecto_encontrado'],
+            'factura': reparacion['factura'],
+            'valor_reparacion': reparacion['valor_reparacion'],
+            'fecha_alta': reparacion['fecha_alta'],
+            'fecha_reparacion': reparacion['fecha_reparacion'],
+            'fecha_retiro': reparacion['fecha_retiro'],
+            'estado': reparacion['estado'],
+            'garantia': reparacion['garantia']
+            
+        })
+    else:
+        return jsonify({
+            'id':str(ObjectId(reparacion['_id'])),
+            'nombre_apellido': reparacion['nombre_apellido'], 
+            'telefono': reparacion['telefono'],
+            'email': reparacion['email'],
+            'domicilio': reparacion['domicilio'],
+            'localidad': reparacion['localidad'],
+            'provincia': reparacion['provincia'],
+            'nro_reparacion': reparacion['nro_reparacion'],
+            'producto': reparacion['producto'],
+            'falla': reparacion['falla'],
+            'defecto_encontrado': reparacion['defecto_encontrado'],
+            'factura': reparacion['factura'],
+            'valor_reparacion': reparacion['valor_reparacion'],
+            'fecha_alta': reparacion['fecha_alta'],
+            'fecha_reparacion': reparacion['fecha_reparacion'],
+            'fecha_retiro': reparacion['fecha_retiro'],
+            'estado': reparacion['estado']
+        })
 
 # mostrar todas las reparaciones
 @app.route('/reparaciones',methods=['GET'])
@@ -302,7 +324,29 @@ def mostrarReparaciones():
     
     
     for doc in registros:
-        reparaciones.append({
+        if len(doc)> 17:
+            reparaciones.append({
+            'id':str(ObjectId(doc['_id'])),
+            'nombre_apellido': doc['nombre_apellido'], 
+            'telefono': doc['telefono'],
+            'email': doc['email'],
+            'domicilio': doc['domicilio'],
+            'localidad': doc['localidad'],
+            'provincia': doc['provincia'],
+            'nro_reparacion': doc['nro_reparacion'],
+            'producto': doc['producto'],
+            'falla': doc['falla'],
+            'defecto_encontrado': doc['defecto_encontrado'],
+            'factura': doc['factura'],
+            'valor_reparacion': doc['valor_reparacion'],
+            'fecha_alta': doc['fecha_alta'],
+            'fecha_reparacion': doc['fecha_reparacion'],
+            'fecha_retiro': doc['fecha_retiro'],
+            'estado': doc['estado'],
+            'garantia': doc['garantia']
+        })
+        else:
+            reparaciones.append({
             'id':str(ObjectId(doc['_id'])),
             'nombre_apellido': doc['nombre_apellido'], 
             'telefono': doc['telefono'],
@@ -321,6 +365,9 @@ def mostrarReparaciones():
             'fecha_retiro': doc['fecha_retiro'],
             'estado': doc['estado']
         })
+            
+            
+        
     return jsonify(reparaciones , {'anterior':prevPage , 'pagina':page,'siguiente':nextPage})
     
 # crear reparacion
@@ -331,7 +378,6 @@ def crearReparacion():
         nro_reparacion = doc['nro']
 
     nueva_reparacion = nro_reparacion + 1
-    
     id = db_reparaciones.insert_one({
         'nombre_apellido': request.json['nombre_apellido'], 
         'telefono': request.json['telefono'],
@@ -348,12 +394,14 @@ def crearReparacion():
         'fecha_alta': request.json['fecha_alta'],
         'fecha_reparacion': request.json['fecha_reparacion'],
         'fecha_retiro': request.json['fecha_retiro'],
-        'estado': request.json['estado']
+        'estado': request.json['estado'],
+        'garantia' : request.json['garantia'] 
     })
     
     db_nro.update_one({'_id':ObjectId(nro_id)}, {'$set':{
         'nro': nueva_reparacion}})
     
+    print (request.json['garantia'])
     return jsonify({
         'id':str(ObjectId(id.inserted_id)),
         'nombre_apellido': request.json['nombre_apellido'], 
@@ -400,7 +448,8 @@ def modificarReparacion(id):
         'fecha_alta': request.json['fecha_alta'],
         'fecha_reparacion': request.json['fecha_reparacion'],
         'fecha_retiro': request.json['fecha_retiro'],
-        'estado': request.json['estado']
+        'estado': request.json['estado'],
+        'garantia' : request.json['garantia']
 
     }})
     return jsonify({'msg':'Reparacion Modificada'})
