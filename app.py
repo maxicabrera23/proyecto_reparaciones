@@ -459,7 +459,7 @@ def enviarMail(nro):
     def enviar(destinatario, asunto, cuerpo):
         mensaje = Message(asunto, sender = 'soporte@surix.net', recipients=[destinatario])
         # mensaje.html= render_template('mail_template.html')
-        mensaje.body= cuerpo
+        mensaje.html= cuerpo
         
         # mail.send(mensaje)
         try:
@@ -491,17 +491,27 @@ def enviarMail(nro):
     
     if reparacion[0]['estado'] == 'ingresada':
         asunto = f'Su equipo fue ingresado para revisión. Reparación N°: {reparacion[0]["nro_reparacion"]} '
-        mensaje = (f'Ingreso el producto: {reparacion[0]["producto"]}.\n'
-                   f'Fecha de ingreso: {reparacion[0]["fecha_alta"]}.\n'
-                   f'N° de reparación: {reparacion[0]["nro_reparacion"]}')
+        mensaje = (f'<div><p style="font-size: 20px; line-height: 32px; font-weight: bold; margin-top:5px;">Ingreso el producto: {reparacion[0]["producto"]}.<br>'
+                   f'Fecha de ingreso: {reparacion[0]["fecha_alta"]}.<br>'
+                   f'N° de reparación: {reparacion[0]["nro_reparacion"]}</p>'
+                   '<div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_kb_PWpPhiXYQouDJbVWjeZAWchcBUv6uyLdmXc6-2JBwIcJ4hFPPyDzmvRtdU4K0FA&usqp=CAU" alt="Logo">'
+                   '<p style="color:#0a2b6a; font-weight: bold; line-height: 32px">Chile 111 - Villa Martelli, Vicente López <br>Whatsapp: 11-6221-9019 // Tel. 5272-9500</p>'
+                   '<p style="color:#0a2b6a">Por favor consultar antes de retirar el equipo.</p>' 
+                   '<p style="color:#0a2b6a">Horario de atención: Lunes a Viernes de 8 a 17hs.</p>'
+                   '<p style="color:#0a2b6a">El tiempo estimado de reparacion es de entre 7 y 10 días hábiles.</p></div></div>')
         enviar(destinatario, asunto, mensaje)
         
     if reparacion[0]['estado'] == 'reparada/terminada':
         asunto = f'Su reparación N° {reparacion[0]["nro_reparacion"]} se encuentra lista para retirar!'
-        mensaje = (f'La reparación N° {reparacion[0]["nro_reparacion"]} ya se encuentra lista para retirar.\n'
-                  f'Producto: {reparacion[0]["producto"]}.\n'
-                  f'Defecto encontrado: {reparacion[0]["defecto_encontrado"]}.\n'
-                  f'Costo de la reparación: {reparacion[0]["valor_reparacion"]}' )
+        mensaje = (f'<div><p style="font-size: 20px; line-height: 32px; font-weight: bold; margin-top:5px;">La reparación N° {reparacion[0]["nro_reparacion"]} ya se encuentra lista para retirar.<br>'
+                  f'Producto: {reparacion[0]["producto"]}.<br>'
+                  f'Defecto encontrado: {reparacion[0]["defecto_encontrado"]}.<br>'
+                  f'Costo de la reparación: {reparacion[0]["valor_reparacion"]}</p>'
+                   '<div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_kb_PWpPhiXYQouDJbVWjeZAWchcBUv6uyLdmXc6-2JBwIcJ4hFPPyDzmvRtdU4K0FA&usqp=CAU" alt="Logo">'
+                   '<p style="color:#0a2b6a; font-weight: bold; line-height: 32px">Chile 111 - Villa Martelli, Vicente López <br>Whatsapp: 11-6221-9019 // Tel. 5272-9500</p>'
+                   '<p style="color:#0a2b6a">Por favor consultar antes de retirar el equipo.</p>' 
+                   '<p style="color:#0a2b6a">Horario de atención: Lunes a Viernes de 8 a 17hs.</p>'
+                   '<p style="color:#0a2b6a">El tiempo estimado de reparacion es de entre 7 y 10 días hábiles.</p></div></div>')
         enviar(destinatario, asunto, mensaje)
     
     
