@@ -235,8 +235,6 @@ main{
 .clientesIzq, .clientesDer{
     width: 50%;
     margin: 0 10px;
-<<<<<<< HEAD
-=======
 }
 #gar, #div-factura{
     display: flex;
@@ -253,16 +251,12 @@ main{
 
 #fact{
     width: 100%;
->>>>>>> 4763dd57f38a755bb083036fa738346afb3f6574
 }
 
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 4763dd57f38a755bb083036fa738346afb3f6574
 /*------------- Colores Estados de Reparaciones---------------*/
 
 .Rojo{
@@ -636,11 +630,7 @@ input::placeholder {
 
 
 
-<<<<<<< HEAD
-/*----------------- Pagina Estados -----------------*/
-=======
 /*------------ Pagina Estados -------------*/
->>>>>>> 4763dd57f38a755bb083036fa738346afb3f6574
 
 .titleEstados{
     color: var(--colorBlanco);
@@ -754,11 +744,7 @@ input::placeholder {
 
 
 
-<<<<<<< HEAD
-/*----------------- PAGINA CLIENTES -----------------*/
-=======
 /*------------- PAGINA CLIENTES -------------*/
->>>>>>> 4763dd57f38a755bb083036fa738346afb3f6574
 
 .AccionesClientes{
     display: flex;
