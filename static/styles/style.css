@@ -630,7 +630,7 @@ input::placeholder {
 
 /*------------ Pagina Estados -------------*/
 
-.titleEstados{
+.titleEstados, .titleHome{
     color: var(--colorBlanco);
     text-shadow: 2px 2px #00000096;
     font-size: 44px;
@@ -1107,6 +1107,64 @@ footer p{
     .Copyright{
         width: 100%;
     }
+}
+
+/* HOME */
+
+.titleHome{
+    font-size: 50px !important;
+}
+
+.contenedor-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 70%;
+    height: 400px;
+    margin: 75px auto ;
+    gap: 40px;
+}
+
+@media screen and (max-width: 772px){
+    .contenedor-grid{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        gap: 20px;
+        
+    }
+    .titleHome{
+        font-size: 40px !important;
+        margin: 40px 100px !important;
+    }
+    .hButton:active{
+        background: #b09567;
+    }
+    
+}
+
+
+.hButton{
+    border-radius: 20px;
+    border: 1px solid #ffffff4f;
+    background: #00587acc;
+    opacity: .84;
+    box-shadow:6px 9px 6px 4px black;
+}
+
+.hButton:hover{
+   
+    background: #b09567;
+}
+
+.contenedor-grid a{
+        color: var(--colorBlanco);
+        font-size: 1.5em;
+        text-decoration: none;
+        font-weight: lighter;
+        line-height: 34px;
+        word-wrap: break-word;
+        display: inline-block;
+        width: 100%;
+        
 }
 
 

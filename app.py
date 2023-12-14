@@ -47,6 +47,10 @@ db_reparaciones = mongo.db.reparaciones
 # rutas de clientes
 # mostrar los html
 @app.route('/', methods=['GET'])
+def mostrarHome():
+    return render_template('home.html')
+
+@app.route('/3', methods=['GET'])
 def mostrarPrincipal():
     return render_template('index.html')
 
